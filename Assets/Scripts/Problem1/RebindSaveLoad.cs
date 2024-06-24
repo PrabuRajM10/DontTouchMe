@@ -1,20 +1,23 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class RebindSaveLoad : MonoBehaviour
+namespace Problem1
 {
-    public InputActionAsset actions;
-
-    public void OnEnable()
+    public class RebindSaveLoad : MonoBehaviour
     {
-        var rebinds = PlayerPrefs.GetString("rebinds");
-        if (!string.IsNullOrEmpty(rebinds))
-            actions.LoadBindingOverridesFromJson(rebinds);
-    }
+        public InputActionAsset actions;
 
-    public void OnDisable()
-    {
-        var rebinds = actions.SaveBindingOverridesAsJson();
-        PlayerPrefs.SetString("rebinds", rebinds);
+        public void OnEnable()
+        {
+            var rebinds = PlayerPrefs.GetString("rebinds");
+            if (!string.IsNullOrEmpty(rebinds))
+                actions.LoadBindingOverridesFromJson(rebinds);
+        }
+
+        public void OnDisable()
+        {
+            var rebinds = actions.SaveBindingOverridesAsJson();
+            PlayerPrefs.SetString("rebinds", rebinds);
+        }
     }
 }

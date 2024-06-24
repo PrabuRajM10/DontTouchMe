@@ -1,5 +1,5 @@
 using System;
-using Samples.Input_System._1._5._1.Rebinding_UI;
+using Problem1;
 using UnityEngine.UI;
 
 ////TODO: have updateBindingUIEvent receive a control path string, too (in addition to the device layout name)

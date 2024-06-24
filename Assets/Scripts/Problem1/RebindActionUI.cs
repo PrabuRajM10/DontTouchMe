@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -9,13 +10,14 @@ using UnityEngine.UI;
 
 ////TODO: deal with composites that have parts bound in different control schemes
 
-namespace Samples.Input_System._1._5._1.Rebinding_UI
+namespace Problem1
 {
     /// <summary>
     /// A reusable component with a self-contained UI for rebinding a single action.
     /// </summary>
     public class RebindActionUI : MonoBehaviour
     {
+        
         /// <summary>
         /// Reference to the action that is to be rebound.
         /// </summary>
@@ -71,15 +73,6 @@ namespace Samples.Input_System._1._5._1.Rebinding_UI
         /// Text component that receives the display string of the binding. Can be <c>null</c> in which
         /// case the component entirely relies on <see cref="updateBindingUIEvent"/>.
         /// </summary>
-        // public Text bindingText
-        // {
-        //     get => m_BindingText;
-        //     set
-        //     {
-        //         m_BindingText = value;
-        //         UpdateBindingDisplay();
-        //     }
-        // }
         public Text bindingText
         {
             get => m_BindingText;
@@ -302,24 +295,27 @@ namespace Samples.Input_System._1._5._1.Rebinding_UI
                     });
 
             // If it's a part binding, show the name of the part in the UI.
-            var partName = default(string);
-            if (action.bindings[bindingIndex].isPartOfComposite)
-                partName = $"Binding '{action.bindings[bindingIndex].name}'. ";
-
-            // Bring up rebind overlay, if we have one.
+            // var partName = default(string);
+            // if (action.bindings[bindingIndex].isPartOfComposite)
+            //     partName = $"Binding '{action.bindings[bindingIndex].name}'. ";
+            //
+            // // Bring up rebind overlay, if we have one.
             m_RebindOverlay?.SetActive(true);
-            if (m_RebindText != null)
-            {
-                var text = !string.IsNullOrEmpty(m_RebindOperation.expectedControlType)
-                    ? $"{partName}Waiting for {m_RebindOperation.expectedControlType} input..."
-                    : $"{partName}Waiting for input...";
-                m_RebindText.text = text;
-            }
+            // if (m_RebindText != null)
+            // {
+            //     var text = !string.IsNullOrEmpty(m_RebindOperation.expectedControlType)
+            //         ? $"{partName}Waiting for {m_RebindOperation.expectedControlType} input..."
+            //         : $"{partName}Waiting for input...";
+            //     m_RebindText.text = text;
+            // }
+            //
+            // // If we have no rebind overlay and no callback but we have a binding text label,
+            // // temporarily set the binding text label to "<Waiting>".
+            // if (m_RebindOverlay == null && m_RebindText == null && m_RebindStartEvent == null && m_BindingText != null)
+            //     m_BindingText.text = "<Waiting...>";
+            
+            m_RebindText.text = "Waiting for Input";
 
-            // If we have no rebind overlay and no callback but we have a binding text label,
-            // temporarily set the binding text label to "<Waiting>".
-            if (m_RebindOverlay == null && m_RebindText == null && m_RebindStartEvent == null && m_BindingText != null)
-                m_BindingText.text = "<Waiting...>";
 
             // Give listeners a chance to act on the rebind starting.
             m_RebindStartEvent?.Invoke(this, m_RebindOperation);
@@ -334,6 +330,7 @@ namespace Samples.Input_System._1._5._1.Rebinding_UI
             s_RebindActionUIs.Add(this);
             if (s_RebindActionUIs.Count == 1)
                 InputSystem.onActionChange += OnActionChange;
+
         }
 
         protected void OnDisable()
@@ -417,6 +414,8 @@ namespace Samples.Input_System._1._5._1.Rebinding_UI
         [Tooltip("Event that is triggered when an interactive rebind is complete or has been aborted.")]
         [SerializeField]
         private InteractiveRebindEvent m_RebindStopEvent;
+        
+        
 
         private InputActionRebindingExtensions.RebindingOperation m_RebindOperation;
 
