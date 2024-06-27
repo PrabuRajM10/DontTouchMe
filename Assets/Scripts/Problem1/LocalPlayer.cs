@@ -59,24 +59,6 @@ namespace Problem1
             if (rigidBody == null) rigidBody = GetComponent<Rigidbody>();
         }
 
-        private void Awake()
-        {
-            _input = new PlayerInput();
-        }
-
-        private void OnEnable()
-        {
-            _input.PlayerAction.Enable();
-            _input.PlayerAction.Movement.performed += OnMovement;
-        }
-
-
-        private void OnDisable()
-        {
-            _input.PlayerAction.Disable();
-            _input.PlayerAction.Movement.performed -= OnMovement;
-        }
-
         void Update()
         {
 
@@ -150,16 +132,16 @@ namespace Problem1
             // _isGrounded = false;
         }
 
-        public void OnMovement(InputAction.CallbackContext value)
-        {
-            // _playerInput.x = value.ReadValue<Vector2>().x;
-            // _playerInput.y = value.ReadValue<Vector2>().y;
-        }
-
-        public void OnJump(InputAction.CallbackContext value)
-        {
-            _desiredJump |= value.started;
-        }
+        // public void OnMovement(InputAction.CallbackContext value)
+        // {
+        //     // _playerInput.x = value.ReadValue<Vector2>().x;
+        //     // _playerInput.y = value.ReadValue<Vector2>().y;
+        // }
+        //
+        // public void OnJump(InputAction.CallbackContext value)
+        // {
+        //     _desiredJump |= value.started;
+        // }
 
 
         private void UpdateVelocity()
