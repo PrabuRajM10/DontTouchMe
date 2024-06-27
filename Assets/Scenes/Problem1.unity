@@ -1172,8 +1172,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.44439584, y: 0.000804008, z: -0.00039990112, w: 0.8958301}
-  m_LocalPosition: {x: -0.9335577, y: 33.26688, z: -26.018078}
+  m_LocalRotation: {x: -0.37066963, y: 0.018663572, z: -0.0074502965, w: -0.9285474}
+  m_LocalPosition: {x: -1.2800975, y: 19.823292, z: -16.510956}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4295,6 +4295,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2901371613713048289, guid: 5007963bfb4817640ad70d3868ab3429,
         type: 3}
+      propertyPath: _camera
+      value: 
+      objectReference: {fileID: 330585545}
+    - target: {fileID: 2901371613713048289, guid: 5007963bfb4817640ad70d3868ab3429,
+        type: 3}
       propertyPath: fireRate
       value: 800
       objectReference: {fileID: 0}
@@ -4411,6 +4416,41 @@ PrefabInstance:
       propertyPath: m_RebindOverlay
       value: 
       objectReference: {fileID: 533276679}
+    - target: {fileID: 1282131179361362421, guid: 7e6d2a31ed778394386b351d238d549d,
+        type: 3}
+      propertyPath: m_RebindStopEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1282131179361362421, guid: 7e6d2a31ed778394386b351d238d549d,
+        type: 3}
+      propertyPath: m_RebindStopEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1282131179361362421, guid: 7e6d2a31ed778394386b351d238d549d,
+        type: 3}
+      propertyPath: m_RebindStopEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 151747777}
+    - target: {fileID: 1282131179361362421, guid: 7e6d2a31ed778394386b351d238d549d,
+        type: 3}
+      propertyPath: m_RebindStopEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1282131179361362421, guid: 7e6d2a31ed778394386b351d238d549d,
+        type: 3}
+      propertyPath: m_RebindStopEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RebindStop
+      objectReference: {fileID: 0}
+    - target: {fileID: 1282131179361362421, guid: 7e6d2a31ed778394386b351d238d549d,
+        type: 3}
+      propertyPath: m_RebindStopEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Problem1.RebindUiManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1282131179361362421, guid: 7e6d2a31ed778394386b351d238d549d,
+        type: 3}
+      propertyPath: m_RebindStopEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2553405049946834995, guid: 7e6d2a31ed778394386b351d238d549d,
         type: 3}
       propertyPath: m_Name

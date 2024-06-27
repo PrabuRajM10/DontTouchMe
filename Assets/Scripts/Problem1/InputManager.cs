@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Problem1
 {
@@ -10,7 +11,11 @@ namespace Problem1
         private bool _desiredJump;
         private bool _isFired;
         private bool _isPaused;
+        private Vector3 _mousePosition;
         private Vector2 _playerInput;
+
+        public Vector3 MousePosition => _mousePosition;
+
         private void Awake()
         {
             if (Instance == null)
@@ -41,6 +46,8 @@ namespace Problem1
             _desiredJump = _input.PlayerAction.Jump.triggered;
             _isFired = _input.PlayerAction.Shoot.IsPressed();
             _isPaused = _input.PlayerAction.Pause.triggered;
+            _mousePosition = _input.PlayerAction.MouseLook.ReadValue<Vector2>();
+            _mousePosition = Mouse.current.position.ReadValue();
         }
 
         public Vector2 PlayerMovementInput()

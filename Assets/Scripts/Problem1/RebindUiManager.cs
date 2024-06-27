@@ -44,6 +44,20 @@ namespace Problem1
             fire.action.Enable();
             resetButton.onClick.RemoveAllListeners();
         }
+
+        // public void RebindStop(RebindActionUI actionUI,string s1 , string s2 , string s3)
+        // {
+        //     Debug.LogFormat("[] [] s1 {0} s2 {1} s3 {2} " , s1 , s2 , s3);
+        // }
+        
+        public void RebindStop(RebindActionUI actionUI,InputActionRebindingExtensions.RebindingOperation operation)
+        {
+            Debug.LogFormat("[] [RebindStop] s1 {0}" , operation.OnComplete(
+                delegate(InputActionRebindingExtensions.RebindingOperation rebindingOperation)
+                {
+                    Debug.Log("rebind compplete");
+                }));
+        }
     }
     
 }

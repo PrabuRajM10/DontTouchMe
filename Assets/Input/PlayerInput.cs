@@ -62,6 +62,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseLook"",
+                    ""type"": ""Value"",
+                    ""id"": ""c587bc39-80af-47cc-84be-709c32c4dfd7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e896b4ec-6cb0-490c-93d6-167e2c2cdab8"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""MouseLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -170,6 +190,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_PlayerAction_Jump = m_PlayerAction.FindAction("Jump", throwIfNotFound: true);
         m_PlayerAction_Shoot = m_PlayerAction.FindAction("Shoot", throwIfNotFound: true);
         m_PlayerAction_Pause = m_PlayerAction.FindAction("Pause", throwIfNotFound: true);
+        m_PlayerAction_MouseLook = m_PlayerAction.FindAction("MouseLook", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -235,6 +256,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerAction_Jump;
     private readonly InputAction m_PlayerAction_Shoot;
     private readonly InputAction m_PlayerAction_Pause;
+    private readonly InputAction m_PlayerAction_MouseLook;
     public struct PlayerActionActions
     {
         private @PlayerInput m_Wrapper;
@@ -243,6 +265,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerAction_Jump;
         public InputAction @Shoot => m_Wrapper.m_PlayerAction_Shoot;
         public InputAction @Pause => m_Wrapper.m_PlayerAction_Pause;
+        public InputAction @MouseLook => m_Wrapper.m_PlayerAction_MouseLook;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -264,6 +287,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @MouseLook.started += instance.OnMouseLook;
+            @MouseLook.performed += instance.OnMouseLook;
+            @MouseLook.canceled += instance.OnMouseLook;
         }
 
         private void UnregisterCallbacks(IPlayerActionActions instance)
@@ -280,6 +306,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @MouseLook.started -= instance.OnMouseLook;
+            @MouseLook.performed -= instance.OnMouseLook;
+            @MouseLook.canceled -= instance.OnMouseLook;
         }
 
         public void RemoveCallbacks(IPlayerActionActions instance)
@@ -312,5 +341,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnMouseLook(InputAction.CallbackContext context);
     }
 }

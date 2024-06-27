@@ -186,7 +186,6 @@ MonoBehaviour:
   characterController: {fileID: 0}
   client: {fileID: 0}
   rigidBody: {fileID: 7616333253394949895}
-  playerInput: {fileID: 0}
   gun: {fileID: 2901371613713048289}
   speed: 10
   maxAcceleration: 100
@@ -251,6 +250,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 74eca8ca-694f-479b-bf9d-2e6ada937339
     m_ActionName: PlayerAction/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eb706894-7083-4700-9683-9475f0410b00
+    m_ActionName: PlayerAction/Shoot[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f555661c-5dbc-4583-81b8-42892e8ed21c
+    m_ActionName: PlayerAction/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerAction
@@ -354,18 +361,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.7134461
+      objectReference: {fileID: 0}
+    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.7134461
+      objectReference: {fileID: 0}
+    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.7134461
+      objectReference: {fileID: 0}
+    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.09424975
+      value: -0.54011
       objectReference: {fileID: 0}
     - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.87
       objectReference: {fileID: 0}
     - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.09342201
+      value: -0.30753
       objectReference: {fileID: 0}
     - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
         type: 3}
