@@ -47,7 +47,8 @@ namespace Problem1
             _isFired = _input.PlayerAction.Shoot.IsPressed();
             _isPaused = _input.PlayerAction.Pause.triggered;
             _mousePosition = _input.PlayerAction.MouseLook.ReadValue<Vector2>();
-            _mousePosition = Mouse.current.position.ReadValue();
+            // _mousePosition = Mouse.current.position.ReadValue();
+            _mousePosition = _input.PlayerAction.MouseLook.ReadValue<Vector2>();
         }
 
         public Vector2 PlayerMovementInput()

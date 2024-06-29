@@ -117,7 +117,6 @@ Transform:
   m_Children:
   - {fileID: 1587083420936469868}
   - {fileID: 1603968826702894590}
-  - {fileID: 2171088422797825139}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -186,9 +185,9 @@ MonoBehaviour:
   characterController: {fileID: 0}
   client: {fileID: 0}
   rigidBody: {fileID: 7616333253394949895}
-  gun: {fileID: 2901371613713048289}
-  speed: 10
-  maxAcceleration: 100
+  gun: {fileID: 0}
+  speed: 11.01
+  maxAcceleration: 6
   maxAirAcceleration: 60
   maxJumpHeight: 1
   maxAirJumps: 1
@@ -219,35 +218,11 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3230032193216189431}
-        m_TargetAssemblyTypeName: LocalPlayer, Assembly-CSharp
-        m_MethodName: OnMovement
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: c1f8a006-8150-4770-8bea-ef3219f48cf8
     m_ActionName: PlayerAction/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3230032193216189431}
-        m_TargetAssemblyTypeName: LocalPlayer, Assembly-CSharp
-        m_MethodName: OnJump
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 74eca8ca-694f-479b-bf9d-2e6ada937339
     m_ActionName: PlayerAction/Jump[/Keyboard/space]
   - m_PersistentCalls:
@@ -258,8 +233,12 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f555661c-5dbc-4583-81b8-42892e8ed21c
     m_ActionName: PlayerAction/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c587bc39-80af-47cc-84be-709c32c4dfd7
+    m_ActionName: PlayerAction/MouseLook[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: M&K
   m_DefaultActionMap: PlayerAction
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -346,109 +325,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1001 &1674808982368554011
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1638365720688193930}
-    m_Modifications:
-    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.7134461
-      objectReference: {fileID: 0}
-    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.7134461
-      objectReference: {fileID: 0}
-    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.7134461
-      objectReference: {fileID: 0}
-    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.54011
-      objectReference: {fileID: 0}
-    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.87
-      objectReference: {fileID: 0}
-    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.30753
-      objectReference: {fileID: 0}
-    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8881151967554942675, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-        type: 3}
-      propertyPath: m_Name
-      value: Gun
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 244d3115f4747d34b88cc4ef0c3e4288, type: 3}
---- !u!4 &2171088422797825139 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 657345842896033896, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-    type: 3}
-  m_PrefabInstance: {fileID: 1674808982368554011}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2901371613713048289 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4574993086596427514, guid: 244d3115f4747d34b88cc4ef0c3e4288,
-    type: 3}
-  m_PrefabInstance: {fileID: 1674808982368554011}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab688ec224842f2b186dda3cfc4ed9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
