@@ -1,44 +1,114 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+
+public enum PoolObjectTypes
+{
+    Bullet,
+    Enemy
+}
 
 public class ObjectPooling : MonoBehaviour
 {
-    private static Bullet _bulletPrefab;
-    private static List<Bullet> _bulletsList = new List<Bullet>();
-    private const int TotalBulletCount = 20;
+    public static ObjectPooling Instance;
+    
+    [FormerlySerializedAs("_bulletPrefab")] [SerializeField]private GameObject bulletPrefab;
+    [FormerlySerializedAs("enemy")] [SerializeField]private GameObject enemyPrefab;
 
-    public static void Init(Bullet bulletPrefab)
+    private Dictionary<PoolObjectTypes, IPoolableObjects> poolsDictionary =
+        new Dictionary<PoolObjectTypes, IPoolableObjects>();
+
+    private List<Bullet> _bulletsListPool = new List<Bullet>();
+    private List<Enemy> _enemyListPool = new List<Enemy>();
+    
+    private const int MinBulletCount = 20;
+    private const int MinEnemyCount = 20;
+
+    private void Awake()
     {
-        _bulletPrefab = bulletPrefab;
-        SpawnBullets(TotalBulletCount);
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if(Instance != this)
+        {
+            Destroy(this);
+        }
+        Spawn(bulletPrefab , MinBulletCount , PoolObjectTypes.Bullet);
+        Spawn(enemyPrefab , MinEnemyCount , PoolObjectTypes.Enemy);
     }
 
-    static void SpawnBullets(int count)
+    private void Spawn(GameObject poolableObjects, int count , PoolObjectTypes poolObjectType)
     {
         for (int i = 0; i < count; i++)
         {
-            var bullet = Instantiate(_bulletPrefab);
-            bullet.gameObject.SetActive(false);
-            _bulletsList.Add(bullet);
+            var poolObject = Instantiate(poolableObjects);
+            poolObject.gameObject.SetActive(false);
+            
+            var iPoolObject = poolObject.GetComponent<IPoolableObjects>();
+            iPoolObject.Init(this);
+            
+            AddObjectToPool(poolObjectType , iPoolObject);
         }
     }
 
-    public static Bullet GetBullet()
+    private void AddObjectToPool(PoolObjectTypes poolObjectType, IPoolableObjects poolObject)
     {
-        if (_bulletsList.Count < 2)
-        {
-            SpawnBullets(5);
-        }            
-        var bullet = _bulletsList[0];
-        _bulletsList.Remove(bullet);
 
-        return bullet;
+        switch (poolObjectType)
+        {
+            case PoolObjectTypes.Bullet:
+                _bulletsListPool.Add((Bullet)poolObject);
+                break;
+            case PoolObjectTypes.Enemy:
+                _enemyListPool.Add((Enemy)poolObject);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(poolObjectType), poolObjectType, null);
+        }
     }
 
-    public static void AddBackToList(Bullet bullet)
+    IPoolableObjects GetObjectFromPool(PoolObjectTypes poolObjectType)
+    {
+        switch (poolObjectType)
+        {
+            case PoolObjectTypes.Bullet:
+                if (_bulletsListPool.Count < 2)
+                {
+                    Spawn(bulletPrefab , 10 , PoolObjectTypes.Bullet);
+                }            
+                var bullet = _bulletsListPool[0];
+                _bulletsListPool.Remove(bullet);
+                bullet.ResetVelocity();
+                return bullet;
+            
+            case PoolObjectTypes.Enemy:
+                if (_enemyListPool.Count < 2)
+                {
+                    Spawn(enemyPrefab , 10 , PoolObjectTypes.Enemy);
+                }            
+                var enemy = _enemyListPool[0];
+                _enemyListPool.Remove(enemy);
+                return enemy;
+        }
+        return null;
+    }
+
+    public Bullet GetBullet()
+    {
+        return (Bullet)GetObjectFromPool(PoolObjectTypes.Bullet);
+    }
+
+    public Enemy GetEnemy()
+    {
+        return (Enemy)GetObjectFromPool(PoolObjectTypes.Enemy);
+    }
+
+    public void AddBackToList(Bullet bullet)
     {
         bullet.gameObject.SetActive(false);
-        _bulletsList.Add(bullet);
+        _bulletsListPool.Add(bullet);
     }
     
 }

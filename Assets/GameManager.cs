@@ -7,6 +7,5 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Bullet bullet;
     void Start()
     {
-        ObjectPooling.Init(bullet);
     }
 }

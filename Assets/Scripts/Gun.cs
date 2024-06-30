@@ -18,7 +18,8 @@ public class Gun : MonoBehaviour
     public void Shoot()
     {
         if(!CanShoot())return;
-        var bullet = ObjectPooling.GetBullet();
+        var bullet = ObjectPooling.Instance.GetBullet();
+        Debug.Log("[] [Shoot] bullet = null " + (bullet == null));
         bullet.SetPositionAndRotation(muzzlePosition);
         bullet.Fire();
         _timeSinceLastShot = 0;

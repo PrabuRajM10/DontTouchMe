@@ -27,6 +27,12 @@ public class Drone : MonoBehaviour
     private void Update()
     {
         SetTargetToLookAt(InputManager.Instance.MousePosition);
+    }
+
+    private void LateUpdate()
+    {
+        transform.LookAt(_lookTarget);
+        
         var distance = (transform.position - player.transform.position).magnitude;
         if (distance >= minDistanceFromPlayer)
         {
@@ -46,11 +52,6 @@ public class Drone : MonoBehaviour
                     isMoving = false;
                 };
         }
-    }
-
-    private void LateUpdate()
-    {
-        transform.LookAt(_lookTarget);
     }
 
     void SetTargetToLookAt(Vector3 lookAtPos)

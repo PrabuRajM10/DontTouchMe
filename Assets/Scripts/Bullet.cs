@@ -2,14 +2,21 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour , IPoolableObjects
 {
     [SerializeField] private float speed = 100f;
     [SerializeField] private Rigidbody rigidBody;
 
+    private ObjectPooling _pool;
+
     private void OnValidate()
     {
         if (rigidBody == null) rigidBody = GetComponent<Rigidbody>();
+    }
+
+    public void Init(ObjectPooling pool)
+    {
+        _pool = pool;
     }
 
     public void SetPositionAndRotation(Transform muzzlePosition)
@@ -27,7 +34,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     { 
-        // Debug.Log(" OnTriggerEnter " + other.name);
+        Debug.Log(" OnTriggerEnter " + other.name);
         if (other.GetComponent<Gun>())
         {
             return;
@@ -37,9 +44,14 @@ public class Bullet : MonoBehaviour
 
     private void DisableBullet()
     {
-        rigidBody.velocity = Vector3.zero;
+        ResetVelocity();
         gameObject.SetActive(false);
-        ObjectPooling.AddBackToList(this);
+        _pool.AddBackToList(this);
+    }
+
+    public void ResetVelocity()
+    {
+        rigidBody.velocity = Vector3.zero;
     }
         
 }
