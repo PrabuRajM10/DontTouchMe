@@ -698,4 +698,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzlePosition: {fileID: 5276260895887855854}
   isReloading: 0
-  fireRate: 1600
+  fireRate: 800

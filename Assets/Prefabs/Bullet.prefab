@@ -441,4 +441,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1800
+  damageAmount: 50
   rigidBody: {fileID: 8021074559545242342}
