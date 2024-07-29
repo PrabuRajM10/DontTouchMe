@@ -1,9 +1,8 @@
-using Managers;
 using UnityEngine;
 
 namespace Gameplay
 {
-    public class Coin : Collectables
+    public class Xp : Collectables
     {
         protected override void OnCollected()
         {

@@ -11,7 +11,8 @@ namespace Gameplay
     {
         Enemy,
         Bullet,
-        Coin
+        Coin,
+        Xp
     }
 
     [Serializable]
@@ -31,6 +32,7 @@ namespace Gameplay
         private List<Enemy> _enemyListPool = new List<Enemy>();
         private List<Bullet> _bulletListPool = new List<Bullet>();
         private List<Collectables> _coinListPool = new List<Collectables>();
+        private List<Collectables> _xpListPool = new List<Collectables>();
 
         private void Start()
         {
@@ -72,6 +74,9 @@ namespace Gameplay
                 case PoolObjectTypes.Coin:
                     _coinListPool.Add((Collectables)poolObject);
                     break;
+                case PoolObjectTypes.Xp:
+                    _xpListPool.Add((Collectables)poolObject);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(poolObjectType), poolObjectType, null);
             }
@@ -104,18 +109,31 @@ namespace Gameplay
                     return bullet;
 
                 case PoolObjectTypes.Coin:
-                    if (_coinListPool.Count < 2)
-                    {
-                        var poolObjectData = GetPoolProjectData(PoolObjectTypes.Coin);
-                        Spawn(poolObjectData.prefab , 10 ,poolObjectData.poolObjectType , poolObjectData.spawnParent);
-                    }            
-                    var collectable = _coinListPool[0];
-                    _coinListPool.Remove(collectable);
-                    collectable.transform.parent = null;
-                    return collectable;
+                    var coin = GetCollectablesObject(_coinListPool , PoolObjectTypes.Coin);
+                    coin.SetManager(CollectablesManagerHolder.Instance.GetManager(CollectablesType.Coins));
+                    return coin;
+                case PoolObjectTypes.Xp:
+                    var xp = GetCollectablesObject(_xpListPool , PoolObjectTypes.Xp);
+                    xp.SetManager(CollectablesManagerHolder.Instance.GetManager(CollectablesType.Xp));
+                    return xp;
                 default:
                     return null;
             }
+        }
+
+        private Collectables GetCollectablesObject(List<Collectables> collectablesListPool, PoolObjectTypes collectablesType)
+        {
+            if (collectablesListPool.Count < 2)
+            {
+                var poolObjectData = GetPoolProjectData(collectablesType);
+                Spawn(poolObjectData.prefab, 10, poolObjectData.poolObjectType, poolObjectData.spawnParent);
+            }
+
+            var collectable = collectablesListPool[0];
+            collectablesListPool.Remove(collectable);
+            collectable.transform.parent = null;
+            return collectable;
+            
         }
 
         public Bullet GetBullet()
@@ -128,9 +146,14 @@ namespace Gameplay
             return (Enemy)GetObjectFromPool(PoolObjectTypes.Enemy);
         }
         
-        public Collectables GetCollectables()
+        public Collectables GetCoins()
         {
             return (Collectables)GetObjectFromPool(PoolObjectTypes.Coin);
+        }
+        
+        public Collectables GetXp()
+        {
+            return (Collectables)GetObjectFromPool(PoolObjectTypes.Xp);
         }
 
         public void AddBackToList(IPoolableObjects poolable , PoolObjectTypes poolObjectTypes)

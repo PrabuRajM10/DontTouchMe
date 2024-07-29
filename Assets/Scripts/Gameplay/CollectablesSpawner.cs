@@ -7,7 +7,8 @@ namespace Gameplay
     public enum CollectablesType
     {
         Coins,
-        Heal
+        Heal,
+        Xp
     }
     public class CollectablesSpawner : AutoSpawner
     {

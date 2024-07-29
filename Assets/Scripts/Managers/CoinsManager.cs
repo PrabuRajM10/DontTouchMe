@@ -1,12 +1,18 @@
+using System;
 using UnityEngine;
 
 namespace Managers
 {
-    public class CoinsManager : GenericSingleton<CoinsManager>
+    public class CoinsManager : CollectablesManager
     {
-        public void OnCoinCollected(int coinValue)
+        [SerializeField] private int coinsCollectedCount;
+        [SerializeField] private int coinsMultiplier;
+
+        public static event Action<int> OnCoinCollected;
+        public override void OnCollectablesCollected()
         {
-            Debug.Log("[CoinsManager] [OnCoinCollected] ++ coinValue " + coinValue);
+            coinsCollectedCount++;
+            OnCoinCollected?.Invoke(coinsCollectedCount * coinsMultiplier);
         }
     }
 }

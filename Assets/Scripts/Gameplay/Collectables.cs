@@ -1,6 +1,6 @@
 using System;
+using Managers;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Gameplay
 {
@@ -8,6 +8,12 @@ namespace Gameplay
     {
         [SerializeField] private CollectablesType collectablesType;
         private ObjectPooling _pool;
+        protected CollectablesManager respectiveManager;
+
+        public void SetManager(CollectablesManager manager)
+        {
+            respectiveManager = manager;
+        }
 
         protected abstract void OnCollected();
 
@@ -20,6 +26,14 @@ namespace Gameplay
         public void BackToPool()
         {
             _pool.AddBackToList(this , PoolObjectTypes.Coin);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            var player = other.GetComponent<Player>();
+            if (player == null) return;
+            OnCollected();
+            BackToPool();
         }
     }
 }

@@ -21,8 +21,12 @@ namespace Gameplay
                     HandleObjectOnReceived(bulletObj.transform, spawnPos);
                     break;
                 case PoolObjectTypes.Coin:
-                    var collectableObj = ObjectPooling.Instance.GetCollectables();
-                    HandleObjectOnReceived(collectableObj.transform, spawnPos);
+                    var coinCollectableObj = ObjectPooling.Instance.GetCoins();
+                    HandleObjectOnReceived(coinCollectableObj.transform, spawnPos);
+                    break;
+                case PoolObjectTypes.Xp:
+                    var xpCollectableObj = ObjectPooling.Instance.GetXp();
+                    HandleObjectOnReceived(xpCollectableObj.transform, spawnPos);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);

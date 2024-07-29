@@ -1,11 +1,12 @@
 using System;
+using Managers;
 using Ui.ScreenHandlers;
 using Ui.Screens;
 using UnityEngine;
 
 namespace Ui
 {
-    public class MainCanvas : MonoBehaviour
+    public class UiManager : GenericSingleton<UiManager>
     {
         [SerializeField] private BaseUi gameplayScreen;
         [SerializeField] private BaseUi settingScreen;
@@ -58,6 +59,16 @@ namespace Ui
                 default:
                     throw new ArgumentOutOfRangeException(nameof(screen), screen, null);
             }
+        }
+
+        public void OnCoinCollected(int coinsCount)
+        {
+            Debug.Log("[UiManager] [OnCoinCollected] coinsCount " + coinsCount);
+        }
+
+        public void OnXpCollected(int xpValue)
+        {
+            Debug.Log("[UiManager] [OnXpCollected] xpValue " + xpValue);
         }
     }
 }
