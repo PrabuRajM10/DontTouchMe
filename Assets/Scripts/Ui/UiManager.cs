@@ -14,6 +14,7 @@ namespace Ui
         [SerializeField] private GameplayUi gameplayScreen;
         [SerializeField] private SettingUi settingScreen;
         [SerializeField] private HomeScreenUi homeScreen;
+        [SerializeField] private GameResultScreen gameResultScreen;
 
         
 
@@ -66,6 +67,8 @@ namespace Ui
                     return settingScreen;
                 case GameScreen.Home:
                     return homeScreen;
+                case GameScreen.GameResult:
+                    return gameResultScreen;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(screen), screen, null);
             }
@@ -77,15 +80,25 @@ namespace Ui
             gameplayScreen.UpdateScore(coinsCount);
         }
 
-        public void UpdateGameTimer(string time)
+        private void UpdateGameTimer(string time)
         {
             gameplayScreen.UpdateTimer(time);
+        }
 
+        public void UpdateKillCount(int killCount)
+        {
+            gameplayScreen.UpdateKills(killCount);
         }
 
         public void OnXpCollected(int xpValue)
         {
             Debug.Log("[UiManager] [OnXpCollected] xpValue " + xpValue);
+        }
+
+        public void OnPlayerDead()
+        {
+            gameResultScreen.ShowResult(false);
+            OnSwitchScreenEvnt(GameScreen.GameResult);
         }
     }
 }

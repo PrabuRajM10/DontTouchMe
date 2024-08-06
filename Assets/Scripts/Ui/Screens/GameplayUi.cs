@@ -14,6 +14,7 @@ namespace Ui.Screens
         [SerializeField] private Button pauseButton;
         [SerializeField] private TMP_Text coinsTxt;
         [SerializeField] private TMP_Text timerTxt;
+        [SerializeField] private TMP_Text killsTxt;
 
         public event Action OnPauseButtonPressed;
         private void OnEnable()
@@ -24,6 +25,13 @@ namespace Ui.Screens
         private void OnDisable()
         {
             pauseButton.onClick.RemoveListener(OnClickPauseButton);
+        }
+
+        public override void Reset()
+        {
+            timerTxt.text = "";
+            killsTxt.text = "";
+            coinsTxt.text = "";
         }
 
         private void OnClickPauseButton()
@@ -42,6 +50,11 @@ namespace Ui.Screens
         public void UpdateScore(int score)
         {
             coinsTxt.text = score.ToString();
+        }
+
+        public void UpdateKills(int count)
+        {
+            killsTxt.text = count.ToString();
         }
     }
 }

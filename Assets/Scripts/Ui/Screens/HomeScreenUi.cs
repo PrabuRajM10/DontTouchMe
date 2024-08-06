@@ -21,6 +21,11 @@ namespace Ui.Screens
             playButton.onClick.RemoveListener(OnClickPlayButton);
         }
 
+        public override void Reset()
+        {
+            
+        }
+
         private void OnClickPlayButton()
         {
             ButtonAnimator.Animate(playButton , () =>

@@ -1,4 +1,5 @@
 using System;
+using Ui;
 using UnityEngine;
 
 namespace Managers
@@ -8,11 +9,10 @@ namespace Managers
         [SerializeField] private int currentXpValue;
         [SerializeField] private int xpMultiplier;
 
-        public static event Action<int> OnXpCollected; 
         public override void OnCollectablesCollected()
         {
             currentXpValue++;
-            OnXpCollected?.Invoke(currentXpValue * xpMultiplier);
+            UiManager.Instance.OnXpCollected(currentXpValue * xpMultiplier);
         }
     }
 }

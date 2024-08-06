@@ -1,4 +1,5 @@
 using System;
+using Managers;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,6 +15,8 @@ namespace Gameplay
 
         private float _currentHealth;
         private bool _canMoveTowardsTarget;
+
+        public event Action<Enemy> OnDead;
         public void Init(ObjectPooling pool)
         {
             _pool = pool;
@@ -57,6 +60,7 @@ namespace Gameplay
 
             if (_currentHealth <= 0)
             {
+                EnemyManager.Instance.EnemyDead(this);
                 _currentHealth = maxHealth;
                 BackToPool();
             }

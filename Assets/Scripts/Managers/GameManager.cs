@@ -26,32 +26,29 @@ namespace Managers
         public static event Action<GameState> OnBeforeStateChange; 
         public static event Action<GameState> OnAfterStateChange;
 
-        private void OnEnable()
-        {
-            CoinsManager.OnCoinCollected += OnCoinCollected;
-            XpManager.OnXpCollected += OnXpCollected;
-        }
-
-        private void OnDisable()
-        {
-            CoinsManager.OnCoinCollected -= OnCoinCollected;
-            XpManager.OnXpCollected -= OnXpCollected;
-        }
-
-        private void OnCoinCollected(int coinsCount)
-        {
-            UiManager.Instance.OnCoinCollected(coinsCount);
-        }
-        
-        private void OnXpCollected(int xpValue)
-        {
-            UiManager.Instance.OnXpCollected(xpValue);
-        }
-
         private void Start()
         {
             ChangeState(initialState);
         }
+
+        private void OnEnable()
+        {
+            player.Dead += OnPlayerDead;
+        }
+
+        private void OnDisable()
+        {
+            player.Dead -= OnPlayerDead;
+        }
+
+        private void OnPlayerDead()
+        {
+            UiManager.Instance.OnPlayerDead();
+            EnemyManager.Instance.OnPlayerDead();
+            enemySpawner.StopSpawning();
+            collectablesSpawnersHolder.StopSpawning();
+        }
+
         public void ChangeState(GameState nextState)
         {
             if(nextState == _currentState ) return;
@@ -69,6 +66,8 @@ namespace Managers
                     HandleOnGameplay();
                     break;
                 case GameState.Home:
+                    break;
+                case GameState.GameResult:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -95,6 +94,7 @@ namespace Managers
     {
         GameStart,
         Gameplay,
-        Home
+        Home,
+        GameResult
     }
 }

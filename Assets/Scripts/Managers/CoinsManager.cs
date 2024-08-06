@@ -1,5 +1,7 @@
 using System;
+using Problem2;
 using UnityEngine;
+using UiManager = Ui.UiManager;
 
 namespace Managers
 {
@@ -8,11 +10,10 @@ namespace Managers
         [SerializeField] private int coinsCollectedCount;
         [SerializeField] private int coinsMultiplier;
 
-        public static event Action<int> OnCoinCollected;
         public override void OnCollectablesCollected()
         {
             coinsCollectedCount++;
-            OnCoinCollected?.Invoke(coinsCollectedCount * coinsMultiplier);
+            UiManager.Instance.OnCoinCollected(coinsCollectedCount);                
         }
     }
 }

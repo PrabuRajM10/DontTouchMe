@@ -1,3 +1,4 @@
+using System;
 using Gameplay;
 using UnityEngine;
 
@@ -12,6 +13,14 @@ namespace Managers
             foreach (var collectablesSpawner in collectablesSpawners)
             {
                 collectablesSpawner.StartAutoSpawning();
+            }
+        }
+
+        public void StopSpawning()
+        {
+            foreach (var spawner in collectablesSpawners)
+            {
+                spawner.StopSpawning();
             }
         }
     }

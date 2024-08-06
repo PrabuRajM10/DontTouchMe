@@ -1,3 +1,4 @@
+using System;
 using Managers;
 using Unity.Mathematics;
 using UnityEngine;
@@ -7,7 +8,6 @@ namespace Gameplay
 {
     public class Player : MonoBehaviour
     {
-        [SerializeField] private CharacterController characterController;
         [SerializeField] private Rigidbody rigidBody;
         [SerializeField] private Gun gun;
 
@@ -34,11 +34,10 @@ namespace Gameplay
         private Vector2 _playerInput;
         private Vector3 _velocity;
 
-
+        public event Action Dead;
 
         private void OnValidate()
         {
-            if (characterController == null) characterController = GetComponent<CharacterController>();
             if (rigidBody == null) rigidBody = GetComponent<Rigidbody>();
         }
 
@@ -124,6 +123,15 @@ namespace Gameplay
             }
 
             _velocity.y += verticalVelocity;
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            var enemy = collision.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                Dead?.Invoke();
+            }
         }
 
         private void OnCollisionStay(Collision collisionInfo)

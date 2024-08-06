@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Ui.Screens
@@ -6,16 +7,24 @@ namespace Ui.Screens
     {
         Gameplay,
         Setting,
-        Home
+        Home,
+        GameResult
     }
-    public class BaseUi : MonoBehaviour
+    public abstract class BaseUi : MonoBehaviour
     {
         [SerializeField] private GameScreen screen;
+
+        private void OnDisable()
+        {
+            Reset();
+        }
 
         public GameScreen Screen
         {
             get => screen;
             set => screen = value;
         }
+
+        public abstract void Reset();
     }
 }

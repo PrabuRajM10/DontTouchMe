@@ -94,8 +94,8 @@ GameObject:
   - component: {fileID: 1638365720688193930}
   - component: {fileID: 8630525251408984467}
   - component: {fileID: 7616333253394949895}
-  - component: {fileID: 3230032193216189431}
   - component: {fileID: 6805021750411950949}
+  - component: {fileID: 3230032193216189431}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -118,7 +118,7 @@ Transform:
   - {fileID: 1587083420936469868}
   - {fileID: 1603968826702894590}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!136 &8630525251408984467
 CapsuleCollider:
@@ -170,27 +170,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &3230032193216189431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5370872912423155470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b90564b055367ee45b5049f1fd112115, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterController: {fileID: 0}
-  client: {fileID: 0}
-  rigidBody: {fileID: 7616333253394949895}
-  gun: {fileID: 0}
-  speed: 11.01
-  maxAcceleration: 6
-  maxAirAcceleration: 60
-  maxJumpHeight: 1
-  maxAirJumps: 1
 --- !u!114 &6805021750411950949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +221,24 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerAction
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3230032193216189431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5370872912423155470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b90564b055367ee45b5049f1fd112115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
+  rigidBody: {fileID: 7616333253394949895}
+  gun: {fileID: 0}
+  speed: 11.01
+  maxJumpHeight: 1
+  maxAirJumps: 1
 --- !u!1 &7320415305419055832
 GameObject:
   m_ObjectHideFlags: 0

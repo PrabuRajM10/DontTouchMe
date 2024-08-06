@@ -19,6 +19,12 @@ namespace Ui.Screens
         {
             okButton.onClick.RemoveAllListeners();
         }
+
+        public override void Reset()
+        {
+            
+        }
+
         private void OnClickOkButton()
         {
             ButtonAnimator.Animate(okButton , () =>

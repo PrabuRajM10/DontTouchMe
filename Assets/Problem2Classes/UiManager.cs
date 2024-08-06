@@ -13,5 +13,9 @@ namespace Problem2
         {
             //show current and max ammo
         }
+
+        public class Instance
+        {
+        }
     }
 }
