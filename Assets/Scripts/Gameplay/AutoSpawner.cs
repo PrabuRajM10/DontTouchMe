@@ -14,10 +14,9 @@ namespace Gameplay
         private void Start()
         {
             _spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
-            StartAutoSpawning();
         }
 
-        private void StartAutoSpawning()
+        public void StartAutoSpawning()
         {
             _canSpawn = true;
             _currentTime = _spawnInterval;

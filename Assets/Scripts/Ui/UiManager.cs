@@ -1,4 +1,6 @@
 using System;
+using Gameplay;
+using Helpers;
 using Managers;
 using Ui.ScreenHandlers;
 using Ui.Screens;
@@ -8,10 +10,11 @@ namespace Ui
 {
     public class UiManager : GenericSingleton<UiManager>
     {
-        [SerializeField] private BaseUi gameplayScreen;
-        [SerializeField] private BaseUi settingScreen;
-
         [SerializeField] private GameScreen initialScreen; 
+        [SerializeField] private GameplayUi gameplayScreen;
+        [SerializeField] private SettingUi settingScreen;
+        [SerializeField] private HomeScreenUi homeScreen;
+
         
 
         private BaseUi _currentScreen;
@@ -28,7 +31,12 @@ namespace Ui
         {
             _currentScreen = GetScreen(initialScreen);
             SetScreenVisibility(_currentScreen , true);
+        }
 
+        private void Update()
+        {
+            if(_currentScreen != gameplayScreen)return;
+            UpdateGameTimer(GameTimer.GetTimeString());
         }
 
         private void OnSwitchScreenEvnt(GameScreen screen)
@@ -56,6 +64,8 @@ namespace Ui
                     return gameplayScreen;
                 case GameScreen.Setting:
                     return settingScreen;
+                case GameScreen.Home:
+                    return homeScreen;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(screen), screen, null);
             }
@@ -64,6 +74,13 @@ namespace Ui
         public void OnCoinCollected(int coinsCount)
         {
             Debug.Log("[UiManager] [OnCoinCollected] coinsCount " + coinsCount);
+            gameplayScreen.UpdateScore(coinsCount);
+        }
+
+        public void UpdateGameTimer(string time)
+        {
+            gameplayScreen.UpdateTimer(time);
+
         }
 
         public void OnXpCollected(int xpValue)

@@ -5,7 +5,8 @@ namespace Ui.Screens
     public enum GameScreen
     {
         Gameplay,
-        Setting
+        Setting,
+        Home
     }
     public class BaseUi : MonoBehaviour
     {

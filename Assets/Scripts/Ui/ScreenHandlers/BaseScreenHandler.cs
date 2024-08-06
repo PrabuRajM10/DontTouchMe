@@ -6,8 +6,10 @@ namespace Ui.ScreenHandlers
 {
     public class BaseScreenHandler : MonoBehaviour
     {
-        public static event Action<GameScreen> SwitchScreenEvnt;
 
+        public GameScreen respectiveScreen;
+        public static event Action<GameScreen> SwitchScreenEvnt;
+        
         protected void SwitchScreen(GameScreen gameScreen)
         {
             SwitchScreenEvnt?.Invoke(gameScreen);

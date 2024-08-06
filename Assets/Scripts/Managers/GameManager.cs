@@ -8,7 +8,13 @@ namespace Managers
 {
     public class GameManager : GenericSingleton<GameManager>
     {
+        [SerializeField] private GameState initialState;
         [SerializeField] private Player player;
+
+        [SerializeField] private AutoSpawner enemySpawner;
+        [SerializeField] private CollectablesSpawnersHolder collectablesSpawnersHolder;
+
+        [SerializeField] private float maxGameTimer;
 
         private GameState _currentState;
         private GameState _previousState;
@@ -44,9 +50,9 @@ namespace Managers
 
         private void Start()
         {
-            ChangeState(GameState.GameStart);
+            ChangeState(initialState);
         }
-        void ChangeState(GameState nextState)
+        public void ChangeState(GameState nextState)
         {
             if(nextState == _currentState ) return;
 
@@ -60,6 +66,9 @@ namespace Managers
                     HandleOnGameStart();
                     break;
                 case GameState.Gameplay:
+                    HandleOnGameplay();
+                    break;
+                case GameState.Home:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -73,11 +82,19 @@ namespace Managers
         {
             
         }
+
+        void HandleOnGameplay()
+        {
+            enemySpawner.StartAutoSpawning();
+            collectablesSpawnersHolder.StartSpawning();
+            GameTimer.StartTimer(this ,maxGameTimer);
+        }
     }
     
     public enum GameState
     {
         GameStart,
-        Gameplay
+        Gameplay,
+        Home
     }
 }
