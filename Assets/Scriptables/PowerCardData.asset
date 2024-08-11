@@ -16,50 +16,50 @@ MonoBehaviour:
   - cardId: 1
     cardRarity: 0
     cardImg: {fileID: 0}
-    cardName: 
+    cardName: Common Card - 1
     cardDescription: 
   - cardId: 2
     cardRarity: 0
     cardImg: {fileID: 0}
-    cardName: 
+    cardName: Common Card - 2
     cardDescription: 
   - cardId: 3
     cardRarity: 0
     cardImg: {fileID: 0}
-    cardName: 
+    cardName: Common Card - 3
     cardDescription: 
   - cardId: 4
     cardRarity: 0
     cardImg: {fileID: 0}
-    cardName: 
+    cardName: Common Card - 4
     cardDescription: 
   - cardId: 5
     cardRarity: 1
     cardImg: {fileID: 0}
-    cardName: 
+    cardName: Rare Card - 1
     cardDescription: 
   - cardId: 6
     cardRarity: 1
     cardImg: {fileID: 0}
-    cardName: 
+    cardName: Rare Card - 2
     cardDescription: 
   - cardId: 7
     cardRarity: 1
     cardImg: {fileID: 0}
-    cardName: 
+    cardName: Rare Card - 3
     cardDescription: 
   - cardId: 8
     cardRarity: 2
     cardImg: {fileID: 0}
-    cardName: 
+    cardName: Epic Card - 1
     cardDescription: 
   - cardId: 9
     cardRarity: 2
     cardImg: {fileID: 0}
-    cardName: 
+    cardName: Epic Card - 2
     cardDescription: 
   - cardId: 10
     cardRarity: 3
     cardImg: {fileID: 0}
-    cardName: 
+    cardName: Legendary Card - 1
     cardDescription: 

@@ -1,20 +1,23 @@
 using System;
+using System.Collections.Generic;
 using Gameplay;
 using Helpers;
 using Managers;
 using Ui.ScreenHandlers;
 using Ui.Screens;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Ui
 {
     public class UiManager : GenericSingleton<UiManager>
     {
         [SerializeField] private GameScreen initialScreen; 
-        [SerializeField] private GameplayUi gameplayScreen;
-        [SerializeField] private SettingUi settingScreen;
-        [SerializeField] private HomeScreenUi homeScreen;
+        [SerializeField] private GameplayScreen gameplayScreen;
+        [SerializeField] private SettingScreen settingScreen;
+        [SerializeField] private HomeScreenScreen homeScreen;
         [SerializeField] private GameResultScreen gameResultScreen;
+        [SerializeField] private CardPickerScreen cardPickerScreen;
 
         
 
@@ -69,6 +72,8 @@ namespace Ui
                     return homeScreen;
                 case GameScreen.GameResult:
                     return gameResultScreen;
+                case GameScreen.CardPicker:
+                    return cardPickerScreen;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(screen), screen, null);
             }
@@ -97,8 +102,24 @@ namespace Ui
 
         public void OnPlayerDead()
         {
-            gameResultScreen.ShowResult(false);
+            SetGameReset(false);
+        }
+
+        public void OnPlayerCompletedLevel()
+        {
+            SetGameReset(true);
+        }
+
+
+        public void SetGameReset(bool state)
+        {
+            gameResultScreen.ShowResult(state);
             OnSwitchScreenEvnt(GameScreen.GameResult);
+        }
+
+        public void SetCurrentGameCards(List<CardData> powerCards)
+        {
+            gameplayScreen.SetCardData(powerCards);
         }
     }
 }

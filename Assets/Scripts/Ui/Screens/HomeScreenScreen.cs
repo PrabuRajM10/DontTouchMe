@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Ui.Screens
 {
-    public class HomeScreenUi : BaseUi
+    public class HomeScreenScreen : BaseUi
     {
         [SerializeField] private Button playButton;
 

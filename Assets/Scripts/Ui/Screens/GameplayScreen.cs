@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Gameplay;
 using Helpers;
@@ -9,12 +10,14 @@ using UnityEngine.UI;
 
 namespace Ui.Screens
 {
-    public class GameplayUi : BaseUi
+    public class GameplayScreen : BaseUi
     {
         [SerializeField] private Button pauseButton;
         [SerializeField] private TMP_Text coinsTxt;
         [SerializeField] private TMP_Text timerTxt;
         [SerializeField] private TMP_Text killsTxt;
+
+        [SerializeField] private PowerCardUi[] powerCardUis;
 
         public event Action OnPauseButtonPressed;
         private void OnEnable()
@@ -55,6 +58,15 @@ namespace Ui.Screens
         public void UpdateKills(int count)
         {
             killsTxt.text = count.ToString();
+        }
+
+        public void SetCardData(List<CardData> powerCards)
+        {
+            for (var i = 0; i < powerCards.Count; i++)
+            {
+                var powerCard = powerCards[i];
+                // powerCardUis[i].SetData(powerCard);
+            }
         }
     }
 }

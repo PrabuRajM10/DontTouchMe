@@ -6,7 +6,7 @@ namespace Ui.ScreenHandlers
 {
     public class HomeScreenHandler : BaseScreenHandler
     {
-        [SerializeField] private HomeScreenUi homeScreen;
+        [SerializeField] private HomeScreenScreen homeScreen;
 
         private void OnEnable()
         {
@@ -20,8 +20,8 @@ namespace Ui.ScreenHandlers
 
         private void PlayButtonPressed()
         {
-            SwitchScreen(GameScreen.Gameplay);
-            GameManager.Instance.ChangeState(GameState.Gameplay);
+            SwitchScreen(GameScreen.CardPicker);
+            GameManager.Instance.ChangeState(GameState.CardPicker);
         }
     }
 }

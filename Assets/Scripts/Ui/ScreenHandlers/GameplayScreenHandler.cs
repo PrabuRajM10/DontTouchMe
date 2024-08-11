@@ -6,7 +6,7 @@ namespace Ui.ScreenHandlers
 {
     public class GameplayScreenHandler : BaseScreenHandler
     {
-        [SerializeField] private GameplayUi gameplayScreen;
+        [SerializeField] private GameplayScreen gameplayScreen;
         private void Update()
         {
             if (InputManager.Instance.IsPaused())

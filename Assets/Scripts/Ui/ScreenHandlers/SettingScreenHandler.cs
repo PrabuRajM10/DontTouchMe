@@ -6,7 +6,7 @@ namespace Ui.ScreenHandlers
 {
     public class SettingScreenHandler : BaseScreenHandler
     {
-        [SerializeField] private SettingUi settingScreen;
+        [SerializeField] private SettingScreen settingScreen;
 
         private void OnEnable()
         {

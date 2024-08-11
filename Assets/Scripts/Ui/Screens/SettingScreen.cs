@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Ui.Screens
 {
-    public class SettingUi : BaseUi
+    public class SettingScreen : BaseUi
     {
         [SerializeField] private Button okButton;
 

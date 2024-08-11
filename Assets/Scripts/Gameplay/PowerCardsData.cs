@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Gameplay
 {
@@ -28,6 +29,11 @@ namespace Gameplay
         public List<CardData> GetCardDataListByRarity(CardRarity rarity)
         {
             return cardDataByRarity[rarity];
+        }
+
+        public CardData GetRandomCard()
+        {
+            return cardDataList[Random.Range(0, cardDataList.Count)];
         }
 
         void SetCardsByRarity(CardRarity rarity)

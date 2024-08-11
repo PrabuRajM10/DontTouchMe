@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Gameplay;
 using Ui;
+using Ui.Screens;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -34,17 +36,35 @@ namespace Managers
         private void OnEnable()
         {
             player.Dead += OnPlayerDead;
+            GameTimer.OnGameTimerDone += GameTimerDone;
         }
+
 
         private void OnDisable()
         {
             player.Dead -= OnPlayerDead;
+            GameTimer.OnGameTimerDone -= GameTimerDone;
+        }
+        private void GameTimerDone()
+        {
+            EndGame(true);
         }
 
         private void OnPlayerDead()
         {
-            UiManager.Instance.OnPlayerDead();
-            EnemyManager.Instance.OnPlayerDead();
+            EndGame(false);
+        }
+
+        void EndGame(bool successful)
+        {
+            ChangeState(GameState.GameResult);
+            UiManager.Instance.SetGameReset(successful);
+            EnemyManager.Instance.DisableAllEnemies();
+            StopSpawning();
+        }
+
+        void StopSpawning()
+        {
             enemySpawner.StopSpawning();
             collectablesSpawnersHolder.StopSpawning();
         }
@@ -69,6 +89,8 @@ namespace Managers
                     break;
                 case GameState.GameResult:
                     break;
+                case GameState.CardPicker:
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -84,9 +106,16 @@ namespace Managers
 
         void HandleOnGameplay()
         {
+            Debug.Log("[HandleOnGameplay]");
             enemySpawner.StartAutoSpawning();
             collectablesSpawnersHolder.StartSpawning();
             GameTimer.StartTimer(this ,maxGameTimer);
+        }
+
+        public void SetPowerCardsForTheGame(List<CardData> powerCards)
+        {
+            UiManager.Instance.SetCurrentGameCards(powerCards);
+            
         }
     }
     
@@ -95,6 +124,7 @@ namespace Managers
         GameStart,
         Gameplay,
         Home,
-        GameResult
+        GameResult,
+        CardPicker
     }
 }

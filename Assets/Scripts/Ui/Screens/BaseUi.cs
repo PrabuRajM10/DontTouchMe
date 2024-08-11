@@ -8,13 +8,14 @@ namespace Ui.Screens
         Gameplay,
         Setting,
         Home,
-        GameResult
+        GameResult,
+        CardPicker
     }
     public abstract class BaseUi : MonoBehaviour
     {
         [SerializeField] private GameScreen screen;
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             Reset();
         }

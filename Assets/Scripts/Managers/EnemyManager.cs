@@ -23,7 +23,7 @@ namespace Managers
             UiManager.Instance.UpdateKillCount(deadEnemiesCount);
         }
 
-        public void OnPlayerDead()
+        public void DisableAllEnemies()
         {
             foreach (var enemy in activeEnemyList)
             {

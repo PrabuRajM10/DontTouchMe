@@ -30,7 +30,7 @@ namespace Ui.ScreenHandlers
         private void OnHomeButtonPressed()
         {
             GameManager.Instance.ChangeState(GameState.Home);
-            SwitchScreen(GameScreen.GameResult);
+            SwitchScreen(GameScreen.Home);
         }
     }
 }
