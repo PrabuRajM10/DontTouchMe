@@ -5,8 +5,7 @@ namespace Gameplay
     [RequireComponent(typeof(Rigidbody))]
     public class Bullet : MonoBehaviour , IPoolableObjects
     {
-        [SerializeField] private float speed = 100f;
-        [SerializeField] private float damageAmount = 10;
+        [SerializeField] private BulletProperties bulletPropertiesSo;
         
         [SerializeField] private Rigidbody rigidBody;
 
@@ -36,7 +35,7 @@ namespace Gameplay
         public void Fire()
         {
             gameObject.SetActive(true);
-            rigidBody.AddForce(transform.forward * speed , ForceMode.Force);
+            rigidBody.AddForce(transform.forward * bulletPropertiesSo.Speed , ForceMode.Force);
             Invoke(nameof(DisableBullet) , 10f);
         }
 
@@ -64,7 +63,7 @@ namespace Gameplay
 
         public float Damage()
         {
-            return damageAmount;
+            return bulletPropertiesSo.DamageAmount;
         }
     }
 }

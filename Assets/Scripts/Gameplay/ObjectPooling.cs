@@ -12,7 +12,8 @@ namespace Gameplay
         Enemy,
         Bullet,
         Coin,
-        Xp
+        Xp,
+        Bomb
     }
 
     [Serializable]
@@ -31,6 +32,7 @@ namespace Gameplay
 
         private List<Enemy> _enemyListPool = new List<Enemy>();
         private List<Bullet> _bulletListPool = new List<Bullet>();
+        private List<Bomb> _bombListPool = new List<Bomb>();
         private List<Collectables> _coinListPool = new List<Collectables>();
         private List<Collectables> _xpListPool = new List<Collectables>();
 
@@ -77,7 +79,8 @@ namespace Gameplay
                 case PoolObjectTypes.Xp:
                     _xpListPool.Add((Collectables)poolObject);
                     break;
-                default:
+                case PoolObjectTypes.Bomb:
+                    _bombListPool.Add((Bomb)poolObject);
                     throw new ArgumentOutOfRangeException(nameof(poolObjectType), poolObjectType, null);
             }
         }
@@ -116,6 +119,16 @@ namespace Gameplay
                     var xp = GetCollectablesObject(_xpListPool , PoolObjectTypes.Xp);
                     xp.SetManager(CollectablesManagerHolder.Instance.GetManager(CollectablesType.Xp));
                     return xp;
+                case PoolObjectTypes.Bomb:
+                    if (_bombListPool.Count < 2)
+                    {
+                        var poolObjectData = GetPoolProjectData(PoolObjectTypes.Bomb);
+                        Spawn(poolObjectData.prefab , 5 ,poolObjectData.poolObjectType , poolObjectData.spawnParent);
+                    }            
+                    var bomb = _bombListPool[0];
+                    _bombListPool.Remove(bomb);
+                    bomb.transform.parent = null;
+                    return bomb;
                 default:
                     return null;
             }
@@ -156,6 +169,10 @@ namespace Gameplay
             return (Collectables)GetObjectFromPool(PoolObjectTypes.Xp);
         }
 
+        public Bomb GetBomb()
+        {
+            return (Bomb)GetObjectFromPool(PoolObjectTypes.Bomb);
+        }
         public void AddBackToList(IPoolableObjects poolable , PoolObjectTypes poolObjectTypes)
         {
             switch (poolObjectTypes)
@@ -171,9 +188,19 @@ namespace Gameplay
                     _bulletListPool.Add(bullet);
                     break;
                 case PoolObjectTypes.Coin:
-                    var collectable = (Collectables)poolable;
-                    ResetObjects(collectable.gameObject, PoolObjectTypes.Coin);
-                    _coinListPool.Add(collectable);
+                    var coin = (Collectables)poolable;
+                    ResetObjects(coin.gameObject, PoolObjectTypes.Coin);
+                    _coinListPool.Add(coin);
+                    break;
+                case PoolObjectTypes.Xp:
+                    var xp = (Collectables)poolable;
+                    ResetObjects(xp.gameObject, PoolObjectTypes.Xp);
+                    _xpListPool.Add(xp);
+                    break;
+                case PoolObjectTypes.Bomb:
+                    var bomb = (Bomb)poolable;
+                    ResetObjects(bomb.gameObject, PoolObjectTypes.Bomb);
+                    _bombListPool.Add(bomb);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(poolObjectTypes), poolObjectTypes, null);

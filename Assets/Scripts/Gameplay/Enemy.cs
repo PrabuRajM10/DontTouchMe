@@ -14,6 +14,7 @@ namespace Gameplay
         private Player _targetPlayer;
 
         private float _currentHealth;
+        private float _defaultSpeed;
         private bool _canMoveTowardsTarget;
 
         public event Action<Enemy> OnDead;
@@ -21,6 +22,8 @@ namespace Gameplay
         {
             _pool = pool;
             _currentHealth = maxHealth;
+            if (agent == null) agent = GetComponent<NavMeshAgent>();
+            _defaultSpeed = agent.speed;
         }
 
         public void BackToPool()
@@ -69,6 +72,30 @@ namespace Gameplay
         public void SetLookTarget()
         {
             transform.LookAt(_targetPlayer.transform);
+        }
+
+        public void SetSpeedMultiplier(float multiplier)
+        {
+            agent.speed *= multiplier;
+        }
+
+        public void ResetSpeed()
+        {
+            agent.speed = _defaultSpeed;
+        }
+
+        public void SetScaleMultiplier(float scale)
+        {
+            transform.localScale *= scale;
+        }
+        public void ResetScale()
+        {
+            transform.localScale = Vector3.one;
+        }
+
+        public void FreezeMovement(bool freezeMovement)
+        {
+            _canMoveTowardsTarget = !freezeMovement;
         }
     }
 }

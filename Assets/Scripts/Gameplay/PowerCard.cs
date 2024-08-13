@@ -2,9 +2,13 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    public class PowerCard : MonoBehaviour
+    [CreateAssetMenu]
+    public class PowerCard : ScriptableObject
     {
         [SerializeField] private PowerCardsId cardId;
         [SerializeField] private CardRarity rarity;
+
+        public virtual void Execute(GameObject requiredObject) {}
+        public virtual void OnBeforeCooldown(GameObject requiredObject) {}
     }
 }

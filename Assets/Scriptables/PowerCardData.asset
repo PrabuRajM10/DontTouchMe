@@ -16,17 +16,17 @@ MonoBehaviour:
   - cardId: 1
     cardRarity: 0
     cardImg: {fileID: 0}
-    cardName: Common Card - 1
+    cardName: Player Speed 2X
     cardDescription: 
   - cardId: 2
     cardRarity: 0
     cardImg: {fileID: 0}
-    cardName: Common Card - 2
+    cardName: Enemy Speed 0.5X
     cardDescription: 
   - cardId: 3
     cardRarity: 0
     cardImg: {fileID: 0}
-    cardName: Common Card - 3
+    cardName: Big Enemies
     cardDescription: 
   - cardId: 4
     cardRarity: 0

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Managers;
 using UnityEngine;
 
@@ -9,6 +11,7 @@ namespace Gameplay
         [SerializeField] private CollectablesType collectablesType;
         private ObjectPooling _pool;
         protected CollectablesManager respectiveManager;
+        private float _speed;
 
         public void SetManager(CollectablesManager manager)
         {
@@ -34,6 +37,20 @@ namespace Gameplay
             if (player == null) return;
             OnCollected();
             BackToPool();
+        }
+
+        public void MoveTowardsTarget(Transform target)
+        {
+            StartCoroutine(MoveToTarget(target));
+        }
+
+        IEnumerator MoveToTarget(Transform target)
+        {
+            while (Vector3.Distance(transform.position , target.position) > 0.1f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
+                yield return null;
+            }
         }
     }
 }

@@ -31,5 +31,45 @@ namespace Managers
             }
             activeEnemyList.Clear();
         }
+
+        public void SetEnemiesSpeedMultiplier(float multiplier)
+        {
+            foreach (var enemy in activeEnemyList)
+            {
+                enemy.SetSpeedMultiplier(multiplier);
+            }
+        }
+
+        public void ResetEnemiesSpeed()
+        {
+            foreach (var enemy in activeEnemyList)
+            {
+                enemy.ResetSpeed();
+            }
+        }
+
+        public void SetEnemiesScaleMultiplier(float scale)
+        {
+            foreach (var enemy in activeEnemyList)
+            {
+                enemy.SetScaleMultiplier(scale);
+            }
+        }
+
+        public void ResetEnemiesScale()
+        {
+            foreach (var enemy in activeEnemyList)
+            {
+                enemy.ResetScale();
+            }
+        }
+
+        public void FreezeEnemies(bool freeze)
+        {
+            foreach (var enemy in activeEnemyList)
+            {
+                enemy.FreezeMovement(freeze);
+            }
+        }
     }
 }

@@ -3,13 +3,15 @@ using Managers;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Gameplay
 {
     public class Player : MonoBehaviour
     {
         [SerializeField] private Rigidbody rigidBody;
-        [SerializeField] private Gun gun;
+        [SerializeField] private Drone drone;
+        [SerializeField] private CollectablesMagnet magnet;        
 
         [SerializeField, Range(0, 20)] private float speed;
         [SerializeField, Range(0, 20)] private int maxJumpHeight;
@@ -22,6 +24,7 @@ namespace Gameplay
         private bool _desiredJump;
         private bool _isGrounded;
         private bool _isMovementKeysPressed;
+        private bool _isImmune;
 
         private float _verticalAxis;
         private float _horizontalAxis;
@@ -29,12 +32,15 @@ namespace Gameplay
         private float _lastSentXValue;
         private float _lastSentYValue;
         private float _lastSentZValue;
+        private float _defaultPlayerSpeed;
         private float _floatCheckTolerance = 0.01f;
 
         private Vector2 _playerInput;
         private Vector3 _velocity;
 
         public event Action Dead;
+
+        public float Speed => speed;
 
         private void OnValidate()
         {
@@ -44,6 +50,7 @@ namespace Gameplay
         private void Awake()
         {
             _input = new PlayerInput();
+            _defaultPlayerSpeed = speed;
         }
 
         private void OnEnable()
@@ -66,7 +73,7 @@ namespace Gameplay
 
             if (InputManager.Instance.IsFired())
             {
-                gun.Shoot();
+                drone.Shoot();
             }
 
             _playerInput = Vector2.ClampMagnitude(_playerInput, 1f);
@@ -128,7 +135,7 @@ namespace Gameplay
         private void OnCollisionEnter(Collision collision)
         {
             var enemy = collision.gameObject.GetComponent<Enemy>();
-            if (enemy != null)
+            if (enemy != null && !_isImmune)
             {
                 Dead?.Invoke();
             }
@@ -146,6 +153,33 @@ namespace Gameplay
         public Vector3 GetPosition()
         {
             return transform.position;
+        }
+
+        public void SetPlayerSpeedMultiplier(float multiplier)
+        {
+            speed *= multiplier;
+        }
+
+        public void ResetPlayerSpeed()
+        {
+            speed = _defaultPlayerSpeed;
+        }
+
+        public void DropBomb()
+        {
+            var bomb = ObjectPooling.Instance.GetBomb();
+            bomb.Deploy(transform.position);
+        }
+
+        public void Immune(bool canBeImmune)
+        {
+            _isImmune = canBeImmune;
+            //Play visuals
+        }
+
+        public void AttractAllCollectables(bool attractCollectables)
+        {
+            magnet.gameObject.SetActive(attractCollectables);
         }
     }
 }

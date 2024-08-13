@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Helpers;
 using Managers;
@@ -7,11 +9,12 @@ namespace Gameplay
 {
     public class Drone : MonoBehaviour
     {
-        private Camera _camera;
-        private Vector3 _lookTarget;
-        [SerializeField] private float lookAtYOffset;
         [SerializeField] private Player player;
+        [SerializeField] private Gun gun1;
+        [SerializeField] private BulletProperties defaultBulletPropertiesSo;
+        
         [SerializeField , Range(0,10)] private float minDistanceFromPlayer;
+        [SerializeField] private float lookAtYOffset;
         [SerializeField] private float minFollowDuration;
         [SerializeField] private float maxFollowDuration;
         [SerializeField] private float yOffsetFromPlayer;
@@ -19,10 +22,24 @@ namespace Gameplay
         [SerializeField] private bool isMoving;
         [SerializeField] private Ease followType;
 
+        [SerializeField] private Transform defaultGunPos;
+        [SerializeField] private Transform dualGunPos1;
+        [SerializeField] private Transform dualGunPos2;
+
+        private Camera _camera;
+        private Vector3 _lookTarget;
+        private Gun _gun2;
+        private readonly List<Gun> _currentActiveGuns = new List<Gun>();
+
         private void OnValidate()
         {
             if(_camera == null)_camera = Camera.main;
             if(yOffsetFromPlayer <= 0)yOffsetFromPlayer = transform.position.y;
+        }
+
+        private void Awake()
+        {
+            _currentActiveGuns.Add(gun1);
         }
 
         private void Update()
@@ -64,6 +81,44 @@ namespace Gameplay
                 _lookTarget = hit.point;
                 _lookTarget.y = lookAtYOffset;
             }
+        }
+
+        public void DualGuns(bool dualGuns)
+        {
+            if (dualGuns)
+            {
+                gun1.transform.LeanMove(dualGunPos1.position, 0.2f);
+                if (_gun2 == null)
+                {
+                    _gun2 = Instantiate(gun1, dualGunPos2);
+                }
+                _currentActiveGuns.Add(_gun2);
+                if(!_gun2.gameObject.activeSelf) _gun2.gameObject.SetActive(true);
+            }
+            else
+            {
+                _gun2.gameObject.SetActive(false);
+                _currentActiveGuns.Remove(_gun2);
+                gun1.transform.LeanMove(defaultGunPos.position, 0.2f);
+            }
+        }
+
+        public void Shoot()
+        {
+            foreach (var gun in _currentActiveGuns)
+            {
+                gun.Shoot();
+            }
+        }
+
+        public void SetBulletDamage(int damageValue)
+        {
+            defaultBulletPropertiesSo.DamageAmount = damageValue;
+        }
+
+        public void ResetBulletDamage()
+        {
+            defaultBulletPropertiesSo.ResetDamage();
         }
     }
 }
