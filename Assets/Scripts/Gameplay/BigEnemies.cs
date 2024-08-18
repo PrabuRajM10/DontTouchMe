@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Gameplay
 {
+    [CreateAssetMenu]
     public class BigEnemies : PowerCard
     {
         public override void Execute(GameObject requiredObject)

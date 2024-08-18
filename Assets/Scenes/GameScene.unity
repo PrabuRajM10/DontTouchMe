@@ -521,6 +521,7 @@ Transform:
   - {fileID: 996215516}
   - {fileID: 300620962}
   - {fileID: 75663583}
+  - {fileID: 609590904}
   m_Father: {fileID: 1084464679}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1293,6 +1294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fe6cc700794d1487c7935afe865959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  valueMultiplier: 0
+  value: 0
   currentXpValue: 0
   xpMultiplier: 1
 --- !u!1 &304651839
@@ -1596,7 +1599,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.36043432, y: -0.00087082013, z: 0.00033649104, w: 0.9327842}
+  m_LocalRotation: {x: 0.3604343, y: -0.0008708201, z: 0.0003364909, w: 0.9327842}
   m_LocalPosition: {x: 0, y: 12.881021, z: -12.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2406,6 +2409,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4981274239114134199}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &524729239 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1507396461461187856, guid: eb93f2249b5966644a7700d996fa9554,
+    type: 3}
+  m_PrefabInstance: {fileID: 4981274239114134199}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca8f3360e87f461aacae37cba2657b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &533276679
 GameObject:
   m_ObjectHideFlags: 0
@@ -2730,6 +2745,50 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1349536842}
   m_SourcePrefab: {fileID: 100100000, guid: e8a9936abbb435e4daa1fc8cfc91dac4, type: 3}
+--- !u!1 &609590903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 609590904}
+  - component: {fileID: 609590905}
+  m_Layer: 0
+  m_Name: PowerCardHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &609590904
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609590903}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 100493658}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &609590905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609590903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda8ca2ff53b4080bfb2ef6eb6168c2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &640073838
 GameObject:
   m_ObjectHideFlags: 0
@@ -4203,8 +4262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6715e7146f93407a83c13eda1a35b026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinsCollectedCount: 0
-  coinsMultiplier: 1
+  valueMultiplier: 0
+  value: 0
 --- !u!1 &1002843629
 GameObject:
   m_ObjectHideFlags: 0
@@ -4373,7 +4432,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062739149}
-  m_LocalRotation: {x: 0.36043432, y: -0.00087082013, z: 0.00033649104, w: 0.9327842}
+  m_LocalRotation: {x: 0.3604343, y: -0.0008708201, z: 0.0003364909, w: 0.9327842}
   m_LocalPosition: {x: -1025.4661, y: -677.1736, z: -4.3700743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6784,6 +6843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respectiveScreen: 4
   cardPickerScreen: {fileID: 1440795284}
+  powerCardsHandler: {fileID: 609590905}
 --- !u!1 &1530658307
 GameObject:
   m_ObjectHideFlags: 0
@@ -8979,6 +9039,11 @@ PrefabInstance:
       objectReference: {fileID: 404567392}
     - target: {fileID: 3230032193216189431, guid: 5007963bfb4817640ad70d3868ab3429,
         type: 3}
+      propertyPath: drone
+      value: 
+      objectReference: {fileID: 524729239}
+    - target: {fileID: 3230032193216189431, guid: 5007963bfb4817640ad70d3868ab3429,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -8986,6 +9051,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6805021750411950949, guid: 5007963bfb4817640ad70d3868ab3429,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6805021750411950949, guid: 5007963bfb4817640ad70d3868ab3429,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
+      value: f14a1e89-9cc8-4300-bf68-b7478bec2219
+      objectReference: {fileID: 0}
+    - target: {fileID: 6805021750411950949, guid: 5007963bfb4817640ad70d3868ab3429,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: 89d6dc35-e0f1-4665-8b98-2d2c29c5ce4a
+      objectReference: {fileID: 0}
+    - target: {fileID: 6805021750411950949, guid: 5007963bfb4817640ad70d3868ab3429,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: 68ae6cd2-a7e0-43e7-b21a-9d1d152f46b5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6805021750411950949, guid: 5007963bfb4817640ad70d3868ab3429,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
+      value: PlayerAction/PowerCardSlot1[/Keyboard/1]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6805021750411950949, guid: 5007963bfb4817640ad70d3868ab3429,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: PlayerAction/PowerCardSlot2[/Keyboard/2]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6805021750411950949, guid: 5007963bfb4817640ad70d3868ab3429,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: PlayerAction/PowerCardSlot3[/Keyboard/3]
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -22,7 +22,7 @@ namespace Managers
             probabilityInPercentage = probability;
         }
     }
-    public class PowerCardManager : GenericSingleton<PowerCardManager>
+    public class PowerCardPicker : GenericSingleton<PowerCardPicker>
     {
         [SerializeField]private List<PowerCardProbability> powerCardProbabilities = new List<PowerCardProbability>();
         [SerializeField]private List<CardData> currentGameCards = new List<CardData>();

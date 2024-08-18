@@ -47,10 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca8f3360e87f461aacae37cba2657b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookAtYOffset: 3
   player: {fileID: 0}
   gun1: {fileID: 7280035033748975339}
+  defaultBulletPropertiesSo: {fileID: 11400000, guid: 161a8b9bd88ce69408074735e501cf26,
+    type: 2}
   minDistanceFromPlayer: 5.01
+  lookAtYOffset: 3
   minFollowDuration: 0.5
   maxFollowDuration: 2
   yOffsetFromPlayer: 3.520784

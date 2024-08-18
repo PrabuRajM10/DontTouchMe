@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Gameplay
 {
+    [CreateAssetMenu]
     public class SlowEnemies : PowerCard
     {
         public override void Execute(GameObject requiredObject)

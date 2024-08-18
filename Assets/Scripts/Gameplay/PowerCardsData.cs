@@ -73,5 +73,6 @@ namespace Gameplay
         public Sprite cardImg;
         public string cardName;
         public string cardDescription;
+        public PowerCard powerCard;
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Gameplay
 {
+    [CreateAssetMenu]
     public class PlayerSpeed2X : PowerCard
     {
         public override void Execute(GameObject requiredObject)

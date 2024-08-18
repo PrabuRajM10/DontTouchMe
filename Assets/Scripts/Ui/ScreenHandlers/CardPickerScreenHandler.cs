@@ -12,6 +12,7 @@ namespace Ui.ScreenHandlers
     public class CardPickerScreenHandler : BaseScreenHandler
     {
         [FormerlySerializedAs("cardPickerUi")] [SerializeField] private CardPickerScreen cardPickerScreen;
+        [SerializeField] private PowerCardsHandler powerCardsHandler;
         private void OnEnable()
         {
             cardPickerScreen.OnGetCardsButtonPressed += GetCardsButtonPressed;
@@ -32,8 +33,12 @@ namespace Ui.ScreenHandlers
 
         private void GetCardsButtonPressed()
         {
-            List<CardData> pickedCard = PowerCardManager.Instance.GetPowerCards();
-            cardPickerScreen.ShowSelectedCards(pickedCard);
+            List<CardData> pickedCard = PowerCardPicker.Instance.GetPowerCards();
+            cardPickerScreen.OnCardsSelected(pickedCard);
+
+            PowerCard[] powerCards = { pickedCard[0].powerCard , pickedCard[1].powerCard , pickedCard[2].powerCard};
+            
+            powerCardsHandler.SetChosenCurrentCard(powerCards);
         }
     }
 }

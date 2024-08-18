@@ -64,6 +64,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""PowerCardSlot1"",
+                    ""type"": ""Button"",
+                    ""id"": ""f14a1e89-9cc8-4300-bf68-b7478bec2219"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PowerCardSlot2"",
+                    ""type"": ""Button"",
+                    ""id"": ""89d6dc35-e0f1-4665-8b98-2d2c29c5ce4a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PowerCardSlot3"",
+                    ""type"": ""Button"",
+                    ""id"": ""68ae6cd2-a7e0-43e7-b21a-9d1d152f46b5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""MouseLook"",
                     ""type"": ""Value"",
                     ""id"": ""c587bc39-80af-47cc-84be-709c32c4dfd7"",
@@ -172,6 +199,39 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""MouseLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""63ebcbc3-0538-4924-a2b1-785600272eb3"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""PowerCardSlot1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b58dcf53-6482-473a-8d23-700c74b1ba95"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""PowerCardSlot2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7dd65d44-e002-4f45-bdac-a115712f7112"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""PowerCardSlot3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -190,6 +250,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_PlayerAction_Jump = m_PlayerAction.FindAction("Jump", throwIfNotFound: true);
         m_PlayerAction_Shoot = m_PlayerAction.FindAction("Shoot", throwIfNotFound: true);
         m_PlayerAction_Pause = m_PlayerAction.FindAction("Pause", throwIfNotFound: true);
+        m_PlayerAction_PowerCardSlot1 = m_PlayerAction.FindAction("PowerCardSlot1", throwIfNotFound: true);
+        m_PlayerAction_PowerCardSlot2 = m_PlayerAction.FindAction("PowerCardSlot2", throwIfNotFound: true);
+        m_PlayerAction_PowerCardSlot3 = m_PlayerAction.FindAction("PowerCardSlot3", throwIfNotFound: true);
         m_PlayerAction_MouseLook = m_PlayerAction.FindAction("MouseLook", throwIfNotFound: true);
     }
 
@@ -256,6 +319,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerAction_Jump;
     private readonly InputAction m_PlayerAction_Shoot;
     private readonly InputAction m_PlayerAction_Pause;
+    private readonly InputAction m_PlayerAction_PowerCardSlot1;
+    private readonly InputAction m_PlayerAction_PowerCardSlot2;
+    private readonly InputAction m_PlayerAction_PowerCardSlot3;
     private readonly InputAction m_PlayerAction_MouseLook;
     public struct PlayerActionActions
     {
@@ -265,6 +331,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerAction_Jump;
         public InputAction @Shoot => m_Wrapper.m_PlayerAction_Shoot;
         public InputAction @Pause => m_Wrapper.m_PlayerAction_Pause;
+        public InputAction @PowerCardSlot1 => m_Wrapper.m_PlayerAction_PowerCardSlot1;
+        public InputAction @PowerCardSlot2 => m_Wrapper.m_PlayerAction_PowerCardSlot2;
+        public InputAction @PowerCardSlot3 => m_Wrapper.m_PlayerAction_PowerCardSlot3;
         public InputAction @MouseLook => m_Wrapper.m_PlayerAction_MouseLook;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
@@ -287,6 +356,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @PowerCardSlot1.started += instance.OnPowerCardSlot1;
+            @PowerCardSlot1.performed += instance.OnPowerCardSlot1;
+            @PowerCardSlot1.canceled += instance.OnPowerCardSlot1;
+            @PowerCardSlot2.started += instance.OnPowerCardSlot2;
+            @PowerCardSlot2.performed += instance.OnPowerCardSlot2;
+            @PowerCardSlot2.canceled += instance.OnPowerCardSlot2;
+            @PowerCardSlot3.started += instance.OnPowerCardSlot3;
+            @PowerCardSlot3.performed += instance.OnPowerCardSlot3;
+            @PowerCardSlot3.canceled += instance.OnPowerCardSlot3;
             @MouseLook.started += instance.OnMouseLook;
             @MouseLook.performed += instance.OnMouseLook;
             @MouseLook.canceled += instance.OnMouseLook;
@@ -306,6 +384,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @PowerCardSlot1.started -= instance.OnPowerCardSlot1;
+            @PowerCardSlot1.performed -= instance.OnPowerCardSlot1;
+            @PowerCardSlot1.canceled -= instance.OnPowerCardSlot1;
+            @PowerCardSlot2.started -= instance.OnPowerCardSlot2;
+            @PowerCardSlot2.performed -= instance.OnPowerCardSlot2;
+            @PowerCardSlot2.canceled -= instance.OnPowerCardSlot2;
+            @PowerCardSlot3.started -= instance.OnPowerCardSlot3;
+            @PowerCardSlot3.performed -= instance.OnPowerCardSlot3;
+            @PowerCardSlot3.canceled -= instance.OnPowerCardSlot3;
             @MouseLook.started -= instance.OnMouseLook;
             @MouseLook.performed -= instance.OnMouseLook;
             @MouseLook.canceled -= instance.OnMouseLook;
@@ -341,6 +428,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnPowerCardSlot1(InputAction.CallbackContext context);
+        void OnPowerCardSlot2(InputAction.CallbackContext context);
+        void OnPowerCardSlot3(InputAction.CallbackContext context);
         void OnMouseLook(InputAction.CallbackContext context);
     }
 }

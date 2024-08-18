@@ -66,12 +66,13 @@ namespace Gameplay
 
         void Update()
         {
+            if(GameManager.Instance.CurrentState != GameState.Gameplay) return;
             _playerInput = InputManager.Instance.PlayerMovementInput();
             _desiredJump |= InputManager.Instance.IsJumpTriggered();
 
             _isMovementKeysPressed = _playerInput.x != 0 || _playerInput.y != 0;
 
-            if (InputManager.Instance.IsFired())
+            if (InputManager.Instance.IsFired() )
             {
                 drone.Shoot();
             }
@@ -83,6 +84,7 @@ namespace Gameplay
 
         private void FixedUpdate()
         {
+            if(GameManager.Instance.CurrentState != GameState.Gameplay) return;
             _velocity = new Vector3(_playerInput.x * speed, rigidBody.velocity.y,
                 _playerInput.y * speed);
 

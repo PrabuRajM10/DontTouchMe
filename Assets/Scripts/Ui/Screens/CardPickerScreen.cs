@@ -56,7 +56,7 @@ namespace Ui.Screens
             }
         }
 
-        public void ShowSelectedCards(List<CardData> pickedCard)
+        public void OnCardsSelected(List<CardData> pickedCard)
         {
             for (int i = 0; i < pickedCard.Count; i++)
             {

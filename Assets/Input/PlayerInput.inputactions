@@ -42,6 +42,33 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "PowerCardSlot1",
+                    "type": "Button",
+                    "id": "f14a1e89-9cc8-4300-bf68-b7478bec2219",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PowerCardSlot2",
+                    "type": "Button",
+                    "id": "89d6dc35-e0f1-4665-8b98-2d2c29c5ce4a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PowerCardSlot3",
+                    "type": "Button",
+                    "id": "68ae6cd2-a7e0-43e7-b21a-9d1d152f46b5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "MouseLook",
                     "type": "Value",
                     "id": "c587bc39-80af-47cc-84be-709c32c4dfd7",
@@ -148,6 +175,39 @@
                     "processors": "",
                     "groups": "M&K",
                     "action": "MouseLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "63ebcbc3-0538-4924-a2b1-785600272eb3",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "M&K",
+                    "action": "PowerCardSlot1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b58dcf53-6482-473a-8d23-700c74b1ba95",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "M&K",
+                    "action": "PowerCardSlot2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7dd65d44-e002-4f45-bdac-a115712f7112",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "M&K",
+                    "action": "PowerCardSlot3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

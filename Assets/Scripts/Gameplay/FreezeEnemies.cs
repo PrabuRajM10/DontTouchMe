@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Gameplay
 {
+    [CreateAssetMenu]
     public class FreezeEnemies : PowerCard
     {
         public override void Execute(GameObject requiredObject)

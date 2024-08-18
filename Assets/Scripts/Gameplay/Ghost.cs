@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Gameplay
 {
+    [CreateAssetMenu]
     public class Ghost : PowerCard
     {
         public override void Execute(GameObject requiredObject)
