@@ -8,14 +8,16 @@ namespace Gameplay
     {
         public override void Execute(GameObject requiredObject)
         {
+            base.Execute(requiredObject);
             var enemyManager = requiredObject.GetComponent<EnemyManager>();
             enemyManager.SetEnemiesSpeedMultiplier(0.5f);
         }
 
-        public override void OnBeforeCooldown(GameObject requiredObject)
+        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono)
         {
             var enemyManager = requiredObject.GetComponent<EnemyManager>();
-            enemyManager.ResetEnemiesSpeed();
+            enemyManager.SetEnemiesSpeedMultiplier(1);
+            base.OnBeforeCooldown(requiredObject , mono);
         }
     }
 }

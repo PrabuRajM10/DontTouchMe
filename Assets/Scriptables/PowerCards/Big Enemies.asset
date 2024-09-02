@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Big Enemies
   m_EditorClassIdentifier: 
   cardId: 3
-  activeTime: 2
+  activeTime: 10
   cooldownTime: 5

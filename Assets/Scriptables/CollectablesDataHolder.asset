@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f4faa78983243cea56a5ed82ff945e5, type: 3}
-  m_Name: Player Speed 2X
+  m_Script: {fileID: 11500000, guid: 5fa62de68bbe434e822d6306eca1e29d, type: 3}
+  m_Name: CollectablesDataHolder
   m_EditorClassIdentifier: 
-  cardId: 1
-  activeTime: 10
-  cooldownTime: 5
+  collectablesData:
+  - collectableType: 0
+    value: 1
+    multiplier: 1
+  - collectableType: 2
+    value: 10
+    multiplier: 1

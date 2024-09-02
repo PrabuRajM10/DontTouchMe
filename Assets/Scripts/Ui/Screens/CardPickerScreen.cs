@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Gameplay;
 using Helpers;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace Ui.Screens
@@ -44,6 +45,7 @@ namespace Ui.Screens
             ButtonAnimator.Animate(getCardsButton, () =>
             {
                 OnGetCardsButtonPressed?.Invoke();
+                getCardsButton.interactable = false;
             });
         }
 

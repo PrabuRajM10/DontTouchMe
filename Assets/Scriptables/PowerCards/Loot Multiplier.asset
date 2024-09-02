@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Loot Multiplier
   m_EditorClassIdentifier: 
   cardId: 5
-  activeTime: 2
+  activeTime: 10
   cooldownTime: 7

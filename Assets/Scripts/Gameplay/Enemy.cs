@@ -36,15 +36,15 @@ namespace Gameplay
             if (agent == null) agent = GetComponent<NavMeshAgent>();
         }
 
-        public void SetTarget(Player target)
+        private void OnEnable()
         {
-            _targetPlayer = target;
-            _canMoveTowardsTarget = true;
+            SetSpeed(EnemyManager.Instance.GetEnemySpeed());
+            SetScale(EnemyManager.Instance.GetEnemyScale());
         }
 
         private void Update()
         {
-            if(!_canMoveTowardsTarget) return;
+            if(agent.speed <= 0) return;
             agent.SetDestination(_targetPlayer.GetPosition());
         }
 
@@ -57,6 +57,11 @@ namespace Gameplay
             }
         }
 
+        public void SetTarget(Player target)
+        {
+            _targetPlayer = target;
+            _canMoveTowardsTarget = true;
+        }
         public void TakeDamage(float damage)
         {
             _currentHealth -= damage;
@@ -74,28 +79,14 @@ namespace Gameplay
             transform.LookAt(_targetPlayer.transform);
         }
 
-        public void SetSpeedMultiplier(float multiplier)
+        public void SetSpeed(float multiplier)
         {
-            agent.speed *= multiplier;
+            agent.speed = multiplier;
         }
 
-        public void ResetSpeed()
+        public void SetScale(float scale)
         {
-            agent.speed = _defaultSpeed;
-        }
-
-        public void SetScaleMultiplier(float scale)
-        {
-            transform.localScale *= scale;
-        }
-        public void ResetScale()
-        {
-            transform.localScale = Vector3.one;
-        }
-
-        public void FreezeMovement(bool freezeMovement)
-        {
-            _canMoveTowardsTarget = !freezeMovement;
+            transform.localScale = Vector3.one * scale;
         }
     }
 }

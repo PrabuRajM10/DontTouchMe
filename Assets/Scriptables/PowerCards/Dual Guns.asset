@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Dual Guns
   m_EditorClassIdentifier: 
   cardId: 8
-  activeTime: 2
+  activeTime: 10
   cooldownTime: 10

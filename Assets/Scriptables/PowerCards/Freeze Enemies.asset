@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Freeze Enemies
   m_EditorClassIdentifier: 
   cardId: 4
-  activeTime: 2
+  activeTime: 10
   cooldownTime: 5

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Ghost
   m_EditorClassIdentifier: 
   cardId: 9
-  activeTime: 2
+  activeTime: 10
   cooldownTime: 10

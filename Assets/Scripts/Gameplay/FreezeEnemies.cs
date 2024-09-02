@@ -8,13 +8,15 @@ namespace Gameplay
     {
         public override void Execute(GameObject requiredObject)
         {
+            base.Execute(requiredObject);
             var enemyManager = requiredObject.GetComponent<EnemyManager>();
             enemyManager.FreezeEnemies(true);
         }
-        public override void OnBeforeCooldown(GameObject requiredObject)
+        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono)
         {
             var enemyManager = requiredObject.GetComponent<EnemyManager>();
             enemyManager.FreezeEnemies(false);
+            base.OnBeforeCooldown(requiredObject , mono);
         }
     }
 }

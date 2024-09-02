@@ -8,6 +8,7 @@ namespace Managers
 {
     public class EnemyManager : GenericSingleton<EnemyManager>
     {
+        [SerializeField] private EnemyProperties enemyPropertiesSo;
         [SerializeField] private List<Enemy> activeEnemyList = new List<Enemy>();
 
         [SerializeField] private int deadEnemiesCount;
@@ -32,44 +33,47 @@ namespace Managers
             activeEnemyList.Clear();
         }
 
+        public float GetEnemySpeed()
+        {
+            return enemyPropertiesSo.EnemySpeed;
+        }
+        public float GetEnemyScale()
+        {
+            return enemyPropertiesSo.EnemyScale;
+        }
+
         public void SetEnemiesSpeedMultiplier(float multiplier)
         {
-            foreach (var enemy in activeEnemyList)
-            {
-                enemy.SetSpeedMultiplier(multiplier);
-            }
+            enemyPropertiesSo.EnemySpeedMultiplier = multiplier;
+            UpdateEnemiesSpeed();
         }
 
-        public void ResetEnemiesSpeed()
+        void UpdateEnemiesSpeed()
         {
             foreach (var enemy in activeEnemyList)
             {
-                enemy.ResetSpeed();
+                enemy.SetSpeed(GetEnemySpeed());
             }
         }
 
-        public void SetEnemiesScaleMultiplier(float scale)
+        public void SetEnemiesScaleMultiplier(float multiplier)
         {
-            foreach (var enemy in activeEnemyList)
-            {
-                enemy.SetScaleMultiplier(scale);
-            }
+            enemyPropertiesSo.EnemyScaleMultiplier = multiplier;
+            UpdateEnemiesScale();
         }
 
-        public void ResetEnemiesScale()
+        void UpdateEnemiesScale()
         {
             foreach (var enemy in activeEnemyList)
             {
-                enemy.ResetScale();
+                enemy.SetScale(GetEnemyScale());
             }
         }
 
         public void FreezeEnemies(bool freeze)
         {
-            foreach (var enemy in activeEnemyList)
-            {
-                enemy.FreezeMovement(freeze);
-            }
+            Debug.LogFormat("[FE] [PowerCardsHandler] [FreezeEnemies] freeze {0}" ,freeze);
+            SetEnemiesSpeedMultiplier(freeze ? 0 : 1);
         }
     }
 }

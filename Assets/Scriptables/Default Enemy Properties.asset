@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f4faa78983243cea56a5ed82ff945e5, type: 3}
-  m_Name: Player Speed 2X
+  m_Script: {fileID: 11500000, guid: 8926b991a49a4a5db7df53aa649a3578, type: 3}
+  m_Name: Default Enemy Properties
   m_EditorClassIdentifier: 
-  cardId: 1
-  activeTime: 10
-  cooldownTime: 5
+  enemySpeed: 3.5
+  enemyScale: 1
+  enemySpeedMultiplier: 1
+  enemyScaleMultiplier: 1

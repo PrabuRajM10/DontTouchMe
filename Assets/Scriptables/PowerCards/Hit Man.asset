@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Hit Man
   m_EditorClassIdentifier: 
   cardId: 10
-  activeTime: 2
+  activeTime: 10
   cooldownTime: 15

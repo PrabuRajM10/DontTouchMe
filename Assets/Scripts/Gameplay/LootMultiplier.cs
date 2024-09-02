@@ -8,14 +8,16 @@ namespace Gameplay
     {
         public override void Execute(GameObject requiredObject)
         {
-            var collectablesManager = requiredObject.GetComponent<CollectablesManager>();
+            base.Execute(requiredObject);
+            var collectablesManager = requiredObject.GetComponent<LootValueHandler>();
             collectablesManager.SetValueMultiplier(2);
         }
 
-        public override void OnBeforeCooldown(GameObject requiredObject)
+        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono)
         {
-            var collectablesManager = requiredObject.GetComponent<CollectablesManager>();
+            var collectablesManager = requiredObject.GetComponent<LootValueHandler>();
             collectablesManager.ResetValues();
+            base.OnBeforeCooldown(requiredObject , mono);
         }
     }
 }
