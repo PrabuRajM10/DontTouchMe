@@ -1,18 +1,26 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Gameplay
 {
     public class Bomb : MonoBehaviour, IPoolableObjects
     {
         [SerializeField] private Rigidbody rigidBody;
+        [SerializeField] private SphereCollider sc;
      
         [SerializeField] private float timeBeforeExplosion;
         [SerializeField] private float explodeRadius = 2f;
-        [SerializeField] private float damageAmount = 20;
+        [SerializeField] private float damageAmount = 200;
+        [SerializeField] private float thrust = 15f;
 
         private ObjectPooling _pool;
-        private float _thrust = 5f;
+
+        private void OnValidate()
+        {
+            if (sc == null) sc = GetComponent<SphereCollider>();
+        }
 
         public void Init(ObjectPooling pool)
         {
@@ -29,7 +37,7 @@ namespace Gameplay
         {
             var transform1 = transform;
             transform1.position = position;
-            rigidBody.AddForce(transform1.up * _thrust);
+            rigidBody.AddForce(transform1.up * thrust);
             StartCoroutine(StartTimer());
         }
 
@@ -53,6 +61,14 @@ namespace Gameplay
             }
             
             BackToPool();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.GetComponent<Jumpable>() != null)
+            {
+                sc.isTrigger = false;
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Gameplay
         [SerializeField] private CollectablesType collectablesType;
         private ObjectPooling _pool;
         protected CollectablesManager respectiveManager;
-        private float _speed;
+        private float _speed = 25;
 
         public void SetManager(CollectablesManager manager)
         {

@@ -11,7 +11,8 @@ namespace Gameplay
     {
         [SerializeField] private Rigidbody rigidBody;
         [SerializeField] private Drone drone;
-        [SerializeField] private CollectablesMagnet magnet;        
+        [SerializeField] private CollectablesMagnet magnet;
+        [SerializeField] private MeshRenderer meshRenderer;
 
         [SerializeField, Range(0, 20)] private float speed;
         [SerializeField, Range(0, 20)] private int maxJumpHeight;
@@ -170,12 +171,17 @@ namespace Gameplay
         public void DropBomb()
         {
             var bomb = ObjectPooling.Instance.GetBomb();
+            bomb.gameObject.SetActive(true);
             bomb.Deploy(transform.position);
         }
 
         public void Immune(bool canBeImmune)
         {
             _isImmune = canBeImmune;
+            var material = meshRenderer.material;
+            var playerMatColor = material.color;
+            // material.color = _isImmune ? new Color(playerMatColor.r, playerMatColor.g, playerMatColor.b, 0.5f) : new Color(playerMatColor.r, playerMatColor.g, playerMatColor.b, 1);
+            material.color = _isImmune ? Color.blue : Color.green;
             //Play visuals
         }
 

@@ -186,7 +186,7 @@ Transform:
   - {fileID: 1603968826702894590}
   - {fileID: 223444909068647162}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!136 &8630525251408984467
 CapsuleCollider:
@@ -316,6 +316,7 @@ MonoBehaviour:
   rigidBody: {fileID: 7616333253394949895}
   drone: {fileID: 0}
   magnet: {fileID: 585453349893044587}
+  meshRenderer: {fileID: 270307295073838574}
   speed: 11.01
   maxJumpHeight: 1
   maxAirJumps: 1

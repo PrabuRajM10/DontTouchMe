@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Gameplay
@@ -23,6 +24,11 @@ namespace Gameplay
             var bullet = ObjectPooling.Instance.GetBullet();
             bullet.SetPositionAndRotation(muzzlePosition);
             bullet.Fire();
+            _timeSinceLastShot = 0;
+        }
+
+        private void OnDisable()
+        {
             _timeSinceLastShot = 0;
         }
     }

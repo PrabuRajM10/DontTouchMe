@@ -69,7 +69,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectablesType: 1
-  value: 10
 --- !u!1 &4720368734592611595
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,7 +80,6 @@ GameObject:
   - component: {fileID: 2420130234369671306}
   - component: {fileID: 2980902551757615236}
   - component: {fileID: 3046329365611152450}
-  - component: {fileID: 965531147802599849}
   m_Layer: 0
   m_Name: Cube2
   m_TagString: Untagged
@@ -154,27 +152,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &965531147802599849
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4720368734592611595}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6619025094574331718
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +163,6 @@ GameObject:
   - component: {fileID: 5626349806353955779}
   - component: {fileID: 4072480953555095484}
   - component: {fileID: 2719409898665789823}
-  - component: {fileID: 5941618439678268100}
   m_Layer: 0
   m_Name: Cube1
   m_TagString: Untagged
@@ -259,24 +235,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5941618439678268100
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6619025094574331718}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

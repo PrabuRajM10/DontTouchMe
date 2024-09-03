@@ -87,19 +87,20 @@ namespace Gameplay
         {
             if (dualGuns)
             {
-                gun1.transform.LeanMove(dualGunPos1.position, 0.2f);
+                gun1.transform.LeanMoveLocal(dualGunPos1.localPosition, 0.2f);
                 if (_gun2 == null)
                 {
                     _gun2 = Instantiate(gun1, dualGunPos2);
+                    _gun2.transform.localPosition = Vector3.zero;
                 }
                 _currentActiveGuns.Add(_gun2);
-                if(!_gun2.gameObject.activeSelf) _gun2.gameObject.SetActive(true);
+                if (!_gun2.gameObject.activeSelf) _gun2.gameObject.SetActive(true);
             }
             else
             {
                 _gun2.gameObject.SetActive(false);
                 _currentActiveGuns.Remove(_gun2);
-                gun1.transform.LeanMove(defaultGunPos.position, 0.2f);
+                gun1.transform.LeanMoveLocal(defaultGunPos.localPosition, 0.2f);
             }
         }
 

@@ -81,7 +81,7 @@ namespace Gameplay
                     break;
                 case PoolObjectTypes.Bomb:
                     _bombListPool.Add((Bomb)poolObject);
-                    throw new ArgumentOutOfRangeException(nameof(poolObjectType), poolObjectType, null);
+                    break;
             }
         }
 
