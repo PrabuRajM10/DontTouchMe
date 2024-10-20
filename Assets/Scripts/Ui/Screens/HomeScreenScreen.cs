@@ -16,14 +16,9 @@ namespace Ui.Screens
             playButton.onClick.AddListener(OnClickPlayButton);
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
             playButton.onClick.RemoveListener(OnClickPlayButton);
-        }
-
-        public override void Reset()
-        {
-            
         }
 
         private void OnClickPlayButton()

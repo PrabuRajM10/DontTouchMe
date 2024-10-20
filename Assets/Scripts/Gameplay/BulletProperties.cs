@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Gameplay
 {
@@ -7,14 +8,8 @@ namespace Gameplay
     public class BulletProperties : ScriptableObject
     {
         [SerializeField] protected float speed = 100f;
-        [SerializeField] protected float damageAmount = 10;
-
-        private float _defaultDamage;
-
-        private void Awake()
-        {
-            _defaultDamage = damageAmount;
-        }
+        [SerializeField] private float defaultDamage;
+        [FormerlySerializedAs("damageAmount")] [SerializeField] protected float currentDamageAmount = 10;
 
         public float Speed
         {
@@ -24,13 +19,14 @@ namespace Gameplay
         
         public float DamageAmount
         {
-            get => damageAmount;
-            set => damageAmount = value;
+            get => currentDamageAmount;
+            set => currentDamageAmount = value;
         }
 
         public void ResetDamage()
         {
-            damageAmount = _defaultDamage;
+            Debug.Log("[BulletProperties] [ResetDamage] _defaultDamage " + defaultDamage);
+            currentDamageAmount = defaultDamage;
         }
     }
 }

@@ -11,11 +11,11 @@ namespace Gameplay
             var drone = requiredObject.GetComponent<Drone>();
             drone.SetBulletDamage(999);
         }
-        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono)
+        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono, CallBack onCooldownDone)
         {
             var drone = requiredObject.GetComponent<Drone>();
             drone.ResetBulletDamage();
-            base.OnBeforeCooldown(requiredObject , mono);
+            base.OnBeforeCooldown(requiredObject , mono , onCooldownDone);
         }
     }
 }

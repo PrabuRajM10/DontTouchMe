@@ -9,9 +9,10 @@ namespace Ui.ScreenHandlers
         [SerializeField] private GameplayScreen gameplayScreen;
         private void Update()
         {
-            if (InputManager.Instance.IsPaused())
+            if (InputManager.Instance.IsPaused() && GameManager.Instance.CurrentState == GameState.Gameplay)
             {
-                SwitchScreen(GameScreen.Setting);
+                Time.timeScale = 0;
+                SwitchScreen(GameScreen.Pause);
             }
         }
     }

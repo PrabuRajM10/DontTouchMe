@@ -13,11 +13,11 @@ namespace Gameplay
             collectablesManager.SetValueMultiplier(2);
         }
 
-        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono)
+        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono, CallBack onCooldownDone)
         {
             var collectablesManager = requiredObject.GetComponent<LootValueHandler>();
             collectablesManager.ResetValues();
-            base.OnBeforeCooldown(requiredObject , mono);
+            base.OnBeforeCooldown(requiredObject , mono , onCooldownDone);
         }
     }
 }

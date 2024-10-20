@@ -31,6 +31,7 @@ namespace Ui.Screens
             base.OnDisable();
             getCardsButton.onClick.RemoveListener(OnClickGetCardsButton);
             nextButton.onClick.RemoveListener(OnClickNextButton);
+            getCardsButton.interactable = true;
         }
         private void OnClickNextButton()
         {

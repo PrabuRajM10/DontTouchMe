@@ -25,7 +25,6 @@ namespace Managers
     public class PowerCardPicker : GenericSingleton<PowerCardPicker>
     {
         [SerializeField]private List<PowerCardProbability> powerCardProbabilities = new List<PowerCardProbability>();
-        [SerializeField]private List<CardData> currentGameCards = new List<CardData>();
 
         [SerializeField] private PowerCardsData powerCardsDataSo;
         [SerializeField] private int cardPickCount = 3;
@@ -57,6 +56,7 @@ namespace Managers
             for (int i = 0; i < cardPickCount; i++)
             {
                 var card = powerCardsDataSo.GetRandomCard();
+                card.powerCard.Init();
                 cardsList.Add(card);
                 // var random = Random.Range(1, 100);
                 // foreach (var powerCardProbability in powerCardsPool)
@@ -83,12 +83,9 @@ namespace Managers
 
         public List<CardData> GetPowerCards()
         {
-            var powerCards = GetCards();
-            currentGameCards = powerCards;
-
-            GameManager.Instance.SetPowerCardsForTheGame(powerCards);
-            
-            return powerCards;
+            var currentGamePowerCards = GetCards();
+            GameManager.Instance.SetPowerCardsForTheGame(currentGamePowerCards);
+            return currentGamePowerCards;
         }
     }
 }

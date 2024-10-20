@@ -13,11 +13,11 @@ namespace Gameplay
             enemyManager.SetEnemiesSpeedMultiplier(0.5f);
         }
 
-        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono)
+        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono, CallBack onCooldownDone)
         {
             var enemyManager = requiredObject.GetComponent<EnemyManager>();
             enemyManager.SetEnemiesSpeedMultiplier(1);
-            base.OnBeforeCooldown(requiredObject , mono);
+            base.OnBeforeCooldown(requiredObject , mono , onCooldownDone);
         }
     }
 }

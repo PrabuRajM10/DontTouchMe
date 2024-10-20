@@ -9,6 +9,7 @@ namespace Gameplay
     {
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private float maxHealth = 100;
+        [SerializeField] private Rigidbody rigidbody;
 
         private ObjectPooling _pool;
         private Player _targetPlayer;
@@ -34,6 +35,7 @@ namespace Gameplay
         private void OnValidate()
         {
             if (agent == null) agent = GetComponent<NavMeshAgent>();
+            if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
         }
 
         private void OnEnable()
@@ -87,6 +89,11 @@ namespace Gameplay
         public void SetScale(float scale)
         {
             transform.localScale = Vector3.one * scale;
+        }
+
+        public void ResetVelocity()
+        {
+            rigidbody.velocity = Vector3.zero;
         }
     }
 }

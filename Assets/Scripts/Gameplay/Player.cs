@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Managers;
 using Unity.Mathematics;
 using UnityEngine;
@@ -13,10 +14,14 @@ namespace Gameplay
         [SerializeField] private Drone drone;
         [SerializeField] private CollectablesMagnet magnet;
         [SerializeField] private MeshRenderer meshRenderer;
+        [SerializeField] private Collider playerCollider;
 
         [SerializeField, Range(0, 20)] private float speed;
         [SerializeField, Range(0, 20)] private int maxJumpHeight;
         [SerializeField, Range(0, 5)] private int maxAirJumps;
+
+        [SerializeField] private Color defaultColor;
+        [SerializeField] private Color immuneColor;
 
         PlayerInput _input;
 
@@ -38,6 +43,7 @@ namespace Gameplay
 
         private Vector2 _playerInput;
         private Vector3 _velocity;
+        private List<Collider> _collisionIgnoredEnemies = new List<Collider>();
 
         public event Action Dead;
 
@@ -46,6 +52,8 @@ namespace Gameplay
         private void OnValidate()
         {
             if (rigidBody == null) rigidBody = GetComponent<Rigidbody>();
+            if (playerCollider == null) playerCollider = GetComponent<Collider>();
+
         }
 
         private void Awake()
@@ -138,10 +146,19 @@ namespace Gameplay
         private void OnCollisionEnter(Collision collision)
         {
             var enemy = collision.gameObject.GetComponent<Enemy>();
-            if (enemy != null && !_isImmune)
+            if (enemy == null) return;
+            if (_isImmune)
             {
-                Dead?.Invoke();
+                var enemyCollider = enemy.GetComponent<Collider>();
+
+                _collisionIgnoredEnemies.Add(enemyCollider);
+                    
+                Physics.IgnoreCollision(playerCollider , enemyCollider);
+                enemy.ResetVelocity();
+                return;
             }
+            rigidBody.velocity = Vector3.zero;
+            Dead?.Invoke();
         }
 
         private void OnCollisionStay(Collision collisionInfo)
@@ -178,13 +195,24 @@ namespace Gameplay
         public void Immune(bool canBeImmune)
         {
             _isImmune = canBeImmune;
+            if (!_isImmune)
+            {
+                EnableCollisionsOnIgnoredEnemies();
+            }
             var material = meshRenderer.material;
-            var playerMatColor = material.color;
-            // material.color = _isImmune ? new Color(playerMatColor.r, playerMatColor.g, playerMatColor.b, 0.5f) : new Color(playerMatColor.r, playerMatColor.g, playerMatColor.b, 1);
-            material.color = _isImmune ? Color.blue : Color.green;
+            material.color = _isImmune ? immuneColor : defaultColor;
+            // material.color = _isImmune ? Color.blue : Color.green;
             //Play visuals
         }
 
+        void EnableCollisionsOnIgnoredEnemies()
+        {
+            if(_collisionIgnoredEnemies.Count < 1) return;
+            foreach (var collisionIgnoredEnemy in _collisionIgnoredEnemies)
+            {
+                Physics.IgnoreCollision(playerCollider , collisionIgnoredEnemy , false);
+            }
+        }
         public void AttractAllCollectables(bool attractCollectables)
         {
             magnet.gameObject.SetActive(attractCollectables);

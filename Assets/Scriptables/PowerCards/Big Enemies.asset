@@ -15,3 +15,5 @@ MonoBehaviour:
   cardId: 3
   activeTime: 10
   cooldownTime: 5
+  xpCost: 2
+  _cardState: 0

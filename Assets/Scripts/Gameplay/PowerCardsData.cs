@@ -33,8 +33,8 @@ namespace Gameplay
 
         public CardData GetRandomCard()
         {
-            // return cardDataList[Random.Range(0, cardDataList.Count)];
-            return cardDataList[8];
+            return cardDataList[Random.Range(0, cardDataList.Count)];
+            // return cardDataList[8];
         }
 
         void SetCardsByRarity(CardRarity rarity)

@@ -186,7 +186,7 @@ Transform:
   - {fileID: 1603968826702894590}
   - {fileID: 223444909068647162}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!136 &8630525251408984467
 CapsuleCollider:
@@ -317,9 +317,12 @@ MonoBehaviour:
   drone: {fileID: 0}
   magnet: {fileID: 585453349893044587}
   meshRenderer: {fileID: 270307295073838574}
+  playerCollider: {fileID: 8630525251408984467}
   speed: 11.01
   maxJumpHeight: 1
   maxAirJumps: 1
+  defaultColor: {r: 0.16078432, g: 0.16078432, b: 0.16078432, a: 1}
+  immuneColor: {r: 0.16078432, g: 0.16078432, b: 0.16078432, a: 0.69803923}
 --- !u!1 &7320415305419055832
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,5 +9,21 @@ namespace Managers
         [SerializeField] protected CollectablesDataHolder collectablesDataHolderSo;
         [SerializeField] protected CollectablesType collectablesType;
         public abstract void OnCollectablesCollected();
+        public abstract void Reset();
+
+        private void OnEnable()
+        {
+            GameManager.OnGameEnd += OnGameEnd;
+        }
+
+        private void OnDisable()
+        {
+            GameManager.OnGameEnd -= OnGameEnd;
+        }
+
+        private void OnGameEnd(bool obj)
+        {
+            Reset();
+        }
     }
 }

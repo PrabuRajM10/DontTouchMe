@@ -15,14 +15,10 @@ namespace Ui.Screens
         {
             okButton.onClick.AddListener(OnClickOkButton);
         }
-        private void OnDisable()
+
+        protected override void OnDisable()
         {
             okButton.onClick.RemoveAllListeners();
-        }
-
-        public override void Reset()
-        {
-            
         }
 
         private void OnClickOkButton()

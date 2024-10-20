@@ -11,11 +11,11 @@ namespace Gameplay
             var player = requiredObject.GetComponent<Player>();
             player.AttractAllCollectables(true);
         }
-        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono)
+        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono, CallBack onCooldownDone)
         {
             var player = requiredObject.GetComponent<Player>();
             player.AttractAllCollectables(false);
-            base.OnBeforeCooldown(requiredObject , mono);
+            base.OnBeforeCooldown(requiredObject , mono , onCooldownDone);
         }
     }
 }

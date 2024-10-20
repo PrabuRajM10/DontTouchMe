@@ -5,6 +5,7 @@ using Ui;
 using Ui.Screens;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Managers
 {
@@ -16,10 +17,13 @@ namespace Managers
         [SerializeField] private AutoSpawner enemySpawner;
         [SerializeField] private CollectablesSpawnersHolder collectablesSpawnersHolder;
 
+        [SerializeField] private PowerCardsHandler powerCardsHandler;        
+
         [SerializeField] private float maxGameTimer;
 
         private GameState _currentState;
         private GameState _previousState;
+        private List<CardData> _currentGamePowerCards;
 
         public Player Player => player;
         public GameState CurrentState => _currentState;
@@ -27,6 +31,8 @@ namespace Managers
 
         public static event Action<GameState> OnBeforeStateChange; 
         public static event Action<GameState> OnAfterStateChange;
+
+        public static event Action<bool> OnGameEnd; 
 
         private void Start()
         {
@@ -57,6 +63,7 @@ namespace Managers
 
         void EndGame(bool successful)
         {
+            OnGameEnd?.Invoke(false);
             ChangeState(GameState.GameResult);
             UiManager.Instance.SetGameReset(successful);
             EnemyManager.Instance.DisableAllEnemies();
@@ -65,8 +72,18 @@ namespace Managers
 
         void StopSpawning()
         {
-            enemySpawner.StopSpawning();
+            StopEnemySpawning();
             collectablesSpawnersHolder.StopSpawning();
+        }
+
+        public void StopEnemySpawning()
+        {
+            enemySpawner.StopSpawning();
+        }
+        
+        public void StartEnemySpawning()
+        {
+            enemySpawner.StartAutoSpawning();
         }
 
         public void ChangeState(GameState nextState)
@@ -107,15 +124,25 @@ namespace Managers
         void HandleOnGameplay()
         {
             Debug.Log("[HandleOnGameplay]");
-            enemySpawner.StartAutoSpawning();
+            StartEnemySpawning();
             collectablesSpawnersHolder.StartSpawning();
             GameTimer.StartTimer(this ,maxGameTimer);
         }
 
         public void SetPowerCardsForTheGame(List<CardData> powerCards)
         {
+            _currentGamePowerCards = powerCards;
             UiManager.Instance.SetCurrentGameCards(powerCards);
-            
+        }
+
+        public List<CardData> GetCurrentPowerCards()
+        {
+            return _currentGamePowerCards;
+        }
+
+        public bool IsAnyCardActive()
+        {
+            return powerCardsHandler.IsAnyCardActive();
         }
     }
     

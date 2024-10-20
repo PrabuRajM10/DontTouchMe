@@ -10,18 +10,24 @@ namespace Managers
     {
         [SerializeField] private EnemyProperties enemyPropertiesSo;
         [SerializeField] private List<Enemy> activeEnemyList = new List<Enemy>();
+        [SerializeField] private int maxEnemiesCountOnGame;
+        [SerializeField] private int minEnemiesCountOnGame;
 
         [SerializeField] private int deadEnemiesCount;
 
         public void AddToActiveList(Enemy enemy)
         {
             activeEnemyList.Add(enemy);
+            
+            if(activeEnemyList.Count >= maxEnemiesCountOnGame) GameManager.Instance.StopEnemySpawning();
         }
 
         public void EnemyDead(Enemy enemy)
         {
             deadEnemiesCount++;
             UiManager.Instance.UpdateKillCount(deadEnemiesCount);
+            activeEnemyList.Remove(enemy);
+            if(activeEnemyList.Count <= minEnemiesCountOnGame) GameManager.Instance.StartEnemySpawning();
         }
 
         public void DisableAllEnemies()
@@ -52,7 +58,7 @@ namespace Managers
         {
             foreach (var enemy in activeEnemyList)
             {
-                enemy.SetSpeed(GetEnemySpeed());
+                enemy.SetSpeed(GetEnemySpeed());    
             }
         }
 

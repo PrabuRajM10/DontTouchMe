@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using Gameplay;
 using Helpers;
-using Managers;
 using Ui.ScreenHandlers;
 using Ui.Screens;
-using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine; 
 
-namespace Ui
+namespace Managers
 {
     public class UiManager : GenericSingleton<UiManager>
     {
@@ -18,6 +16,8 @@ namespace Ui
         [SerializeField] private HomeScreenScreen homeScreen;
         [SerializeField] private GameResultScreen gameResultScreen;
         [SerializeField] private CardPickerScreen cardPickerScreen;
+        [SerializeField] private PauseScreen pauseScreen;
+        [SerializeField] private PopUpUI popUpUI;
 
         
 
@@ -25,6 +25,7 @@ namespace Ui
         private void OnEnable()
         {
             BaseScreenHandler.SwitchScreenEvnt += OnSwitchScreenEvnt;
+            PopUp.Init(popUpUI);
         }
         private void OnDisable()
         {
@@ -74,6 +75,8 @@ namespace Ui
                     return gameResultScreen;
                 case GameScreen.CardPicker:
                     return cardPickerScreen;
+                case GameScreen.Pause:
+                    return pauseScreen;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(screen), screen, null);
             }
@@ -98,6 +101,7 @@ namespace Ui
         public void OnXpCollected(int xpValue)
         {
             Debug.Log("[UiManager] [OnXpCollected] xpValue " + xpValue);
+            gameplayScreen.UpdateXp(xpValue);
         }
 
         public void OnPlayerDead()
@@ -120,6 +124,23 @@ namespace Ui
         public void SetCurrentGameCards(List<CardData> powerCards)
         {
             gameplayScreen.SetCardData(powerCards);
+        }
+
+        public void SetPowerCardAvailability(int index, bool state)
+        {
+            gameplayScreen.SetPowerCardAvailability(index , state);
+
+        }
+
+        public void OnPowerCardActivated(int index, float activeTime, int xpCost)
+        {
+            gameplayScreen.OnPowerCardActivated(index , activeTime , xpCost);
+
+        }
+
+        public void PowerCardOnCoolDown(int index, float cardCooldownTime)
+        {
+            gameplayScreen.SetCardOnCooldown(index, cardCooldownTime);
         }
     }
 }

@@ -28,7 +28,20 @@ namespace Gameplay
 
         public void BackToPool()
         {
-            _pool.AddBackToList(this , PoolObjectTypes.Coin);
+            _pool.AddBackToList(this , GetPoolTypeByCollectableType());
+        }
+
+        PoolObjectTypes GetPoolTypeByCollectableType()
+        {
+            switch (CollectablesType)
+            {
+                case CollectablesType.Coins:
+                    return PoolObjectTypes.Coin;
+                case CollectablesType.Xp:
+                    return PoolObjectTypes.Xp;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void OnTriggerEnter(Collider other)

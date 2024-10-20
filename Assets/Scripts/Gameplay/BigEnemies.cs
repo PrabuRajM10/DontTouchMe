@@ -16,11 +16,11 @@ namespace Gameplay
         }
         
 
-        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono)
+        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono, CallBack onCooldownDone)
         {
             var enemyManager = requiredObject.GetComponent<EnemyManager>();
             enemyManager.SetEnemiesScaleMultiplier(1f);
-            base.OnBeforeCooldown(requiredObject , mono);
+            base.OnBeforeCooldown(requiredObject , mono , onCooldownDone);
         }
     }
 }

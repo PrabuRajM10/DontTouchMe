@@ -8,7 +8,8 @@ namespace Gameplay
     {
         Ready,
         Active,
-        Cooldown
+        Cooldown,
+        UnAvailable
     }
     public class PowerCard : ScriptableObject
     {
@@ -16,13 +17,18 @@ namespace Gameplay
 
         [SerializeField] private float activeTime;
         [SerializeField] private float cooldownTime;
+        [SerializeField] private int xpCost;
 
-        private PowerCardState _cardState;
+        [SerializeField] private PowerCardState _cardState = PowerCardState.UnAvailable;
 
         private bool _isOnCooldown;
         public PowerCardsId CardId => cardId;
         public float ActiveTime => activeTime;
         public float CooldownTime => cooldownTime;
+        public int XpCost => xpCost;
+        public delegate void CallBack();
+
+        private CallBack _callBack;
 
         public PowerCardState CardState
         {
@@ -30,21 +36,33 @@ namespace Gameplay
             set => _cardState = value;
         }
 
+        public void Init()
+        {
+            _cardState = PowerCardState.UnAvailable;
+        }
         public virtual void Execute(GameObject requiredObject)
         {
             _cardState = PowerCardState.Active;
         }
 
-        public virtual void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono)
+        public virtual void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono , CallBack onCooldownDone)
         {
-            mono.StartCoroutine(StartCooldown());
+            _callBack = onCooldownDone;
+            if(mono != null)mono.StartCoroutine(StartCooldown());
+        }
+
+        public void ResetAbility(GameObject requiredObject)
+        {
+            OnBeforeCooldown(requiredObject, null , () => {_cardState = PowerCardState.UnAvailable;});
+            _cardState = PowerCardState.UnAvailable;
         }
 
         IEnumerator StartCooldown()
         {
             _cardState = PowerCardState.Cooldown;
             yield return new WaitForSeconds(cooldownTime);
-            _cardState = PowerCardState.Ready;
+            _cardState = PowerCardState.UnAvailable;
+            _callBack?.Invoke();
         }
     }
 }

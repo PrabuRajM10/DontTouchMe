@@ -21,15 +21,11 @@ namespace Ui.Screens
             homeButton.onClick.AddListener(OnClickHomeButton);
             retryButton.onClick.AddListener(OnClickRetryButton);
         }
-        private void OnDisable()
+
+        protected override void OnDisable()
         {
             homeButton.onClick.RemoveListener(OnClickHomeButton);
             retryButton.onClick.RemoveListener(OnClickRetryButton);
-        }
-
-        public override void Reset()
-        {
-            
         }
 
         private void OnClickRetryButton()

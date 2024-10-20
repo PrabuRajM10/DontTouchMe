@@ -23,8 +23,8 @@ namespace Ui.ScreenHandlers
         }
         private void OnRetryButtonPressed()
         {
-            GameManager.Instance.ChangeState(GameState.Gameplay);
-            SwitchScreen(GameScreen.Gameplay);
+            GameManager.Instance.ChangeState(GameState.CardPicker);
+            SwitchScreen(GameScreen.CardPicker);
         }
 
         private void OnHomeButtonPressed()

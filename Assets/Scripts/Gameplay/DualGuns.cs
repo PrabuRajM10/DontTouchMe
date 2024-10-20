@@ -13,11 +13,11 @@ namespace Gameplay
             drone.DualGuns(true);
         }
 
-        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono)
+        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono, CallBack onCooldownDone)
         {
             var drone = requiredObject.GetComponent<Drone>();
             drone.DualGuns(false);
-            base.OnBeforeCooldown(requiredObject , mono);
+            base.OnBeforeCooldown(requiredObject , mono , onCooldownDone);
         }
     }
 }

@@ -1,5 +1,5 @@
 using UnityEngine;
-using UiManager = Ui.UiManager;
+using UiManager = Managers.UiManager;
 
 namespace Managers
 {
@@ -12,6 +12,11 @@ namespace Managers
             coinCount += coinValue;
 
             UiManager.Instance.OnCoinCollected(coinCount);                
+        }
+
+        public override void Reset()
+        {
+            coinCount = 0;
         }
     }
 }

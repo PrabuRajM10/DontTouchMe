@@ -12,11 +12,11 @@ namespace Gameplay
             player.SetPlayerSpeedMultiplier(2);
         }
 
-        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono)
+        public override void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono, CallBack onCooldownDone)
         {
             var player = requiredObject.GetComponent<Player>();
             player.ResetPlayerSpeed();
-            base.OnBeforeCooldown(requiredObject , mono);
+            base.OnBeforeCooldown(requiredObject , mono , onCooldownDone);
         }
     }
 }

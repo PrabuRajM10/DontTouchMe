@@ -9,7 +9,8 @@ namespace Ui.Screens
         Setting,
         Home,
         GameResult,
-        CardPicker
+        CardPicker,
+        Pause
     }
     public abstract class BaseUi : MonoBehaviour
     {
@@ -26,6 +27,9 @@ namespace Ui.Screens
             set => screen = value;
         }
 
-        public abstract void Reset();
+        public virtual void Reset()
+        {
+            
+        }
     }
 }
