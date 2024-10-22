@@ -55,7 +55,7 @@ namespace Ui.Screens
 
         private void OnClickPauseButton()
         {
-            ButtonAnimator.Animate(pauseButton , () =>
+            UiAnimator.ButtonOnClick(pauseButton , () =>
             {
                 OnPauseButtonPressed?.Invoke();
             });

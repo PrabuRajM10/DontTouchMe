@@ -30,7 +30,7 @@ namespace Ui.Screens
 
         private void OnClickRetryButton()
         {
-            ButtonAnimator.Animate(retryButton , () =>
+            UiAnimator.ButtonOnClick(retryButton , () =>
             {
                 OnRetryButtonPressed?.Invoke();
             });
@@ -38,7 +38,7 @@ namespace Ui.Screens
 
         private void OnClickHomeButton()
         {
-            ButtonAnimator.Animate(homeButton , () =>
+            UiAnimator.ButtonOnClick(homeButton , () =>
             {
                 OnHomeButtonPressed?.Invoke();
             });

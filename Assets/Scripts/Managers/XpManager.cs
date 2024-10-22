@@ -12,7 +12,7 @@ namespace Managers
         private CardData _powerCard1Data;
         private CardData _powerCard2Data;
         private CardData _powerCard3Data;
-
+        
         public override void OnCollectablesCollected()
         {
             totalXpValue += (int)collectablesDataHolderSo.GetValueByType(collectablesType);
@@ -28,6 +28,7 @@ namespace Managers
             }
 
             if(GameManager.Instance.IsAnyCardActive()) return;
+            Debug.Log("[XpManager] [OnCollectablesCollected] _powerCard1Data " + (_powerCard1Data.cardName , _powerCard2Data.cardName , _powerCard3Data.cardName));
             SetCardAvailabilityIfPossible();
         }
 
@@ -65,6 +66,7 @@ namespace Managers
         public override void Reset()
         {
             totalXpValue = 0;
+            _powerCardsData.Clear();
         }
     }
 }

@@ -40,6 +40,7 @@ namespace Gameplay
 
         private void OnEnable()
         {
+            ResetVelocity();
             SetSpeed(EnemyManager.Instance.GetEnemySpeed());
             SetScale(EnemyManager.Instance.GetEnemyScale());
         }

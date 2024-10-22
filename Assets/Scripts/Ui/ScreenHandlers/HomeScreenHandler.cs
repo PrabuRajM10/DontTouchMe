@@ -10,12 +10,12 @@ namespace Ui.ScreenHandlers
 
         private void OnEnable()
         {
-            homeScreen.onPlayButtonPressed += PlayButtonPressed;
+            homeScreen.OnOnPlayButtonPressed += PlayButtonPressed;
         }
 
         private void OnDisable()
         {
-            homeScreen.onPlayButtonPressed -= PlayButtonPressed;
+            homeScreen.OnOnPlayButtonPressed -= PlayButtonPressed;
         }
 
         private void PlayButtonPressed()

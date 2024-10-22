@@ -25,7 +25,7 @@ namespace Helpers
         
         public static IEnumerator TimerDisplay(float maxTimer, Callback onTimerDone)
         {
-            Debug.Log("[Utils] [StartTimer] called maxTimer " + maxTimer);
+            // Debug.Log("[Utils] [StartTimer] called maxTimer " + maxTimer);
             _currentTimer = maxTimer;
 
             while (_currentTimer > 0)

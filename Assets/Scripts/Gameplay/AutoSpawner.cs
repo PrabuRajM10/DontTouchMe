@@ -18,7 +18,7 @@ namespace Gameplay
 
         public void StartAutoSpawning()
         {
-            Debug.Log("[StartAutoSpawning] called ");
+            // Debug.Log("[StartAutoSpawning] called ");
             _canSpawn = true;
             _currentTime = _spawnInterval;
         }

@@ -35,7 +35,7 @@ namespace Ui.Screens
         }
         private void OnClickNextButton()
         {
-            ButtonAnimator.Animate(nextButton, () =>
+            UiAnimator.ButtonOnClick(nextButton, () =>
             {
                 OnNextButtonPressed?.Invoke();
             });
@@ -43,7 +43,7 @@ namespace Ui.Screens
 
         private void OnClickGetCardsButton()
         {
-            ButtonAnimator.Animate(getCardsButton, () =>
+            UiAnimator.ButtonOnClick(getCardsButton, () =>
             {
                 OnGetCardsButtonPressed?.Invoke();
                 getCardsButton.interactable = false;

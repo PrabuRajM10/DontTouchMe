@@ -50,21 +50,24 @@ namespace Gameplay
             if (InputManager.Instance.IsPowerCard1KeyPressed())
             {
                 _currentPowerCardIndex = 1;
+                HandleOnKeyPressed();
             }
             else if (InputManager.Instance.IsPowerCard2KeyPressed())
             {
                 _currentPowerCardIndex = 2;
+                HandleOnKeyPressed();
             }
             else if (InputManager.Instance.IsPowerCard3KeyPressed())
             {
                 _currentPowerCardIndex = 3;
+                HandleOnKeyPressed();
             }
-            HandleOnKeyPressed();
             
         }
 
         private void OnGameEnd(bool b)
         {
+            _activeTime = 0;
             if (_currentPowerCardIndex <= 0)
             {
                 _powerCards.Clear();
@@ -73,6 +76,7 @@ namespace Gameplay
             StopAllCoroutines();
             _requiredRef = GetReferenceByCardType(GetCurrentCard().CardId);
             GetCurrentCard().ResetAbility(_requiredRef);
+            _currentPowerCardIndex = 0;
             _powerCards.Clear();
         }
         private void HandleOnKeyPressed()

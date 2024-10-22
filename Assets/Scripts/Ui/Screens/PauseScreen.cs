@@ -33,7 +33,7 @@ namespace Ui.Screens
 
         private void OnClickQuitButton()
         {
-            ButtonAnimator.Animate(quitButton, () =>
+            UiAnimator.ButtonOnClick(quitButton, () =>
             {
                 OnQuitButtonPressed?.Invoke();
             });
@@ -41,7 +41,7 @@ namespace Ui.Screens
 
         private void OnClickHomeButton()
         {
-            ButtonAnimator.Animate(homeButton, () =>
+            UiAnimator.ButtonOnClick(homeButton, () =>
             {
                 OnHomeButtonPressed?.Invoke();
             });
@@ -49,7 +49,7 @@ namespace Ui.Screens
 
         private void OnClickResumeButton()
         {
-            ButtonAnimator.Animate(resumeButton, () =>
+            UiAnimator.ButtonOnClick(resumeButton, () =>
             {
                 OnResumeButtonPressed?.Invoke();
             });
