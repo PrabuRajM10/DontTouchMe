@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Helpers;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,15 +13,31 @@ namespace Ui.Screens
         [FormerlySerializedAs("mainMenuButton")] [SerializeField] private Button homeButton;
         [SerializeField] private Button quitButton;
 
+        [SerializeField] private Transform resumeBtnStartPos;
+        [SerializeField] private Transform homeBtnStartPos;
+        [SerializeField] private Transform quitBtnStartPos;
+        
+        [SerializeField] private Transform resumeBtnEndPos;
+        [SerializeField] private Transform homeBtnEndPos;
+        [SerializeField] private Transform quitBtnEndPos;
+
         public event Action OnResumeButtonPressed;
         public event Action OnHomeButtonPressed;
         public event Action OnQuitButtonPressed;
 
+        private delegate void Callback();
+        
+
         private void OnEnable()
         {
+            Debug.Log("[PauseScreen] [OnEnable] called ");
             resumeButton.onClick.AddListener(OnClickResumeButton);
             homeButton.onClick.AddListener(OnClickHomeButton);
             quitButton.onClick.AddListener(OnClickQuitButton);
+            UiAnimator.Move(resumeButton.transform , resumeBtnEndPos , LeanTweenType.easeOutElastic , 1 , 0.1f ,true);
+            UiAnimator.Move(homeButton.transform , homeBtnEndPos , LeanTweenType.easeOutElastic , 1 , 0.2f ,true);
+            UiAnimator.Move(quitButton.transform , quitBtnEndPos , LeanTweenType.easeOutElastic , 1 , 0.3f ,true);
+
         }
 
         protected override void OnDisable()
@@ -35,24 +52,43 @@ namespace Ui.Screens
         {
             UiAnimator.ButtonOnClick(quitButton, () =>
             {
-                OnQuitButtonPressed?.Invoke();
-            });
+                OnClickAnimation(() =>
+                {
+                    OnQuitButtonPressed?.Invoke();
+                });
+            }, true);
         }
 
         private void OnClickHomeButton()
         {
             UiAnimator.ButtonOnClick(homeButton, () =>
             {
-                OnHomeButtonPressed?.Invoke();
-            });
+                OnClickAnimation(() =>
+                {
+                    OnHomeButtonPressed?.Invoke();
+                });
+            }, true);
         }
 
         private void OnClickResumeButton()
         {
             UiAnimator.ButtonOnClick(resumeButton, () =>
             {
-                OnResumeButtonPressed?.Invoke();
-            });
+                OnClickAnimation(() =>
+                {
+                    OnResumeButtonPressed?.Invoke();
+                });
+            } , true);
+        }
+
+        async void OnClickAnimation(Callback callback)
+        {
+            UiAnimator.Move(resumeButton.transform , resumeBtnStartPos , LeanTweenType.easeOutElastic, 1 , 0.1f ,true);
+            UiAnimator.Move(homeButton.transform , homeBtnStartPos , LeanTweenType.easeOutElastic, 1 , 0.2f ,true);
+            UiAnimator.Move(quitButton.transform, quitBtnStartPos, LeanTweenType.easeOutElastic, 1, 0.3f, true);
+
+            await Task.Delay(600);
+            callback?.Invoke();
         }
     }
 }

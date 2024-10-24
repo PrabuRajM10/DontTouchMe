@@ -20,9 +20,9 @@ namespace Ui.Screens
         {
             playButton.onClick.AddListener(OnClickPlayButton);
             
-            UiAnimator.MoveWithDelay(playButton.transform , playButtonEndPos , LeanTweenType.easeOutElastic , 0.3f, null);
-            UiAnimator.MoveWithDelay(title.transform , titleTextStartPos , LeanTweenType.easeOutElastic , 0.3f, null);
-            UiAnimator.ScaleWithDelay(title.transform,Vector3.zero,  Vector3.one, LeanTweenType.easeOutBack, 0.3f, null);
+            UiAnimator.Move(playButton.transform , playButtonEndPos , LeanTweenType.easeOutElastic);
+            UiAnimator.Move(title.transform , titleTextStartPos , LeanTweenType.easeOutElastic);
+            UiAnimator.Scale(title.transform,Vector3.zero,  Vector3.one, LeanTweenType.easeOutBack);
         }
 
         protected override void OnDisable()
@@ -34,12 +34,12 @@ namespace Ui.Screens
         {
             UiAnimator.ButtonOnClick(playButton , () =>
             {
-                UiAnimator.Move(playButton.transform , playButtonStartPos , LeanTweenType.easeOutElastic , () =>
+                UiAnimator.Move(playButton.transform , playButtonStartPos , LeanTweenType.easeOutExpo,0.6f,0,false, () =>
                 {
                     OnOnPlayButtonPressed?.Invoke();
                 });
-                UiAnimator.Scale(title.transform, title.transform.localScale, Vector3.zero, LeanTweenType.easeOutBack, null);
-                UiAnimator.Move(title.transform, titleTextEndPos, LeanTweenType.easeOutElastic, null);
+                UiAnimator.Scale(title.transform, title.transform.localScale, Vector3.zero, LeanTweenType.easeOutBack);
+                UiAnimator.Move(title.transform, titleTextEndPos, LeanTweenType.easeOutElastic);
             });
         }
     }

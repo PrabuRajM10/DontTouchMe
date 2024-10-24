@@ -33,11 +33,14 @@ namespace Ui.ScreenHandlers
 
         private void OnResumeButtonPressed()
         {
+            Time.timeScale = 1;
             SwitchScreen(GameScreen.Gameplay);
         }
 
         private void OnHomeButtonPressed()
         {
+            Time.timeScale = 1;
+            GameManager.Instance.GameEnd(false);
             SwitchScreen(GameScreen.Home);
             GameManager.Instance.ChangeState(GameState.Home);
         }

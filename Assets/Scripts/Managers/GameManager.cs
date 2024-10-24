@@ -63,12 +63,18 @@ namespace Managers
 
         void EndGame(bool successful)
         {
-            OnGameEnd?.Invoke(false);
+            GameEnd(successful);
             ChangeState(GameState.GameResult);
             UiManager.Instance.SetGameReset(successful);
+        }
+
+        public void GameEnd(bool successful)
+        {
+            OnGameEnd?.Invoke(successful);
             EnemyManager.Instance.DisableAllEnemies();
             StopSpawning();
         }
+        
 
         void StopSpawning()
         {

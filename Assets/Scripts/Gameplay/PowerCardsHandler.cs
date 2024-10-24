@@ -67,7 +67,6 @@ namespace Gameplay
 
         private void OnGameEnd(bool b)
         {
-            _activeTime = 0;
             if (_currentPowerCardIndex <= 0)
             {
                 _powerCards.Clear();
@@ -76,8 +75,7 @@ namespace Gameplay
             StopAllCoroutines();
             _requiredRef = GetReferenceByCardType(GetCurrentCard().CardId);
             GetCurrentCard().ResetAbility(_requiredRef);
-            _currentPowerCardIndex = 0;
-            _powerCards.Clear();
+            Reset();
         }
         private void HandleOnKeyPressed()
         {
@@ -152,6 +150,13 @@ namespace Gameplay
             _powerCards.Add(1,powerCards[0]);
             _powerCards.Add(2,powerCards[1]);
             _powerCards.Add(3,powerCards[2]);
+        }
+
+        public void Reset()
+        {
+            _activeTime = 0;
+            _currentPowerCardIndex = 0;
+            _powerCards.Clear();
         }
 
         GameObject GetReferenceByCardType(PowerCardsId cardId)

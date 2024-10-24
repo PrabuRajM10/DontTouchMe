@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Gameplay;
 using Helpers;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -13,8 +15,17 @@ namespace Ui.Screens
         [SerializeField] private Button getCardsButton;
         [SerializeField] private Button nextButton;
         [SerializeField] private Transform cardsViewContentParent;
+        [SerializeField] private Transform getCardBtnStartPos;
+        [SerializeField] private Transform getCardBtnEndPos;
+        [SerializeField] private Transform nextBtnStartPos;
+        [SerializeField] private Transform nextBtnEndPos;
         
         [SerializeField] private PowerCardUi powerCardUi;
+
+        [SerializeField] private Transform[] cardsStartPositions;
+        [SerializeField] private Transform[] cardsEndPositions;
+
+        private List<PowerCardUi> _cardsList = new List<PowerCardUi>();
 
         public event Action OnGetCardsButtonPressed; 
         public event Action OnNextButtonPressed; 
@@ -23,6 +34,8 @@ namespace Ui.Screens
         {
             getCardsButton.onClick.AddListener(OnClickGetCardsButton);
             nextButton.onClick.AddListener(OnClickNextButton);
+            
+            UiAnimator.Move(getCardsButton.transform , getCardBtnEndPos , LeanTweenType.easeOutElastic);
         }
 
 
@@ -35,9 +48,19 @@ namespace Ui.Screens
         }
         private void OnClickNextButton()
         {
+            for (var i = 0; i < _cardsList.Count; i++)
+            {
+                var cardUi = _cardsList[i];
+                UiAnimator.Move(cardUi.transform, cardsStartPositions[i], LeanTweenType.easeOutExpo, 0.6f);
+            }
+
             UiAnimator.ButtonOnClick(nextButton, () =>
             {
-                OnNextButtonPressed?.Invoke();
+                UiAnimator.Move(getCardsButton.transform , getCardBtnStartPos , LeanTweenType.easeOutExpo , 0.6f);
+                UiAnimator.Move(nextButton.transform , nextBtnStartPos , LeanTweenType.easeOutExpo , 0.6f,0,false,() =>
+                {
+                    OnNextButtonPressed?.Invoke();
+                });
             });
         }
 
@@ -57,16 +80,20 @@ namespace Ui.Screens
             {
                 Destroy(cardsViewContentParent.GetChild(i).gameObject);
             }
+            _cardsList.Clear();
         }
 
-        public void OnCardsSelected(List<CardData> pickedCard)
+        public async void OnCardsSelected(List<CardData> pickedCard)
         {
             for (int i = 0; i < pickedCard.Count; i++)
             {
-                var card = Instantiate(powerCardUi, cardsViewContentParent);
-                card.SetData(pickedCard[i]); ;
+                var card = Instantiate(powerCardUi,cardsStartPositions[i].position , quaternion.identity, cardsViewContentParent);
+                card.SetData(pickedCard[i] , cardsEndPositions[i]);
+                _cardsList.Add(card);
+                await Task.Delay(100);
             }
             nextButton.gameObject.SetActive(true);
+            UiAnimator.Move(nextButton.transform , nextBtnEndPos , LeanTweenType.easeOutElastic);
         }
     }
 }
