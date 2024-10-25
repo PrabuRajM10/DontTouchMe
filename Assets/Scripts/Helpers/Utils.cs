@@ -25,7 +25,7 @@ namespace Helpers
         
         public static IEnumerator TimerDisplay(float maxTimer, Callback onTimerDone)
         {
-            // Debug.Log("[Utils] [StartTimer] called maxTimer " + maxTimer);
+            Debug.Log("[Utils] [StartTimer] called maxTimer " + maxTimer);
             _currentTimer = maxTimer;
 
             while (_currentTimer > 0)
@@ -49,6 +49,20 @@ namespace Helpers
             var seconds = Mathf.FloorToInt(_currentTimer % 60);
 
             return $"{minutes:00}:{seconds:00}";
+        }
+
+        public static void QuitGame()
+        {
+            PopUp.ShowPopUp("Attention" , "Do you really want to quit game" , PopUpType.YES_NO , () =>
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else           
+            Application.Quit();
+#endif
+            }, PopUp.ClosePopUp);
+
+
         }
     }
 }

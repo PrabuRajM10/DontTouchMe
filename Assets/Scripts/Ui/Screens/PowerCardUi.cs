@@ -17,7 +17,7 @@ namespace Ui.Screens
             cardName.text = powerCard.cardName;
             
             gameObject.SetActive(true);
-            UiAnimator.Move(transform , cardsEndPosition , LeanTweenType.easeOutBounce);
+            LeanAnimator.Move(transform , cardsEndPosition , LeanTweenType.easeOutBounce);
         }
     }
 }

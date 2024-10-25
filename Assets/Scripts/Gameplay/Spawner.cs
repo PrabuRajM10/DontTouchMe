@@ -37,7 +37,7 @@ namespace Gameplay
         {
             poolObj.position = spawnPos;
             poolObj.SetParent(postSpawnParent);
-            poolObj.localScale = Vector3.one;
+            // poolObj.localScale = Vector3.one;
             poolObj.gameObject.SetActive(true);
         }
     }

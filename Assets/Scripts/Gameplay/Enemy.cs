@@ -1,4 +1,5 @@
 using System;
+using Helpers;
 using Managers;
 using UnityEngine;
 using UnityEngine.AI;
@@ -41,9 +42,15 @@ namespace Gameplay
         private void OnEnable()
         {
             ResetVelocity();
+            ResetScale();
             SetSpeed(EnemyManager.Instance.GetEnemySpeed());
             SetScale(EnemyManager.Instance.GetEnemyScale());
         }
+
+        // private void OnDisable()
+        // {
+        //     ResetScale();
+        // }
 
         private void Update()
         {
@@ -89,12 +96,17 @@ namespace Gameplay
 
         public void SetScale(float scale)
         {
-            transform.localScale = Vector3.one * scale;
+            LeanAnimator.Scale(transform , transform.localScale , Vector3.one * scale, LeanTweenType.easeOutBack , 0.5f);
         }
 
         public void ResetVelocity()
         {
             rigidbody.velocity = Vector3.zero;
+        }
+
+        void ResetScale()
+        {
+            transform.localScale = Vector3.zero;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Gameplay
         private void OnTriggerEnter(Collider other)
         { 
             // Debug.Log(" OnTriggerEnter " + other.name);
-            if (other.GetComponent<Gun>())
+            if (other.GetComponent<Gun>() || other.GetComponent<CollectablesMagnet>())
             {
                 return;
             }

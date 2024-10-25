@@ -1,3 +1,4 @@
+using Helpers;
 using Managers;
 using Ui.Screens;
 using UnityEngine;
@@ -10,12 +11,19 @@ namespace Ui.ScreenHandlers
 
         private void OnEnable()
         {
-            homeScreen.OnOnPlayButtonPressed += PlayButtonPressed;
+            homeScreen.OnPlayButtonPressed += PlayButtonPressed;
+            homeScreen.OnQuitButtonPressed += OnQuitButtonPressed;
         }
+
 
         private void OnDisable()
         {
-            homeScreen.OnOnPlayButtonPressed -= PlayButtonPressed;
+            homeScreen.OnPlayButtonPressed -= PlayButtonPressed;
+            homeScreen.OnQuitButtonPressed -= OnQuitButtonPressed;
+        }
+        private void OnQuitButtonPressed()
+        {
+            Utils.QuitGame();
         }
 
         private void PlayButtonPressed()

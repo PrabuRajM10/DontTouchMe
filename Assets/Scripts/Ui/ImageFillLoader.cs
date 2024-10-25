@@ -7,6 +7,7 @@ namespace Ui
     public class ImageFillLoader : MonoBehaviour
     {
         [SerializeField] private Image fillImage;
+        [SerializeField] private bool isReverse;
 
         public void StartLoading(float time)
         {
@@ -18,12 +19,38 @@ namespace Ui
         {
             var totalTime = fillTime;
             float currentTime = 0;
+            
             while (currentTime <= totalTime)
             {
                 fillImage.fillAmount = (currentTime / totalTime);
                 currentTime += Time.deltaTime;
                 yield return null;
             }
+            // if (isReverse)
+            // {
+            //     // var totalTime = 0;
+            //     // float currentTime = fillTime;
+            //     //
+            //     // while (currentTime >= totalTime)
+            //     // {
+            //     //     fillImage.fillAmount = (totalTime / currentTime );
+            //     //     currentTime -= Time.deltaTime;
+            //     //     yield return null;
+            //     // }
+            //     //
+            //     var totalTime = fillTime;
+            //     float currentTime = 0;
+            //     
+            //     while (currentTime <= totalTime)
+            //     {
+            //         fillImage.fillAmount = (currentTime / totalTime) - 1;
+            //         currentTime += Time.deltaTime;
+            //         yield return null;
+            //     }
+            // }
+            // else
+            // {
+            // }
 
             OnTimerDone();
         }

@@ -34,9 +34,9 @@ namespace Ui.Screens
             resumeButton.onClick.AddListener(OnClickResumeButton);
             homeButton.onClick.AddListener(OnClickHomeButton);
             quitButton.onClick.AddListener(OnClickQuitButton);
-            UiAnimator.Move(resumeButton.transform , resumeBtnEndPos , LeanTweenType.easeOutElastic , 1 , 0.1f ,true);
-            UiAnimator.Move(homeButton.transform , homeBtnEndPos , LeanTweenType.easeOutElastic , 1 , 0.2f ,true);
-            UiAnimator.Move(quitButton.transform , quitBtnEndPos , LeanTweenType.easeOutElastic , 1 , 0.3f ,true);
+            LeanAnimator.Move(resumeButton.transform , resumeBtnEndPos , LeanTweenType.easeOutElastic , 1 , 0.1f ,true);
+            LeanAnimator.Move(homeButton.transform , homeBtnEndPos , LeanTweenType.easeOutElastic , 1 , 0.2f ,true);
+            LeanAnimator.Move(quitButton.transform , quitBtnEndPos , LeanTweenType.easeOutElastic , 1 , 0.3f ,true);
 
         }
 
@@ -50,7 +50,7 @@ namespace Ui.Screens
 
         private void OnClickQuitButton()
         {
-            UiAnimator.ButtonOnClick(quitButton, () =>
+            LeanAnimator.ButtonOnClick(quitButton, () =>
             {
                 OnClickAnimation(() =>
                 {
@@ -61,7 +61,7 @@ namespace Ui.Screens
 
         private void OnClickHomeButton()
         {
-            UiAnimator.ButtonOnClick(homeButton, () =>
+            LeanAnimator.ButtonOnClick(homeButton, () =>
             {
                 OnClickAnimation(() =>
                 {
@@ -72,7 +72,7 @@ namespace Ui.Screens
 
         private void OnClickResumeButton()
         {
-            UiAnimator.ButtonOnClick(resumeButton, () =>
+            LeanAnimator.ButtonOnClick(resumeButton, () =>
             {
                 OnClickAnimation(() =>
                 {
@@ -83,9 +83,9 @@ namespace Ui.Screens
 
         async void OnClickAnimation(Callback callback)
         {
-            UiAnimator.Move(resumeButton.transform , resumeBtnStartPos , LeanTweenType.easeOutElastic, 1 , 0.1f ,true);
-            UiAnimator.Move(homeButton.transform , homeBtnStartPos , LeanTweenType.easeOutElastic, 1 , 0.2f ,true);
-            UiAnimator.Move(quitButton.transform, quitBtnStartPos, LeanTweenType.easeOutElastic, 1, 0.3f, true);
+            LeanAnimator.Move(resumeButton.transform , resumeBtnStartPos , LeanTweenType.easeOutElastic, 1 , 0.1f ,true);
+            LeanAnimator.Move(homeButton.transform , homeBtnStartPos , LeanTweenType.easeOutElastic, 1 , 0.2f ,true);
+            LeanAnimator.Move(quitButton.transform, quitBtnStartPos, LeanTweenType.easeOutElastic, 1, 0.3f, true);
 
             await Task.Delay(600);
             callback?.Invoke();

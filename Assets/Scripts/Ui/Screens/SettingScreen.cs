@@ -23,7 +23,7 @@ namespace Ui.Screens
 
         private void OnClickOkButton()
         {
-            UiAnimator.ButtonOnClick(okButton , () =>
+            LeanAnimator.ButtonOnClick(okButton , () =>
             {
                 OnOkButtonPressed?.Invoke();
             });

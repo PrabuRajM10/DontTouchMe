@@ -35,7 +35,7 @@ namespace Ui.Screens
             getCardsButton.onClick.AddListener(OnClickGetCardsButton);
             nextButton.onClick.AddListener(OnClickNextButton);
             
-            UiAnimator.Move(getCardsButton.transform , getCardBtnEndPos , LeanTweenType.easeOutElastic);
+            LeanAnimator.Move(getCardsButton.transform , getCardBtnEndPos , LeanTweenType.easeOutElastic);
         }
 
 
@@ -51,13 +51,12 @@ namespace Ui.Screens
             for (var i = 0; i < _cardsList.Count; i++)
             {
                 var cardUi = _cardsList[i];
-                UiAnimator.Move(cardUi.transform, cardsStartPositions[i], LeanTweenType.easeOutExpo, 0.6f);
+                LeanAnimator.Move(cardUi.transform, cardsStartPositions[i], LeanTweenType.easeOutExpo, 0.6f);
             }
 
-            UiAnimator.ButtonOnClick(nextButton, () =>
+            LeanAnimator.ButtonOnClick(nextButton, () =>
             {
-                UiAnimator.Move(getCardsButton.transform , getCardBtnStartPos , LeanTweenType.easeOutExpo , 0.6f);
-                UiAnimator.Move(nextButton.transform , nextBtnStartPos , LeanTweenType.easeOutExpo , 0.6f,0,false,() =>
+                LeanAnimator.Move(nextButton.transform , nextBtnStartPos , LeanTweenType.easeOutExpo , 0.6f,0,false,() =>
                 {
                     OnNextButtonPressed?.Invoke();
                 });
@@ -66,8 +65,9 @@ namespace Ui.Screens
 
         private void OnClickGetCardsButton()
         {
-            UiAnimator.ButtonOnClick(getCardsButton, () =>
+            LeanAnimator.ButtonOnClick(getCardsButton, () =>
             {
+                LeanAnimator.Move(getCardsButton.transform , getCardBtnStartPos , LeanTweenType.easeOutExpo , 0.6f);
                 OnGetCardsButtonPressed?.Invoke();
                 getCardsButton.interactable = false;
             });
@@ -93,7 +93,7 @@ namespace Ui.Screens
                 await Task.Delay(100);
             }
             nextButton.gameObject.SetActive(true);
-            UiAnimator.Move(nextButton.transform , nextBtnEndPos , LeanTweenType.easeOutElastic);
+            LeanAnimator.Move(nextButton.transform , nextBtnEndPos , LeanTweenType.easeOutElastic);
         }
     }
 }

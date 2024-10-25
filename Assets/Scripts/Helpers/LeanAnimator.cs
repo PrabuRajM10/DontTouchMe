@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Helpers
 {
-    public abstract class UiAnimator
+    public abstract class LeanAnimator
     {
         public delegate void CallBack();
 

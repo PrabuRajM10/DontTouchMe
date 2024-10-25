@@ -24,6 +24,8 @@ namespace Managers
         private GameState _currentState;
         private GameState _previousState;
         private List<CardData> _currentGamePowerCards;
+        private int _currentCollectedCoins;
+        private int _currentKillCount;
 
         public Player Player => player;
         public GameState CurrentState => _currentState;
@@ -63,16 +65,19 @@ namespace Managers
 
         void EndGame(bool successful)
         {
-            GameEnd(successful);
             ChangeState(GameState.GameResult);
-            UiManager.Instance.SetGameReset(successful);
+            UiManager.Instance.SetGameReset(successful , _currentCollectedCoins , _currentKillCount);
+            GameEnd(successful);
         }
 
         public void GameEnd(bool successful)
         {
             OnGameEnd?.Invoke(successful);
+            GameTimer.StopTimer();
             EnemyManager.Instance.DisableAllEnemies();
             StopSpawning();
+            _currentCollectedCoins = 0;
+            _currentKillCount = 0;
         }
         
 
@@ -149,6 +154,15 @@ namespace Managers
         public bool IsAnyCardActive()
         {
             return powerCardsHandler.IsAnyCardActive();
+        }
+
+        public void UpdateCollectedCoins(int value)
+        {
+            _currentCollectedCoins = value;
+        }
+        public void UpdateKills(int value)
+        {
+            _currentKillCount = value;
         }
     }
     

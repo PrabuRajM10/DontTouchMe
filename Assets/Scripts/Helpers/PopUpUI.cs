@@ -44,7 +44,7 @@ namespace Helpers
 
         private void OnCLickContinueButton()
         {
-            UiAnimator.ButtonOnClick(continueButton , () =>
+            LeanAnimator.ButtonOnClick(continueButton , () =>
             {
                 yesCallBack?.Invoke();
             });
@@ -52,14 +52,14 @@ namespace Helpers
 
         private void OnClickConfirmButton()
         {
-            UiAnimator.ButtonOnClick(confirmButton , () =>
+            LeanAnimator.ButtonOnClick(confirmButton , () =>
             {
                 yesCallBack?.Invoke();
             });
         }
         private void OnClickNoButton()
         {
-            UiAnimator.ButtonOnClick(noButton , () =>
+            LeanAnimator.ButtonOnClick(noButton , () =>
             {
                 noCallBack?.Invoke();
             });
@@ -67,7 +67,7 @@ namespace Helpers
 
         private void OnClickYesButton()
         {
-            UiAnimator.ButtonOnClick(yesButton , () =>
+            LeanAnimator.ButtonOnClick(yesButton , () =>
             {
                 yesCallBack?.Invoke();
             });

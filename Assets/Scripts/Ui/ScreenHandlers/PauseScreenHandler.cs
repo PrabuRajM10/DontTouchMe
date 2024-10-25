@@ -28,7 +28,7 @@ namespace Ui.ScreenHandlers
         private void OnQuitButtonPressed()
         {
             Debug.Log("[PauseScreenHandler] [OnQuitButtonPressed] ");
-            PopUp.ShowPopUp("Attention" , "Do ypu really want to quit game" , PopUpType.YES_NO , Application.Quit, PopUp.ClosePopUp);
+            Utils.QuitGame();
         }
 
         private void OnResumeButtonPressed()

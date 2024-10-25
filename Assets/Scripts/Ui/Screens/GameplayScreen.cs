@@ -55,7 +55,7 @@ namespace Ui.Screens
 
         private void OnClickPauseButton()
         {
-            UiAnimator.ButtonOnClick(pauseButton , () =>
+            LeanAnimator.ButtonOnClick(pauseButton , () =>
             {
                 OnPauseButtonPressed?.Invoke();
             });
@@ -120,8 +120,9 @@ namespace Ui.Screens
 
         public void SetCardOnCooldown(int index, float cardCooldownTime)
         {
+            SetPowerCardAvailability(index, false);
+            // ActivateAllCards(false);
             xpManager.SetCardAvailabilityIfPossible();
-            // ActivateAllCards(true);
             var card = _cardsDict[index];
             card.SetCooldownTimer(cardCooldownTime);
         }

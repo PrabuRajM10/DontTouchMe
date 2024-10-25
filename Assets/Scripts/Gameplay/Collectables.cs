@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Helpers;
 using Managers;
 using UnityEngine;
 
@@ -12,6 +13,11 @@ namespace Gameplay
         private ObjectPooling _pool;
         protected CollectablesManager respectiveManager;
         private float _speed = 25;
+
+        private void OnEnable()
+        {
+            LeanAnimator.Scale(transform , Vector3.zero, Vector3.one, LeanTweenType.easeOutBack , 0.3f);
+        }
 
         public void SetManager(CollectablesManager manager)
         {

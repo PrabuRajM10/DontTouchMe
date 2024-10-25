@@ -11,6 +11,7 @@ namespace Managers
             var coinValue = (int)collectablesDataHolderSo.GetValueByType(collectablesType);
             coinCount += coinValue;
 
+            GameManager.Instance.UpdateCollectedCoins(coinCount);
             UiManager.Instance.OnCoinCollected(coinCount);                
         }
 

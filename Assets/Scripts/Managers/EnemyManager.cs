@@ -15,6 +15,21 @@ namespace Managers
 
         [SerializeField] private int deadEnemiesCount;
 
+        private void OnEnable()
+        {
+            GameManager.OnGameEnd += OnGameEnd;
+        }
+
+        private void OnDisable()
+        {
+            GameManager.OnGameEnd -= OnGameEnd;
+        }
+
+        private void OnGameEnd(bool obj)
+        {
+            deadEnemiesCount = 0;
+        }
+
         public void AddToActiveList(Enemy enemy)
         {
             activeEnemyList.Add(enemy);
@@ -25,6 +40,7 @@ namespace Managers
         public void EnemyDead(Enemy enemy)
         {
             deadEnemiesCount++;
+            GameManager.Instance.UpdateKills(deadEnemiesCount);
             UiManager.Instance.UpdateKillCount(deadEnemiesCount);
             activeEnemyList.Remove(enemy);
             if(activeEnemyList.Count <= minEnemiesCountOnGame) GameManager.Instance.StartEnemySpawning();

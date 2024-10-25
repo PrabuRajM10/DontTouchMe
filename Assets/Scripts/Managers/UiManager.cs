@@ -104,23 +104,6 @@ namespace Managers
             gameplayScreen.UpdateXp(xpValue);
         }
 
-        public void OnPlayerDead()
-        {
-            SetGameReset(false);
-        }
-
-        public void OnPlayerCompletedLevel()
-        {
-            SetGameReset(true);
-        }
-
-
-        public void SetGameReset(bool state)
-        {
-            gameResultScreen.ShowResult(state);
-            OnSwitchScreenEvnt(GameScreen.GameResult);
-        }
-
         public void SetCurrentGameCards(List<CardData> powerCards)
         {
             gameplayScreen.SetCardData(powerCards);
@@ -141,6 +124,12 @@ namespace Managers
         public void PowerCardOnCoolDown(int index, float cardCooldownTime)
         {
             gameplayScreen.SetCardOnCooldown(index, cardCooldownTime);
+        }
+
+        public void SetGameReset(bool successful, int currentCollectedCoins, int currentKillCount)
+        {
+            gameResultScreen.ShowResult(successful , currentCollectedCoins , currentKillCount);
+            OnSwitchScreenEvnt(GameScreen.GameResult);
         }
     }
 }
