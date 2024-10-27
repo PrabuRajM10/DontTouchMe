@@ -17,13 +17,22 @@ namespace Ui.ScreenHandlers
         {
             cardPickerScreen.OnGetCardsButtonPressed += GetCardsButtonPressed;
             cardPickerScreen.OnNextButtonPressed += OnNextButtonPressed;
+            cardPickerScreen.OnBackButtonPressed += OnBackButtonPressed;
         }
+
 
 
         private void OnDisable()
         {
             cardPickerScreen.OnGetCardsButtonPressed -= GetCardsButtonPressed;
             cardPickerScreen.OnNextButtonPressed -= OnNextButtonPressed;
+            cardPickerScreen.OnBackButtonPressed -= OnBackButtonPressed;
+        }
+        private void OnBackButtonPressed()
+        {
+            GameManager.Instance.ChangeState(GameState.Home);
+            SwitchScreen(GameScreen.Home);
+            
         }
         private void OnNextButtonPressed()
         {

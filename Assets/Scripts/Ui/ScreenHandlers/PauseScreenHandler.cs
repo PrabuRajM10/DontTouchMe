@@ -28,7 +28,18 @@ namespace Ui.ScreenHandlers
         private void OnQuitButtonPressed()
         {
             Debug.Log("[PauseScreenHandler] [OnQuitButtonPressed] ");
-            Utils.QuitGame();
+            PopUp.ShowPopUp("Attention" , "Do you sure you want to quit" , PopUpType.YES_NO , () =>
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else           
+            Application.Quit();
+#endif
+            } , () =>
+            {
+                PopUp.ClosePopUp();
+                SwitchScreen(GameScreen.Pause);
+            });
         }
 
         private void OnResumeButtonPressed()

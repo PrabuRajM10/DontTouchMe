@@ -16,6 +16,7 @@ namespace Ui.Screens
     public class GameplayScreen : BaseUi
     {
         [SerializeField] private Button pauseButton;
+        [SerializeField] private Button infoExitButton;
         [SerializeField] private TMP_Text coinsTxt;
         [SerializeField] private TMP_Text timerTxt;
         [SerializeField] private TMP_Text killsTxt;
@@ -24,7 +25,9 @@ namespace Ui.Screens
         [FormerlySerializedAs("cardUi")] [SerializeField] private CardUi cardUiPrefab;
 
         [SerializeField] private Transform cardUiParent;
-        [SerializeField] private XpManager xpManager;
+        [SerializeField] private Transform info;
+        [SerializeField] private Transform board;
+        [FormerlySerializedAs("xpManager")] [SerializeField] private SpellManager spellManager;
 
         [SerializeField] private PowerCardUi[] powerCardUis;
 
@@ -36,12 +39,25 @@ namespace Ui.Screens
         private void OnEnable()
         {
             pauseButton.onClick.AddListener(OnClickPauseButton);
+            infoExitButton.onClick.AddListener(OnClickInfoExitButton);
         }
+
 
         protected override void OnDisable()
         {
             base.OnDisable();
             pauseButton.onClick.RemoveListener(OnClickPauseButton);
+            infoExitButton.onClick.RemoveListener(OnClickInfoExitButton);
+        }
+        private void OnClickInfoExitButton()
+        {
+            LeanAnimator.Fade(info , 0 , LeanTweenType.easeInCubic , 0.1f , 0 , true);
+            LeanAnimator.Scale(info , Vector3.one, Vector3.zero, LeanTweenType.easeOutExpo , 0.5f , 0 , true , () =>
+            {
+                info.gameObject.SetActive(false);
+                Time.timeScale = 1;
+            });
+            LeanAnimator.Fade(board , 1 , LeanTweenType.easeInBack , 0.2f , 0 , true);
         }
 
         public override void Reset()
@@ -122,9 +138,18 @@ namespace Ui.Screens
         {
             SetPowerCardAvailability(index, false);
             // ActivateAllCards(false);
-            xpManager.SetCardAvailabilityIfPossible();
+            spellManager.SetCardAvailabilityIfPossible();
             var card = _cardsDict[index];
             card.SetCooldownTimer(cardCooldownTime);
+        }
+
+        public void ShowFirstSpellCollectionAnimation()
+        {
+            info.gameObject.SetActive(true);
+            Time.timeScale = 0;
+            LeanAnimator.Fade(board , 0 , LeanTweenType.easeInBack , 0.2f , 0 , true);
+            LeanAnimator.Fade(info , 1 , LeanTweenType.easeInBack , 0.2f , 0 , true);
+            LeanAnimator.Scale(info , Vector3.zero, Vector3.one, LeanTweenType.easeOutElastic , 0.5f , 0 , true);
         }
     }
 }

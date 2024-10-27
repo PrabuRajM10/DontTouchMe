@@ -16,7 +16,7 @@ namespace Managers
         {
             base.Awake();
             collectablesDictionary.Add(CollectablesType.Coins , coinsManager);
-            collectablesDictionary.Add(CollectablesType.Xp , xPManager);
+            collectablesDictionary.Add(CollectablesType.Spell , xPManager);
         }
 
         public CollectablesManager GetManager(CollectablesType type)

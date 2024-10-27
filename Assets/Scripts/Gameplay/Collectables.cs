@@ -43,7 +43,7 @@ namespace Gameplay
             {
                 case CollectablesType.Coins:
                     return PoolObjectTypes.Coin;
-                case CollectablesType.Xp:
+                case CollectablesType.Spell:
                     return PoolObjectTypes.Xp;
                 default:
                     throw new ArgumentOutOfRangeException();

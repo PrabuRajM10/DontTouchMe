@@ -21,7 +21,7 @@ namespace Gameplay
     public class PowerCardsHandler : MonoBehaviour
     {
         [SerializeField] private List<PowerCardReference> powerCardReferences = new List<PowerCardReference>();
-        [SerializeField] private XpManager xpManager; 
+        [FormerlySerializedAs("xpManager")] [SerializeField] private SpellManager spellManager; 
 
 
         private Dictionary<int, PowerCard> _powerCards = new Dictionary<int, PowerCard>();
@@ -85,7 +85,7 @@ namespace Gameplay
             }
 
             UiManager.Instance.OnPowerCardActivated(_currentPowerCardIndex, GetCurrentCard().ActiveTime , GetCurrentCard().XpCost);
-            xpManager.OnCurrentXpValueUpdate(-GetCurrentCard().XpCost);
+            spellManager.OnCurrentXpValueUpdate(-GetCurrentCard().XpCost);
             UpdateCardsUnAvailability();
             ExecutePowerCard(_currentPowerCardIndex);
         }
@@ -100,7 +100,7 @@ namespace Gameplay
             foreach (var powerCard in _powerCards)
             {
                 if(powerCard.Value.CardState is PowerCardState.Cooldown or PowerCardState.Active ) return;
-                if (xpManager.GetXpValue() < powerCard.Value.XpCost)
+                if (spellManager.GetXpValue() < powerCard.Value.XpCost)
                 {
                     powerCard.Value.CardState = PowerCardState.UnAvailable;
                 }
@@ -137,7 +137,7 @@ namespace Gameplay
 
         private void OnCooldownDone()
         {
-            xpManager.SetCardAvailabilityIfPossible();
+            spellManager.SetCardAvailabilityIfPossible();
         }
 
         public bool IsAnyCardActive()

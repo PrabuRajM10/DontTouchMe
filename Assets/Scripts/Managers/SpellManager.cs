@@ -1,22 +1,33 @@
+using System;
 using System.Collections.Generic;
 using Gameplay;
+using PlayerPrefs;
 using Ui;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Managers
 {
-    public class XpManager : CollectablesManager
+    public class SpellManager : CollectablesManager
     {
-        [SerializeField] private int totalXpValue;
+        [FormerlySerializedAs("totalXpValue")] [SerializeField] private int totalSpellValue;
         private List<CardData> _powerCardsData = new List<CardData>();
         private CardData _powerCard1Data;
         private CardData _powerCard2Data;
         private CardData _powerCard3Data;
+
+        public static Action OnSpellCollectedForFirstTime;
         
         public override void OnCollectablesCollected()
         {
-            totalXpValue += (int)collectablesDataHolderSo.GetValueByType(collectablesType);
-            UiManager.Instance.OnXpCollected(totalXpValue);
+            if (PlayerPrefManager.GetIsSpellCollectedForFirstTime() < 1 && totalSpellValue <= 0)
+            {
+                Debug.Log("Spell collected for first time");
+                OnSpellCollectedForFirstTime?.Invoke();
+                PlayerPrefManager.UpdateIsSpellCollectedForFirstTime(1);
+            }
+            totalSpellValue += (int)collectablesDataHolderSo.GetValueByType(collectablesType);
+            UiManager.Instance.OnXpCollected(totalSpellValue);
 
             if (_powerCardsData.Count <= 0)
             {
@@ -34,19 +45,19 @@ namespace Managers
 
         public void SetCardAvailabilityIfPossible()
         {
-            if (_powerCard1Data.powerCard.XpCost <= totalXpValue && _powerCard1Data.powerCard.CardState == PowerCardState.UnAvailable)
+            if (_powerCard1Data.powerCard.XpCost <= totalSpellValue && _powerCard1Data.powerCard.CardState == PowerCardState.UnAvailable)
             {
                 _powerCard1Data.powerCard.CardState = PowerCardState.Ready;
                 UiManager.Instance.SetPowerCardAvailability(1, true);
             }
 
-            if (_powerCard2Data.powerCard.XpCost <= totalXpValue && _powerCard2Data.powerCard.CardState == PowerCardState.UnAvailable)
+            if (_powerCard2Data.powerCard.XpCost <= totalSpellValue && _powerCard2Data.powerCard.CardState == PowerCardState.UnAvailable)
             {
                 _powerCard2Data.powerCard.CardState = PowerCardState.Ready;
                 UiManager.Instance.SetPowerCardAvailability(2, true);
             }
 
-            if (_powerCard3Data.powerCard.XpCost <= totalXpValue && _powerCard3Data.powerCard.CardState == PowerCardState.UnAvailable)
+            if (_powerCard3Data.powerCard.XpCost <= totalSpellValue && _powerCard3Data.powerCard.CardState == PowerCardState.UnAvailable)
             {
                 _powerCard3Data.powerCard.CardState = PowerCardState.Ready;
                 UiManager.Instance.SetPowerCardAvailability(3, true);
@@ -55,17 +66,17 @@ namespace Managers
 
         public void OnCurrentXpValueUpdate(int valueDifference)
         {
-            totalXpValue += valueDifference;
+            totalSpellValue += valueDifference;
         }
 
         public int GetXpValue()
         {
-            return totalXpValue;
+            return totalSpellValue;
         }
 
         public override void Reset()
         {
-            totalXpValue = 0;
+            totalSpellValue = 0;
             _powerCardsData.Clear();
         }
     }

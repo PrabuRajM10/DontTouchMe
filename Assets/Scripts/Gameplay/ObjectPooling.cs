@@ -117,7 +117,7 @@ namespace Gameplay
                     return coin;
                 case PoolObjectTypes.Xp:
                     var xp = GetCollectablesObject(_xpListPool , PoolObjectTypes.Xp);
-                    xp.SetManager(CollectablesManagerHolder.Instance.GetManager(CollectablesType.Xp));
+                    xp.SetManager(CollectablesManagerHolder.Instance.GetManager(CollectablesType.Spell));
                     return xp;
                 case PoolObjectTypes.Bomb:
                     if (_bombListPool.Count < 2)

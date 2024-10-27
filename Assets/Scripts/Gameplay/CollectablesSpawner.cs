@@ -8,7 +8,7 @@ namespace Gameplay
     {
         Coins,
         Heal,
-        Xp
+        Spell
     }
     public class CollectablesSpawner : AutoSpawner
     {

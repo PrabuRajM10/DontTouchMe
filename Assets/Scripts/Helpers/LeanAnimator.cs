@@ -41,5 +41,14 @@ namespace Helpers
                     callBack?.Invoke();
                 }).setIgnoreTimeScale(ignoreTimeScale);
         }
+
+        public static void Fade(Transform uiElement , float targetValue , LeanTweenType tweenType, float duration = 1 ,float delay = 0, bool ignoreTimeScale = false  , CallBack callBack = null)
+        {
+            var canvasGroup = uiElement.GetComponent<CanvasGroup>();
+            canvasGroup.LeanAlpha(targetValue, duration).setDelay(delay).setEase(tweenType).setIgnoreTimeScale(ignoreTimeScale).setOnComplete(() =>
+            {
+                callBack?.Invoke();
+            });
+        }
     }
 }
