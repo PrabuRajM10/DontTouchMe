@@ -1,3 +1,4 @@
+using Enums;
 using Helpers;
 using Managers;
 using Ui.Screens;
@@ -28,7 +29,7 @@ namespace Ui.ScreenHandlers
 
         private void PlayButtonPressed()
         {
-            SwitchScreen(GameScreen.CardPicker);
+            SwitchScreen(Enum.GameScreen.CardPicker);
             GameManager.Instance.ChangeState(GameState.CardPicker);
         }
     }

@@ -1,20 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Enums;
 using Managers;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Enum = Enums.Enum;
 
 namespace Gameplay
 {
-    public enum PoolObjectTypes
-    {
-        Enemy,
-        Bullet,
-        Coin,
-        Xp,
-        Bomb
-    }
+    
 
     [Serializable]
     public class PoolObjectData
@@ -22,7 +17,7 @@ namespace Gameplay
         public GameObject prefab;
         public Transform spawnParent;
         public int initialSpawnCount;
-        public PoolObjectTypes poolObjectType;
+        public Enum.PoolObjectTypes poolObjectType;
     }
 
     public class ObjectPooling : GenericSingleton<ObjectPooling>
@@ -35,6 +30,7 @@ namespace Gameplay
         private List<Bomb> _bombListPool = new List<Bomb>();
         private List<Collectables> _coinListPool = new List<Collectables>();
         private List<Collectables> _xpListPool = new List<Collectables>();
+        private List<PositionalAudio> _positionalAudios = new List<PositionalAudio>();
 
         private void Start()
         {
@@ -46,7 +42,7 @@ namespace Gameplay
             // Spawn(enemyPrefab , minEnemyCount , PoolObjectTypes.Enemy , enemySpawnParent);k
         }
 
-        private void Spawn(GameObject poolableObjects, int count , PoolObjectTypes poolObjectType , Transform parent)
+        private void Spawn(GameObject poolableObjects, int count , Enum.PoolObjectTypes poolObjectType , Transform parent)
         {
             for (int i = 0; i < count; i++)
             {
@@ -60,39 +56,42 @@ namespace Gameplay
             }
         }
 
-        private void AddObjectToPool(PoolObjectTypes poolObjectType, IPoolableObjects poolObject)
+        private void AddObjectToPool(Enum.PoolObjectTypes poolObjectType, IPoolableObjects poolObject)
         {
 
             switch (poolObjectType)
             {
-                case PoolObjectTypes.Enemy:
+                case Enum.PoolObjectTypes.Enemy:
                     var enemy = (Enemy)poolObject;
                     enemy.SetTarget(GameManager.Instance.Player);
                     _enemyListPool.Add(enemy);
                     break;
-                case PoolObjectTypes.Bullet:
+                case Enum.PoolObjectTypes.Bullet:
                     _bulletListPool.Add((Bullet)poolObject);
                     break;
-                case PoolObjectTypes.Coin:
+                case Enum.PoolObjectTypes.Coin:
                     _coinListPool.Add((Collectables)poolObject);
                     break;
-                case PoolObjectTypes.Xp:
+                case Enum.PoolObjectTypes.Xp:
                     _xpListPool.Add((Collectables)poolObject);
                     break;
-                case PoolObjectTypes.Bomb:
+                case Enum.PoolObjectTypes.Bomb:
                     _bombListPool.Add((Bomb)poolObject);
+                    break;
+                case Enum.PoolObjectTypes.Audio:
+                    _positionalAudios.Add((PositionalAudio)poolObject);
                     break;
             }
         }
 
-        IPoolableObjects GetObjectFromPool(PoolObjectTypes poolObjectType)
+        IPoolableObjects GetObjectFromPool(Enum.PoolObjectTypes poolObjectType)
         {
             switch (poolObjectType)
             {
-                case PoolObjectTypes.Enemy:
+                case Enum.PoolObjectTypes.Enemy:
                     if (_enemyListPool.Count < 2)
                     {
-                        var poolObjectData = GetPoolProjectData(PoolObjectTypes.Enemy);
+                        var poolObjectData = GetPoolProjectData(Enum.PoolObjectTypes.Enemy);
                         Spawn(poolObjectData.prefab , 10 ,poolObjectData.poolObjectType , poolObjectData.spawnParent);
                     }            
                     var enemy = _enemyListPool[0];
@@ -100,10 +99,10 @@ namespace Gameplay
                     enemy.transform.parent = null;
                     return enemy;
             
-                case PoolObjectTypes.Bullet:
+                case Enum.PoolObjectTypes.Bullet:
                     if (_bulletListPool.Count < 2)
                     {
-                        var poolObjectData = GetPoolProjectData(PoolObjectTypes.Bullet);
+                        var poolObjectData = GetPoolProjectData(Enum.PoolObjectTypes.Bullet);
                         Spawn(poolObjectData.prefab , 10 ,poolObjectData.poolObjectType , poolObjectData.spawnParent);
                     }            
                     var bullet = _bulletListPool[0];
@@ -111,30 +110,40 @@ namespace Gameplay
                     bullet.transform.parent = null;
                     return bullet;
 
-                case PoolObjectTypes.Coin:
-                    var coin = GetCollectablesObject(_coinListPool , PoolObjectTypes.Coin);
-                    coin.SetManager(CollectablesManagerHolder.Instance.GetManager(CollectablesType.Coins));
+                case Enum.PoolObjectTypes.Coin:
+                    var coin = GetCollectablesObject(_coinListPool , Enum.PoolObjectTypes.Coin);
+                    coin.SetManager(CollectablesManagerHolder.Instance.GetManager(Enum.CollectablesType.Coins));
                     return coin;
-                case PoolObjectTypes.Xp:
-                    var xp = GetCollectablesObject(_xpListPool , PoolObjectTypes.Xp);
-                    xp.SetManager(CollectablesManagerHolder.Instance.GetManager(CollectablesType.Spell));
+                case Enum.PoolObjectTypes.Xp:
+                    var xp = GetCollectablesObject(_xpListPool , Enum.PoolObjectTypes.Xp);
+                    xp.SetManager(CollectablesManagerHolder.Instance.GetManager(Enum.CollectablesType.Spell));
                     return xp;
-                case PoolObjectTypes.Bomb:
+                case Enum.PoolObjectTypes.Bomb:
                     if (_bombListPool.Count < 2)
                     {
-                        var poolObjectData = GetPoolProjectData(PoolObjectTypes.Bomb);
+                        var poolObjectData = GetPoolProjectData(Enum.PoolObjectTypes.Bomb);
                         Spawn(poolObjectData.prefab , 5 ,poolObjectData.poolObjectType , poolObjectData.spawnParent);
                     }            
                     var bomb = _bombListPool[0];
                     _bombListPool.Remove(bomb);
                     bomb.transform.parent = null;
                     return bomb;
+                case Enum.PoolObjectTypes.Audio:
+                    if (_positionalAudios.Count < 2)
+                    {
+                        var poolObjectData = GetPoolProjectData(Enum.PoolObjectTypes.Audio);
+                        Spawn(poolObjectData.prefab , 10 ,poolObjectData.poolObjectType , poolObjectData.spawnParent);
+                    }            
+                    var audio = _positionalAudios[0];
+                    _positionalAudios.Remove(audio);
+                    audio.transform.parent = null;
+                    return audio;
                 default:
                     return null;
             }
         }
 
-        private Collectables GetCollectablesObject(List<Collectables> collectablesListPool, PoolObjectTypes collectablesType)
+        private Collectables GetCollectablesObject(List<Collectables> collectablesListPool, Enum.PoolObjectTypes collectablesType)
         {
             if (collectablesListPool.Count < 2)
             {
@@ -151,70 +160,81 @@ namespace Gameplay
 
         public Bullet GetBullet()
         {
-            return (Bullet)GetObjectFromPool(PoolObjectTypes.Bullet);
+            return (Bullet)GetObjectFromPool(Enum.PoolObjectTypes.Bullet);
         }
 
         public Enemy GetEnemy()
         {
-            return (Enemy)GetObjectFromPool(PoolObjectTypes.Enemy);
+            return (Enemy)GetObjectFromPool(Enum.PoolObjectTypes.Enemy);
         }
         
         public Collectables GetCoins()
         {
-            return (Collectables)GetObjectFromPool(PoolObjectTypes.Coin);
+            return (Collectables)GetObjectFromPool(Enum.PoolObjectTypes.Coin);
         }
         
         public Collectables GetXp()
         {
-            return (Collectables)GetObjectFromPool(PoolObjectTypes.Xp);
+            return (Collectables)GetObjectFromPool(Enum.PoolObjectTypes.Xp);
         }
 
         public Bomb GetBomb()
         {
-            return (Bomb)GetObjectFromPool(PoolObjectTypes.Bomb);
+            return (Bomb)GetObjectFromPool(Enum.PoolObjectTypes.Bomb);
         }
-        public void AddBackToList(IPoolableObjects poolable , PoolObjectTypes poolObjectTypes)
+
+        public PositionalAudio GetAudioPrefab()
+        {
+            return (PositionalAudio)GetObjectFromPool(Enum.PoolObjectTypes.Audio);
+
+        }
+        public void AddBackToList(IPoolableObjects poolable , Enum.PoolObjectTypes poolObjectTypes)
         {
             switch (poolObjectTypes)
             {
-                case PoolObjectTypes.Enemy:
+                case Enum.PoolObjectTypes.Enemy:
                     var enemy = (Enemy)poolable;
-                    ResetObjects(enemy.gameObject , PoolObjectTypes.Enemy);
+                    ResetObjects(enemy.gameObject , Enum.PoolObjectTypes.Enemy);
                     _enemyListPool.Add(enemy);
                     break;
-                case PoolObjectTypes.Bullet:
+                case Enum.PoolObjectTypes.Bullet:
                     var bullet = (Bullet)poolable;
-                    ResetObjects(bullet.gameObject, PoolObjectTypes.Bullet);
+                    ResetObjects(bullet.gameObject, Enum.PoolObjectTypes.Bullet);
                     _bulletListPool.Add(bullet);
                     break;
-                case PoolObjectTypes.Coin:
+                case Enum.PoolObjectTypes.Coin:
                     var coin = (Collectables)poolable;
-                    ResetObjects(coin.gameObject, PoolObjectTypes.Coin);
+                    ResetObjects(coin.gameObject, Enum.PoolObjectTypes.Coin);
                     _coinListPool.Add(coin);
                     break;
-                case PoolObjectTypes.Xp:
+                case Enum.PoolObjectTypes.Xp:
                     var xp = (Collectables)poolable;
-                    ResetObjects(xp.gameObject, PoolObjectTypes.Xp);
+                    ResetObjects(xp.gameObject, Enum.PoolObjectTypes.Xp);
                     _xpListPool.Add(xp);
                     break;
-                case PoolObjectTypes.Bomb:
+                case Enum.PoolObjectTypes.Bomb:
                     var bomb = (Bomb)poolable;
-                    ResetObjects(bomb.gameObject, PoolObjectTypes.Bomb);
+                    ResetObjects(bomb.gameObject, Enum.PoolObjectTypes.Bomb);
                     _bombListPool.Add(bomb);
+                    break;
+                case Enum.PoolObjectTypes.Audio:
+                    var audio = (PositionalAudio)poolable;
+                    ResetObjects(audio.gameObject, Enum.PoolObjectTypes.Audio);
+                    _positionalAudios.Add(audio);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(poolObjectTypes), poolObjectTypes, null);
             }
         }
 
-        private void ResetObjects(GameObject poolObj , PoolObjectTypes type)
+        private void ResetObjects(GameObject poolObj , Enum.PoolObjectTypes type)
         {
             poolObj.gameObject.SetActive(false);
             poolObj.transform.SetParent(GetPoolProjectData(type).spawnParent);
             poolObj.transform.position = Vector3.zero;
         }
 
-        PoolObjectData GetPoolProjectData(PoolObjectTypes poolObjectType)
+        PoolObjectData GetPoolProjectData(Enum.PoolObjectTypes poolObjectType)
         {
             return poolObjectDataList.FirstOrDefault(poolObjectData => poolObjectData.poolObjectType == poolObjectType);
         }

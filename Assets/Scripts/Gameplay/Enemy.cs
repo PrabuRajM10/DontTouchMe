@@ -1,8 +1,10 @@
 using System;
+using Enums;
 using Helpers;
 using Managers;
 using UnityEngine;
 using UnityEngine.AI;
+using Enum = Enums.Enum;
 
 namespace Gameplay
 {
@@ -30,7 +32,7 @@ namespace Gameplay
 
         public void BackToPool()
         {
-            _pool.AddBackToList(this , PoolObjectTypes.Enemy);        
+            _pool.AddBackToList(this , Enum.PoolObjectTypes.Enemy);        
         }
 
         private void OnValidate()

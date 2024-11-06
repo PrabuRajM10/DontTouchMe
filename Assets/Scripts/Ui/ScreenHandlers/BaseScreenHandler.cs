@@ -1,16 +1,18 @@
 using System;
+using Enums;
 using Ui.Screens;
 using UnityEngine;
+using Enum = Enums.Enum;
 
 namespace Ui.ScreenHandlers
 {
     public class BaseScreenHandler : MonoBehaviour
     {
 
-        public GameScreen respectiveScreen;
-        public static event Action<GameScreen> SwitchScreenEvnt;
+        public Enum.GameScreen respectiveScreen;
+        public static event Action<Enum.GameScreen> SwitchScreenEvnt;
         
-        protected void SwitchScreen(GameScreen gameScreen)
+        protected void SwitchScreen(Enum.GameScreen gameScreen)
         {
             SwitchScreenEvnt?.Invoke(gameScreen);
         }

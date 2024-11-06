@@ -1,7 +1,9 @@
 using System;
+using Enums;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Enum = Enums.Enum;
 
 namespace Helpers
 {
@@ -78,7 +80,7 @@ namespace Helpers
             } , true);
         }
 
-        public void ShowPop(string header , string message , PopUpType popUpType , YesCallBack yesCallBack , NoCallBack noCallBack )
+        public void ShowPop(string header , string message , Enum.PopUpType popUpType , YesCallBack yesCallBack , NoCallBack noCallBack )
         {
             HandleButtonsAndCallbacks(popUpType , yesCallBack , noCallBack);
             this.header.text = header;
@@ -104,30 +106,30 @@ namespace Helpers
             LeanAnimator.Fade(transform, 0, LeanTweenType.easeInOutSine, 0.5f , 0 , true);
         }
 
-        void HandleButtonsAndCallbacks(PopUpType popUpType , YesCallBack yesCallBack , NoCallBack noCallBack)
+        void HandleButtonsAndCallbacks(Enum.PopUpType popUpType , YesCallBack yesCallBack , NoCallBack noCallBack)
         {
             DisableALlButtons();
             switch (popUpType)
             {
-                case PopUpType.YES_NO:
+                case Enum.PopUpType.YES_NO:
                     this.yesCallBack = yesCallBack;
                     this.noCallBack = noCallBack;
                     yesButton.gameObject.SetActive(true);
                     noButton.gameObject.SetActive(true);
                     break;
-                case PopUpType.ONLY_YES:
+                case Enum.PopUpType.ONLY_YES:
                     this.yesCallBack = yesCallBack;
                     yesButton.gameObject.SetActive(true);
                     break;
-                case PopUpType.ONLY_NO:
+                case Enum.PopUpType.ONLY_NO:
                     this.noCallBack = noCallBack;
                     noButton.gameObject.SetActive(true);
                     break;
-                case PopUpType.CONFIRM:
+                case Enum.PopUpType.CONFIRM:
                     this.yesCallBack = yesCallBack;
                     confirmButton.gameObject.SetActive(true);
                     break;
-                case PopUpType.CONTINUE:
+                case Enum.PopUpType.CONTINUE:
                     this.yesCallBack = yesCallBack;
                     continueButton.gameObject.SetActive(true);
                     break;

@@ -1,3 +1,4 @@
+using Enums;
 using Helpers;
 using Managers;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Gameplay
     {
         [SerializeField] private float distanceFromPlayer;
 
-        protected override (PoolObjectTypes, Vector3) OnSpawn()
+        protected override (Enum.PoolObjectTypes, Vector3) OnSpawn()
         {
             var playerPos =  GameManager.Instance.Player.GetPosition();
             var randPos = Utils.GetRandomPointAroundTarget(playerPos , distanceFromPlayer);

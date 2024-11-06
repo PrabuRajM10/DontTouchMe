@@ -1,3 +1,4 @@
+using Enums;
 using UnityEngine;
 
 namespace Gameplay
@@ -44,6 +45,6 @@ namespace Gameplay
             }
         }
 
-        protected abstract (PoolObjectTypes type ,Vector3 position) OnSpawn(); // return spawn pos
+        protected abstract (Enum.PoolObjectTypes type ,Vector3 position) OnSpawn(); // return spawn pos
     }
 }

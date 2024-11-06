@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Enums;
 using UnityEngine;
+using Enum = Enums.Enum;
 using Random = UnityEngine.Random;
 
 namespace Gameplay
@@ -11,22 +13,22 @@ namespace Gameplay
     {
         [SerializeField] private List<CardData> cardDataList = new List<CardData>();
 
-        private Dictionary<CardRarity, List<CardData>> cardDataByRarity = new Dictionary<CardRarity, List<CardData>>();
+        private Dictionary<Enum.CardRarity, List<CardData>> cardDataByRarity = new Dictionary<Enum.CardRarity, List<CardData>>();
 
         public void Init()
         {
-            SetCardsByRarity(CardRarity.Common);
-            SetCardsByRarity(CardRarity.Rare);
-            SetCardsByRarity(CardRarity.Epic);
-            SetCardsByRarity(CardRarity.Legendary);
+            SetCardsByRarity(Enum.CardRarity.Common);
+            SetCardsByRarity(Enum.CardRarity.Rare);
+            SetCardsByRarity(Enum.CardRarity.Epic);
+            SetCardsByRarity(Enum.CardRarity.Legendary);
         }
 
-        public CardData GetCardDataById(PowerCardsId cardId)
+        public CardData GetCardDataById(Enum.PowerCardsId cardId)
         {
             return cardDataList.FirstOrDefault(cardData => cardData.cardId == cardId);
         }
 
-        public List<CardData> GetCardDataListByRarity(CardRarity rarity)
+        public List<CardData> GetCardDataListByRarity(Enum.CardRarity rarity)
         {
             return cardDataByRarity[rarity];
         }
@@ -37,40 +39,20 @@ namespace Gameplay
             // return cardDataList[8];
         }
 
-        void SetCardsByRarity(CardRarity rarity)
+        void SetCardsByRarity(Enum.CardRarity rarity)
         {
             var cardList = cardDataList.Where(cardData => cardData.cardRarity == rarity).ToList();
             cardDataByRarity.Add(rarity , cardList);
         }
     }
     
-    public enum PowerCardsId
-    {
-        PC1 = 1,
-        PC2,
-        PC3,
-        PC4,
-        PC5,
-        PC6,
-        PC7,
-        PC8,
-        PC9,
-        PC10
-    }
-
-    public enum CardRarity
-    {
-        Common,
-        Rare,
-        Epic,
-        Legendary
-    }
+    
 
     [Serializable]
     public class CardData
     {
-        public PowerCardsId cardId;
-        public CardRarity cardRarity;
+        public Enum.PowerCardsId cardId;
+        public Enum.CardRarity cardRarity;
         public Sprite cardImg;
         public string cardName;
         public string cardDescription;

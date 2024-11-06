@@ -1,3 +1,4 @@
+using Enums;
 using Ui.Screens;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -20,7 +21,7 @@ namespace Ui.ScreenHandlers
 
         private void OkButtonPressed()
         {
-            SwitchScreen(GameScreen.Gameplay);
+            SwitchScreen(Enum.GameScreen.Gameplay);
         }
     }
 }

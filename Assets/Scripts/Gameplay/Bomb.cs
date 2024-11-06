@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using Enums;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Enum = Enums.Enum;
 
 namespace Gameplay
 {
@@ -30,7 +32,7 @@ namespace Gameplay
 
         public void BackToPool()
         {
-            _pool.AddBackToList(this , PoolObjectTypes.Bomb);
+            _pool.AddBackToList(this , Enum.PoolObjectTypes.Bomb);
         }
 
         public void Deploy(Vector3 position)

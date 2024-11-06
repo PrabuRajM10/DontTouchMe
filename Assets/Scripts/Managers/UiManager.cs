@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
+using Enums;
 using Gameplay;
 using Helpers;
 using Ui.ScreenHandlers;
 using Ui.Screens;
-using UnityEngine; 
+using UnityEngine;
+using Enum = Enums.Enum;
 
 namespace Managers
 {
     public class UiManager : GenericSingleton<UiManager>
     {
-        [SerializeField] private GameScreen initialScreen; 
+        [SerializeField] private Enum.GameScreen initialScreen; 
         [SerializeField] private GameplayScreen gameplayScreen;
         [SerializeField] private SettingScreen settingScreen;
         [SerializeField] private HomeScreenScreen homeScreen;
@@ -44,7 +46,7 @@ namespace Managers
             UpdateGameTimer(GameTimer.GetTimeString());
         }
 
-        private void OnSwitchScreenEvnt(GameScreen screen)
+        private void OnSwitchScreenEvnt(Enum.GameScreen screen)
         {
             if (_currentScreen != null)
             {
@@ -61,21 +63,21 @@ namespace Managers
             screen.gameObject.SetActive(state);
         }
 
-        private BaseUi GetScreen(GameScreen screen)
+        private BaseUi GetScreen(Enum.GameScreen screen)
         {
             switch (screen)
             {
-                case GameScreen.Gameplay:
+                case Enum.GameScreen.Gameplay:
                     return gameplayScreen;
-                case GameScreen.Setting:
+                case Enum.GameScreen.Setting:
                     return settingScreen;
-                case GameScreen.Home:
+                case Enum.GameScreen.Home:
                     return homeScreen;
-                case GameScreen.GameResult:
+                case Enum.GameScreen.GameResult:
                     return gameResultScreen;
-                case GameScreen.CardPicker:
+                case Enum.GameScreen.CardPicker:
                     return cardPickerScreen;
-                case GameScreen.Pause:
+                case Enum.GameScreen.Pause:
                     return pauseScreen;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(screen), screen, null);
@@ -129,7 +131,7 @@ namespace Managers
         public void SetGameReset(bool successful, int currentCollectedCoins, int currentKillCount)
         {
             gameResultScreen.ShowResult(successful , currentCollectedCoins , currentKillCount);
-            OnSwitchScreenEvnt(GameScreen.GameResult);
+            OnSwitchScreenEvnt(Enum.GameScreen.GameResult);
         }
     }
 }

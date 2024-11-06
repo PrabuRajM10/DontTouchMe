@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Enums;
 using Gameplay;
 using Managers;
 using Ui.Screens;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Enum = Enums.Enum;
 
 namespace Ui.ScreenHandlers
 {
@@ -31,13 +33,13 @@ namespace Ui.ScreenHandlers
         private void OnBackButtonPressed()
         {
             GameManager.Instance.ChangeState(GameState.Home);
-            SwitchScreen(GameScreen.Home);
+            SwitchScreen(Enum.GameScreen.Home);
             
         }
         private void OnNextButtonPressed()
         {
             GameManager.Instance.ChangeState(GameState.Gameplay);
-            SwitchScreen(GameScreen.Gameplay);
+            SwitchScreen(Enum.GameScreen.Gameplay);
         }
 
         private void GetCardsButtonPressed()

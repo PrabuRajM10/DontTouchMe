@@ -1,3 +1,5 @@
+using Enums;
+
 namespace Helpers
 {
     public static class PopUp
@@ -9,7 +11,7 @@ namespace Helpers
             _popUpUI = popUp;
         }
 
-        public static void ShowPopUp(string header , string message , PopUpType popUpType , PopUpUI.YesCallBack yesCallBack, PopUpUI.NoCallBack noCallBack)
+        public static void ShowPopUp(string header , string message , Enum.PopUpType popUpType , PopUpUI.YesCallBack yesCallBack, PopUpUI.NoCallBack noCallBack)
         {
             _popUpUI.ShowPop(header,message , popUpType , yesCallBack , noCallBack);
         }
@@ -20,12 +22,5 @@ namespace Helpers
         }
     }
 
-    public enum PopUpType
-    {
-        YES_NO,
-        ONLY_YES,
-        ONLY_NO,
-        CONFIRM,
-        CONTINUE
-    }
+    
 }

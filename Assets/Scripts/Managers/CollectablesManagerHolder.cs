@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Enums;
 using Gameplay;
 using UnityEngine;
 
@@ -9,17 +10,17 @@ namespace Managers
         [SerializeField] private CollectablesManager coinsManager;
         [SerializeField] private CollectablesManager xPManager;
 
-        private Dictionary<CollectablesType, CollectablesManager> collectablesDictionary =
-            new Dictionary<CollectablesType, CollectablesManager>();
+        private Dictionary<Enum.CollectablesType, CollectablesManager> collectablesDictionary =
+            new Dictionary<Enum.CollectablesType, CollectablesManager>();
 
         public override void Awake()
         {
             base.Awake();
-            collectablesDictionary.Add(CollectablesType.Coins , coinsManager);
-            collectablesDictionary.Add(CollectablesType.Spell , xPManager);
+            collectablesDictionary.Add(Enum.CollectablesType.Coins , coinsManager);
+            collectablesDictionary.Add(Enum.CollectablesType.Spell , xPManager);
         }
 
-        public CollectablesManager GetManager(CollectablesType type)
+        public CollectablesManager GetManager(Enum.CollectablesType type)
         {
             CollectablesManager value;
             return collectablesDictionary.TryGetValue(type, out value) ? value : null;

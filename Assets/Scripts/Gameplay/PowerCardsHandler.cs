@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Enums;
 using Managers;
 using Problem2;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Enum = Enums.Enum;
 using UiManager = Managers.UiManager;
 
 namespace Gameplay
@@ -15,7 +17,7 @@ namespace Gameplay
     [Serializable]
     public class PowerCardReference
     {
-        public PowerCardsId cardId;
+        public Enum.PowerCardsId cardId;
         public GameObject requiredReference;
     }
     public class PowerCardsHandler : MonoBehaviour
@@ -159,7 +161,7 @@ namespace Gameplay
             _powerCards.Clear();
         }
 
-        GameObject GetReferenceByCardType(PowerCardsId cardId)
+        GameObject GetReferenceByCardType(Enum.PowerCardsId cardId)
         {
             foreach (var powerCardReference in powerCardReferences.Where(powerCardReference => powerCardReference.cardId == cardId))
             {

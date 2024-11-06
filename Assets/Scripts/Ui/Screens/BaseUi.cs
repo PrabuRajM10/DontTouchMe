@@ -1,27 +1,21 @@
 using System;
+using Enums;
 using UnityEngine;
+using Enum = Enums.Enum;
 
 namespace Ui.Screens
 {
-    public enum GameScreen
-    {
-        Gameplay,
-        Setting,
-        Home,
-        GameResult,
-        CardPicker,
-        Pause
-    }
+    
     public abstract class BaseUi : MonoBehaviour
     {
-        [SerializeField] private GameScreen screen;
+        [SerializeField] private Enum.GameScreen screen;
 
         protected virtual void OnDisable()
         {
             Reset();
         }
 
-        public GameScreen Screen
+        public Enum.GameScreen Screen
         {
             get => screen;
             set => screen = value;

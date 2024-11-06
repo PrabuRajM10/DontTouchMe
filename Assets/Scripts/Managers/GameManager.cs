@@ -6,6 +6,7 @@ using Ui.Screens;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Enum = Enums.Enum;
 
 namespace Managers
 {
@@ -17,7 +18,8 @@ namespace Managers
         [SerializeField] private AutoSpawner enemySpawner;
         [SerializeField] private CollectablesSpawnersHolder collectablesSpawnersHolder;
 
-        [SerializeField] private PowerCardsHandler powerCardsHandler;        
+        [SerializeField] private PowerCardsHandler powerCardsHandler;
+        [FormerlySerializedAs("audioDataSo")] [SerializeField] private GameAudioData gameAudioData;
 
         [SerializeField] private float maxGameTimer;
 
@@ -39,6 +41,8 @@ namespace Managers
         private void Start()
         {
             ChangeState(initialState);
+            SoundManager.Init(gameAudioData);
+            SoundManager.PlayBgMusic(true);
         }
 
         private void OnEnable()
@@ -116,6 +120,7 @@ namespace Managers
                 case GameState.Home:
                     break;
                 case GameState.GameResult:
+                    HandleOnGameResult();
                     break;
                 case GameState.CardPicker:
                     break;
@@ -131,10 +136,15 @@ namespace Managers
         {
             
         }
+        private void HandleOnGameResult()
+        {
+            SoundManager.PlayBgMusic(true);
+        }
 
         void HandleOnGameplay()
         {
             Debug.Log("[HandleOnGameplay]");
+            SoundManager.PlayBgMusic(false);
             StartEnemySpawning();
             collectablesSpawnersHolder.StartSpawning();
             GameTimer.StartTimer(this ,maxGameTimer);

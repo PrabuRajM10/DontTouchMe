@@ -1,20 +1,16 @@
+using Enums;
 using Helpers;
 using Managers;
 using UnityEngine;
 
 namespace Gameplay
 {
-    public enum CollectablesType
-    {
-        Coins,
-        Heal,
-        Spell
-    }
+    
     public class CollectablesSpawner : AutoSpawner
     {
         [SerializeField] private float distanceFromPlayer = 50f;
 
-        protected override (PoolObjectTypes, Vector3) OnSpawn()
+        protected override (Enum.PoolObjectTypes, Vector3) OnSpawn()
         {
             var playerPos =  GameManager.Instance.Player.GetPosition();
             var randPos = Utils.GetRandomPointAroundTarget(playerPos , distanceFromPlayer);

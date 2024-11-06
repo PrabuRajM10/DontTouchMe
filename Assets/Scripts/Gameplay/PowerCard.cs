@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using Enums;
 using UnityEngine;
+using Enum = Enums.Enum;
 
 namespace Gameplay
 {
@@ -13,7 +15,7 @@ namespace Gameplay
     }
     public class PowerCard : ScriptableObject
     {
-        [SerializeField] private PowerCardsId cardId;
+        [SerializeField] private Enum.PowerCardsId cardId;
 
         [SerializeField] private float activeTime;
         [SerializeField] private float cooldownTime;
@@ -22,7 +24,7 @@ namespace Gameplay
         [SerializeField] private PowerCardState _cardState = PowerCardState.UnAvailable;
 
         private bool _isOnCooldown;
-        public PowerCardsId CardId => cardId;
+        public Enum.PowerCardsId CardId => cardId;
         public float ActiveTime => activeTime;
         public float CooldownTime => cooldownTime;
         public int XpCost => xpCost;

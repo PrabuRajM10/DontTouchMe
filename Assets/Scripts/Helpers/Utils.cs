@@ -1,4 +1,5 @@
 using System.Collections;
+using Enums;
 using TMPro;
 using UnityEngine;
 
@@ -53,7 +54,7 @@ namespace Helpers
 
         public static void QuitGame()
         {
-            PopUp.ShowPopUp("Attention" , "Do you really want to quit game" , PopUpType.YES_NO , () =>
+            PopUp.ShowPopUp("Attention" , "Do you really want to quit game" , Enum.PopUpType.YES_NO , () =>
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Enums;
 using Gameplay;
 using UnityEngine;
 using Unity.Collections;
+using Enum = Enums.Enum;
 using Random = UnityEngine.Random;
 
 namespace Managers
@@ -11,12 +13,12 @@ namespace Managers
     [Serializable]
     public class PowerCardProbability
     {
-        public CardRarity cardRarity;
+        public Enum.CardRarity cardRarity;
         
         [ Range(1,100)]
         public int probabilityInPercentage;
 
-        public PowerCardProbability(CardRarity cardRarity , int probability)
+        public PowerCardProbability(Enum.CardRarity cardRarity , int probability)
         {
             this.cardRarity = cardRarity;
             probabilityInPercentage = probability;
@@ -29,7 +31,7 @@ namespace Managers
         [SerializeField] private PowerCardsData powerCardsDataSo;
         [SerializeField] private int cardPickCount = 3;
 
-        private Dictionary<CardRarity, int> _rarityMargin = new Dictionary<CardRarity, int>();
+        private Dictionary<Enum.CardRarity, int> _rarityMargin = new Dictionary<Enum.CardRarity, int>();
 
         private void OnValidate()
         {

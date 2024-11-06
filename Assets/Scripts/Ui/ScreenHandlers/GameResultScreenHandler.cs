@@ -1,7 +1,9 @@
 using System;
+using Enums;
 using Managers;
 using Ui.Screens;
 using UnityEngine;
+using Enum = Enums.Enum;
 
 namespace Ui.ScreenHandlers
 {
@@ -24,13 +26,13 @@ namespace Ui.ScreenHandlers
         private void OnRetryButtonPressed()
         {
             GameManager.Instance.ChangeState(GameState.CardPicker);
-            SwitchScreen(GameScreen.CardPicker);
+            SwitchScreen(Enum.GameScreen.CardPicker);
         }
 
         private void OnHomeButtonPressed()
         {
             GameManager.Instance.ChangeState(GameState.Home);
-            SwitchScreen(GameScreen.Home);
+            SwitchScreen(Enum.GameScreen.Home);
         }
     }
 }
