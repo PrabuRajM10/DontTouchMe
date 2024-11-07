@@ -42,7 +42,7 @@ namespace Managers
         {
             ChangeState(initialState);
             SoundManager.Init(gameAudioData);
-            SoundManager.PlayBgMusic(true);
+            SoundManager.PlaySound(Enum.SoundType.MainBg , Vector3.zero, true);
         }
 
         private void OnEnable()
@@ -138,13 +138,11 @@ namespace Managers
         }
         private void HandleOnGameResult()
         {
-            SoundManager.PlayBgMusic(true);
         }
 
         void HandleOnGameplay()
         {
             Debug.Log("[HandleOnGameplay]");
-            SoundManager.PlayBgMusic(false);
             StartEnemySpawning();
             collectablesSpawnersHolder.StartSpawning();
             GameTimer.StartTimer(this ,maxGameTimer);

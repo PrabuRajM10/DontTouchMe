@@ -82,8 +82,17 @@ namespace Gameplay
             {
                 EnemyManager.Instance.EnemyDead(this);
                 _currentHealth = maxHealth;
+                SoundManager.PlaySound(Enum.SoundType.EnemyDeath , GetPosition());
                 BackToPool();
+                return;
             }
+            
+            SoundManager.PlaySound(Enum.SoundType.EnemyHit , GetPosition());
+        }
+
+        Vector3 GetPosition()
+        {
+            return transform.position;
         }
 
         public void SetLookTarget()

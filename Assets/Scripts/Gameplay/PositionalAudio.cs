@@ -17,9 +17,8 @@ namespace Gameplay
             if(audioSource == null)audioSource = GetComponent<AudioSource>();
         }
 
-        public async void BackToPool()
+        public void BackToPool()
         {
-            await Task.Delay((int)audioSource.clip.length * 1000);
             _pool.AddBackToList(this , Enum.PoolObjectTypes.Audio);
         }
 
@@ -31,7 +30,7 @@ namespace Gameplay
             audioSource.loop = loop;
             gameObject.SetActive(true);
             audioSource.Play();
-            if(!loop)BackToPool();
+            if(!loop)Invoke(nameof(BackToPool) , audioSource.clip.length);
         }
         
         

@@ -14,10 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioDatas:
   - audioType: 7
-    audioClip: {fileID: 8300000, guid: 06154107d5af0cf439d77cbeb2f2c6cf, type: 3}
+    audioClip: {fileID: 8300000, guid: 1999cca22db6afb479dbc8763a6ca470, type: 3}
     audioMixerGroup: {fileID: -6377892557762059735, guid: ca8588c6fb6a6c44aa875faa62553e5b,
       type: 2}
   - audioType: 8
     audioClip: {fileID: 8300000, guid: 304ae5f47b93b4140bc8acc44f724d50, type: 3}
     audioMixerGroup: {fileID: -7423981059108382737, guid: ca8588c6fb6a6c44aa875faa62553e5b,
+      type: 2}
+  - audioType: 0
+    audioClip: {fileID: 8300000, guid: abb143300b213da4083fa508d0188aeb, type: 3}
+    audioMixerGroup: {fileID: -8034045026642663875, guid: ca8588c6fb6a6c44aa875faa62553e5b,
+      type: 2}
+  - audioType: 1
+    audioClip: {fileID: 8300000, guid: b6714335f8ed4a64d97a3ae21607bd53, type: 3}
+    audioMixerGroup: {fileID: 1600950885915918678, guid: ca8588c6fb6a6c44aa875faa62553e5b,
+      type: 2}
+  - audioType: 2
+    audioClip: {fileID: 8300000, guid: 5db113462f2cc744695057218670fd82, type: 3}
+    audioMixerGroup: {fileID: -2235280511049845696, guid: ca8588c6fb6a6c44aa875faa62553e5b,
       type: 2}
