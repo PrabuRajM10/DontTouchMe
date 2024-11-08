@@ -1,6 +1,8 @@
 using System;
+using Gameplay;
 using UnityEngine;
 using UnityEngine.UI;
+using Enum = Enums.Enum;
 
 namespace Helpers
 {
@@ -11,6 +13,7 @@ namespace Helpers
         private static CallBack _callback;
         public static void ButtonOnClick(Button button , CallBack callBack, bool ignoreTimeScale = false)
         {
+            SoundManager.PlaySound(Enum.SoundType.ButtonClick);
             var buttonTrans = button.transform;
             var initialScale = buttonTrans.localScale;
             buttonTrans.localScale = initialScale / 1.2f;

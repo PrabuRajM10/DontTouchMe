@@ -73,5 +73,10 @@ namespace Gameplay
                 yield return null;
             }
         }
+
+        protected Vector3 GetPosition()
+        {
+            return transform.position;
+        }
     }
 }

@@ -33,3 +33,19 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 5db113462f2cc744695057218670fd82, type: 3}
     audioMixerGroup: {fileID: -2235280511049845696, guid: ca8588c6fb6a6c44aa875faa62553e5b,
       type: 2}
+  - audioType: 4
+    audioClip: {fileID: 8300000, guid: 74ae9dce43e400a4a8ef184d7250d0d7, type: 3}
+    audioMixerGroup: {fileID: 7346679824862582161, guid: ca8588c6fb6a6c44aa875faa62553e5b,
+      type: 2}
+  - audioType: 5
+    audioClip: {fileID: 8300000, guid: 8f325b8eb1a869a438760eb7ea0e7dfd, type: 3}
+    audioMixerGroup: {fileID: -9159224426452881346, guid: ca8588c6fb6a6c44aa875faa62553e5b,
+      type: 2}
+  - audioType: 3
+    audioClip: {fileID: 8300000, guid: ff2aadba6309d634eb47aeda8878cbfe, type: 3}
+    audioMixerGroup: {fileID: -1134849768733234392, guid: ca8588c6fb6a6c44aa875faa62553e5b,
+      type: 2}
+  - audioType: 9
+    audioClip: {fileID: 8300000, guid: f649d58cc991f6a45b1be3a3a3933bb7, type: 3}
+    audioMixerGroup: {fileID: -3038435704494233081, guid: ca8588c6fb6a6c44aa875faa62553e5b,
+      type: 2}

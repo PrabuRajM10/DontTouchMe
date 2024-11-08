@@ -1,3 +1,4 @@
+using Enums;
 using UnityEngine;
 
 namespace Gameplay
@@ -6,6 +7,7 @@ namespace Gameplay
     {
         protected override void OnCollected()
         {
+            SoundManager.PlaySound(Enum.SoundType.Spell , GetPosition());
             respectiveManager.OnCollectablesCollected();
         }
     }

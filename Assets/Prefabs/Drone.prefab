@@ -30,6 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7693905072444003663}
+  - {fileID: 5022725294557645803}
   - {fileID: 6009242521364256889}
   - {fileID: 2239075224683607128}
   m_Father: {fileID: 0}
@@ -78,7 +79,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7693905072444003663
 Transform:
   m_ObjectHideFlags: 0
@@ -372,3 +373,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab688ec224842f2b186dda3cfc4ed9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &6722777812630410932
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4369539376212426377}
+    m_Modifications:
+    - target: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.81438
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.81438
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.81438
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231060372698760614, guid: a375e66363b610d409fe83b48c4bea7c,
+        type: 3}
+      propertyPath: m_Name
+      value: Magician Hat and Stick
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a375e66363b610d409fe83b48c4bea7c, type: 3}
+--- !u!4 &5022725294557645803 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1799281262591794527, guid: a375e66363b610d409fe83b48c4bea7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6722777812630410932}
+  m_PrefabAsset: {fileID: 0}

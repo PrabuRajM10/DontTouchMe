@@ -13,7 +13,8 @@ namespace Enums
             Spell,
             Ability,
             MainBg,
-            GameBg
+            GameBg,
+            ButtonClick
         }
         public enum GameScreen
         {
