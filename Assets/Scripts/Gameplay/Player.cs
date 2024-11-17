@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Helpers;
 using Managers;
 using Unity.Mathematics;
 using UnityEngine;
@@ -83,6 +84,7 @@ namespace Gameplay
 
             if (InputManager.Instance.IsFired() )
             {
+                CameraShake.ShakeCamera();
                 drone.Shoot();
             }
 

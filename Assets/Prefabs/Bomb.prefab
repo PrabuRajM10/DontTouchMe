@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 903750605338781029}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6718, y: 1.6718, z: 1.6718}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4535456578886517719}
   m_Father: {fileID: 0}
@@ -54,7 +54,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.83
+  m_Radius: 0.59
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3249871297728145059
 Rigidbody:
@@ -95,12 +95,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a58e1c33a6d748d086bef284b2c6ce84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 3249871297728145059}
-  sc: {fileID: 766539463443309829}
   timeBeforeExplosion: 2
   explodeRadius: 10
   damageAmount: 200
-  thrust: 220
+  thrust: 250
+  torqueForce: 3
 --- !u!1001 &3305588416793475393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113,6 +112,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1382291296267516566, guid: bcc17fb0febfc944ca89694a2d6638de,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1382291296267516566, guid: bcc17fb0febfc944ca89694a2d6638de,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1382291296267516566, guid: bcc17fb0febfc944ca89694a2d6638de,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1382291296267516566, guid: bcc17fb0febfc944ca89694a2d6638de,
         type: 3}
@@ -163,6 +177,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1382291296267516566, guid: bcc17fb0febfc944ca89694a2d6638de,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7064654038132047679, guid: bcc17fb0febfc944ca89694a2d6638de,
         type: 3}

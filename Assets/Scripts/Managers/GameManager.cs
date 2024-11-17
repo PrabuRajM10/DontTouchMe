@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Cinemachine;
 using Gameplay;
+using Helpers;
 using Ui;
 using Ui.Screens;
 using Unity.VisualScripting;
@@ -20,6 +22,7 @@ namespace Managers
 
         [SerializeField] private PowerCardsHandler powerCardsHandler;
         [FormerlySerializedAs("audioDataSo")] [SerializeField] private GameAudioData gameAudioData;
+        [SerializeField] private CinemachineVirtualCamera cameraShakeVirtualCam;
 
         [SerializeField] private float maxGameTimer;
 
@@ -42,6 +45,7 @@ namespace Managers
         {
             ChangeState(initialState);
             SoundManager.Init(gameAudioData);
+            CameraShake.Init(cameraShakeVirtualCam);
             SoundManager.PlaySound(Enum.SoundType.MainBg , Vector3.zero, true);
         }
 
@@ -57,6 +61,7 @@ namespace Managers
             player.Dead -= OnPlayerDead;
             GameTimer.OnGameTimerDone -= GameTimerDone;
         }
+
         private void GameTimerDone()
         {
             EndGame(true);
