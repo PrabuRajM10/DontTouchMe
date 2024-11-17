@@ -4,11 +4,14 @@ using UnityEngine;
 namespace Gameplay
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Bullet : MonoBehaviour , IPoolableObjects
+    public class Bullet : MonoBehaviour , IPoolableObjects , IParticleEmitter
     {
         [SerializeField] private BulletProperties bulletPropertiesSo;
         
         [SerializeField] private Rigidbody rigidBody;
+
+        [SerializeField] private ParticleSystem groundHitParticle;
+        [SerializeField] private ParticleSystem enemyHitParticle;
 
         private ObjectPooling _pool;
 
@@ -41,23 +44,26 @@ namespace Gameplay
         }
 
         private void OnTriggerEnter(Collider other)
-        { 
+        {
             // Debug.Log(" OnTriggerEnter " + other.name);
             if (other.GetComponent<Gun>() || other.GetComponent<CollectablesMagnet>())
             {
                 return;
             }
-            DisableBullet();
+
+            ResetVelocity();
+            var contactPoint = other.ClosestPoint(transform.position);
+            Debug.DrawLine(transform.position, contactPoint, Color.blue, 200f);
+            PlayParticle(other.GetComponent<Enemy>() != null ? enemyHitParticle : groundHitParticle , contactPoint);
         }
 
         private void DisableBullet()
         {
             ResetVelocity();
-            gameObject.SetActive(false);
             BackToPool();
         }
 
-        public void ResetVelocity()
+        private void ResetVelocity()
         {
             rigidBody.velocity = Vector3.zero;
         }
@@ -65,6 +71,19 @@ namespace Gameplay
         public float Damage()
         {
             return bulletPropertiesSo.DamageAmount;
+        }
+
+        public void PlayParticle(ParticleSystem particleSystem , Vector3 position)
+        {
+            Debug.Log("PlayParticle");
+            particleSystem.transform.position = position;
+            particleSystem.Play();
+            Invoke(nameof(OnParticleSpawnDone) , particleSystem.main.duration);
+        }
+
+        public void OnParticleSpawnDone()
+        {
+            BackToPool();
         }
     }
 }

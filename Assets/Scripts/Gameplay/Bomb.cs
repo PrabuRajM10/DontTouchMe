@@ -9,13 +9,15 @@ using Random = UnityEngine.Random;
 
 namespace Gameplay
 {
-    public class Bomb : MonoBehaviour, IPoolableObjects
+    public class Bomb : MonoBehaviour, IPoolableObjects , IParticleEmitter
     {
         [SerializeField] private float timeBeforeExplosion;
         [SerializeField] private float explodeRadius = 2f;
         [SerializeField] private float damageAmount = 200;
         [SerializeField] private float thrust = 15f;
         [SerializeField] private float torqueForce = 10f;
+        [SerializeField] private ParticleSystem particle;
+        [SerializeField] Color gizmoColor = Color.green;
 
         private Rigidbody _rigidBody;
         private SphereCollider _sc;
@@ -70,7 +72,7 @@ namespace Gameplay
                 }
             }
             
-            BackToPool();
+            PlayParticle(particle , transform.position);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -79,6 +81,24 @@ namespace Gameplay
             {
                 _sc.isTrigger = false;
             }
+        }
+        
+
+        void OnDrawGizmos()
+        {
+            Gizmos.color = gizmoColor;
+            Gizmos.DrawWireSphere(transform.position, explodeRadius);
+        }
+
+        public void PlayParticle(ParticleSystem particleSystem , Vector3 position)
+        {
+            particleSystem.Play();
+            Invoke(nameof(OnParticleSpawnDone) , particleSystem.main.duration);
+        }
+
+        public void OnParticleSpawnDone()
+        {
+            BackToPool();
         }
     }
 }
