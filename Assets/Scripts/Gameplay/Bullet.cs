@@ -1,10 +1,11 @@
-using Enums;
+using System;
 using UnityEngine;
+using Enum = Enums.Enum;
 
 namespace Gameplay
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Bullet : MonoBehaviour , IPoolableObjects , IParticleEmitter
+    public class Bullet : MonoBehaviour , IPoolableObjects
     {
         [SerializeField] private BulletProperties bulletPropertiesSo;
         
@@ -15,9 +16,18 @@ namespace Gameplay
 
         private ObjectPooling _pool;
 
+        private Vector3 _lastFramePosition;
+        private bool _recordPosition;
+
         private void OnValidate()
         {
             if (rigidBody == null) rigidBody = GetComponent<Rigidbody>();
+        }
+
+        private void Update()
+        {
+            if(!_recordPosition)return;
+            _lastFramePosition = transform.position;
         }
 
         public void Init(ObjectPooling pool)
@@ -39,28 +49,41 @@ namespace Gameplay
         public void Fire()
         {
             gameObject.SetActive(true);
+            _recordPosition = true;
             rigidBody.AddForce(transform.forward * bulletPropertiesSo.Speed , ForceMode.Force);
             Invoke(nameof(DisableBullet) , 10f);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnCollisionEnter(Collision collision)
         {
-            // Debug.Log(" OnTriggerEnter " + other.name);
-            if (other.GetComponent<Gun>() || other.GetComponent<CollectablesMagnet>())
+            
+            if (collision.gameObject.GetComponent<Gun>() || collision.gameObject.GetComponent<CollectablesMagnet>() || collision.gameObject.GetComponent<Bullet>())
             {
                 return;
             }
 
-            ResetVelocity();
-            var contactPoint = other.ClosestPoint(transform.position);
-            Debug.DrawLine(transform.position, contactPoint, Color.blue, 200f);
-            PlayParticle(other.GetComponent<Enemy>() != null ? enemyHitParticle : groundHitParticle , contactPoint);
+            var contactPoint = collision.contacts[0];
+            var enemy = collision.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                var enemyHit = ObjectPooling.Instance.GetEnemyHit();
+                var rotation = Quaternion.LookRotation(contactPoint.normal).normalized;
+                enemyHit.Play(contactPoint.point , rotation);
+            }
+            else
+            {
+                var bulletHit = ObjectPooling.Instance.GetBulletHit();
+                bulletHit.Play(contactPoint.point);
+            }
+
+            DisableBullet();
         }
 
         private void DisableBullet()
         {
             ResetVelocity();
             BackToPool();
+            _recordPosition = false;
         }
 
         private void ResetVelocity()
@@ -71,19 +94,6 @@ namespace Gameplay
         public float Damage()
         {
             return bulletPropertiesSo.DamageAmount;
-        }
-
-        public void PlayParticle(ParticleSystem particleSystem , Vector3 position)
-        {
-            Debug.Log("PlayParticle");
-            particleSystem.transform.position = position;
-            particleSystem.Play();
-            Invoke(nameof(OnParticleSpawnDone) , particleSystem.main.duration);
-        }
-
-        public void OnParticleSpawnDone()
-        {
-            BackToPool();
         }
     }
 }

@@ -60,9 +60,9 @@ namespace Gameplay
             agent.SetDestination(_targetPlayer.GetPosition());
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnCollisionEnter(Collision collision)
         {
-            var bullet = other.GetComponent<Bullet>();
+            var bullet = collision.gameObject.GetComponent<Bullet>();
             if (bullet != null)
             {
                 TakeDamage(bullet.Damage());

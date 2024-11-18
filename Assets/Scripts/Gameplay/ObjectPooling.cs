@@ -30,7 +30,9 @@ namespace Gameplay
         private List<Bomb> _bombListPool = new List<Bomb>();
         private List<Collectables> _coinListPool = new List<Collectables>();
         private List<Collectables> _xpListPool = new List<Collectables>();
-        private List<PositionalAudio> _positionalAudios = new List<PositionalAudio>();
+        private List<PositionalAudio> _positionalAudiosPool = new List<PositionalAudio>();
+        private List<InGameParticles> _bulletHitParticlePool = new List<InGameParticles>();
+        private List<InGameParticles> _enemyHitParticlePool = new List<InGameParticles>();
 
         private void Start()
         {
@@ -72,15 +74,23 @@ namespace Gameplay
                 case Enum.PoolObjectTypes.Coin:
                     _coinListPool.Add((Collectables)poolObject);
                     break;
-                case Enum.PoolObjectTypes.Xp:
+                case Enum.PoolObjectTypes.Spell:
                     _xpListPool.Add((Collectables)poolObject);
                     break;
                 case Enum.PoolObjectTypes.Bomb:
                     _bombListPool.Add((Bomb)poolObject);
                     break;
                 case Enum.PoolObjectTypes.Audio:
-                    _positionalAudios.Add((PositionalAudio)poolObject);
+                    _positionalAudiosPool.Add((PositionalAudio)poolObject);
                     break;
+                case Enum.PoolObjectTypes.BulletHitParticle:
+                    _bulletHitParticlePool.Add((InGameParticles)poolObject);
+                    break;
+                case Enum.PoolObjectTypes.EnemyHitParticle:
+                    _enemyHitParticlePool.Add((InGameParticles)poolObject);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(poolObjectType), poolObjectType, null);
             }
         }
 
@@ -114,8 +124,8 @@ namespace Gameplay
                     var coin = GetCollectablesObject(_coinListPool , Enum.PoolObjectTypes.Coin);
                     coin.SetManager(CollectablesManagerHolder.Instance.GetManager(Enum.CollectablesType.Coins));
                     return coin;
-                case Enum.PoolObjectTypes.Xp:
-                    var xp = GetCollectablesObject(_xpListPool , Enum.PoolObjectTypes.Xp);
+                case Enum.PoolObjectTypes.Spell:
+                    var xp = GetCollectablesObject(_xpListPool , Enum.PoolObjectTypes.Spell);
                     xp.SetManager(CollectablesManagerHolder.Instance.GetManager(Enum.CollectablesType.Spell));
                     return xp;
                 case Enum.PoolObjectTypes.Bomb:
@@ -129,18 +139,36 @@ namespace Gameplay
                     bomb.transform.parent = null;
                     return bomb;
                 case Enum.PoolObjectTypes.Audio:
-                    if (_positionalAudios.Count < 2)
+                    if (_positionalAudiosPool.Count < 2)
                     {
                         var poolObjectData = GetPoolProjectData(Enum.PoolObjectTypes.Audio);
                         Spawn(poolObjectData.prefab , 10 ,poolObjectData.poolObjectType , poolObjectData.spawnParent);
                     }            
-                    var audio = _positionalAudios[0];
-                    _positionalAudios.Remove(audio);
+                    var audio = _positionalAudiosPool[0];
+                    _positionalAudiosPool.Remove(audio);
                     audio.transform.parent = null;
                     return audio;
+                case Enum.PoolObjectTypes.BulletHitParticle:
+                    return GetParticleObject(_bulletHitParticlePool , Enum.PoolObjectTypes.BulletHitParticle);
+                case Enum.PoolObjectTypes.EnemyHitParticle:
+                    return GetParticleObject(_enemyHitParticlePool , Enum.PoolObjectTypes.EnemyHitParticle);
                 default:
                     return null;
             }
+        }
+
+        private IPoolableObjects GetParticleObject(List<InGameParticles> poolList , Enum.PoolObjectTypes particlePoolType)
+        {
+            if (poolList.Count < 2)
+            {
+                var poolObjectData = GetPoolProjectData(particlePoolType);
+                Spawn(poolObjectData.prefab, 10, poolObjectData.poolObjectType, poolObjectData.spawnParent);
+            }
+
+            var bulletHit = poolList[0];
+            poolList.Remove(bulletHit);
+            bulletHit.transform.parent = null;
+            return bulletHit;
         }
 
         private Collectables GetCollectablesObject(List<Collectables> collectablesListPool, Enum.PoolObjectTypes collectablesType)
@@ -175,7 +203,7 @@ namespace Gameplay
         
         public Collectables GetXp()
         {
-            return (Collectables)GetObjectFromPool(Enum.PoolObjectTypes.Xp);
+            return (Collectables)GetObjectFromPool(Enum.PoolObjectTypes.Spell);
         }
 
         public Bomb GetBomb()
@@ -186,7 +214,16 @@ namespace Gameplay
         public PositionalAudio GetAudioPrefab()
         {
             return (PositionalAudio)GetObjectFromPool(Enum.PoolObjectTypes.Audio);
+        }
 
+        public InGameParticles GetBulletHit()
+        {
+            return (InGameParticles)GetObjectFromPool(Enum.PoolObjectTypes.BulletHitParticle);
+        }
+        
+        public InGameParticles GetEnemyHit()
+        {
+            return (InGameParticles)GetObjectFromPool(Enum.PoolObjectTypes.EnemyHitParticle);
         }
         public void AddBackToList(IPoolableObjects poolable , Enum.PoolObjectTypes poolObjectTypes)
         {
@@ -207,9 +244,9 @@ namespace Gameplay
                     ResetObjects(coin.gameObject, Enum.PoolObjectTypes.Coin);
                     _coinListPool.Add(coin);
                     break;
-                case Enum.PoolObjectTypes.Xp:
+                case Enum.PoolObjectTypes.Spell:
                     var xp = (Collectables)poolable;
-                    ResetObjects(xp.gameObject, Enum.PoolObjectTypes.Xp);
+                    ResetObjects(xp.gameObject, Enum.PoolObjectTypes.Spell);
                     _xpListPool.Add(xp);
                     break;
                 case Enum.PoolObjectTypes.Bomb:
@@ -220,8 +257,17 @@ namespace Gameplay
                 case Enum.PoolObjectTypes.Audio:
                     var audio = (PositionalAudio)poolable;
                     ResetObjects(audio.gameObject, Enum.PoolObjectTypes.Audio);
-                    _positionalAudios.Add(audio);
+                    _positionalAudiosPool.Add(audio);
                     break;
+                case Enum.PoolObjectTypes.BulletHitParticle:
+                    var bulletHit = (InGameParticles)poolable;
+                    ResetObjects(bulletHit.gameObject, Enum.PoolObjectTypes.BulletHitParticle);
+                    _bulletHitParticlePool.Add(bulletHit);
+                    break;
+                case Enum.PoolObjectTypes.EnemyHitParticle:
+                    var enemyHit = (InGameParticles)poolable;
+                    ResetObjects(enemyHit.gameObject, Enum.PoolObjectTypes.EnemyHitParticle);
+                    _enemyHitParticlePool.Add(enemyHit);  break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(poolObjectTypes), poolObjectTypes, null);
             }

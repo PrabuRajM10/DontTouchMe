@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Default Bullet Properties
   m_EditorClassIdentifier: 
   speed: 1000
-  defaultDamage: 50
-  currentDamageAmount: 50
+  defaultDamage: 25
+  currentDamageAmount: 25

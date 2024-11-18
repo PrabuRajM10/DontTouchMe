@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1912894420786218304}
   - component: {fileID: 7044512570113838566}
   - component: {fileID: 3302809597613228041}
+  - component: {fileID: 6822984370931800552}
   m_Layer: 0
   m_Name: BulletHit
   m_TagString: FxTemporaire
@@ -31,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &7044512570113838566
 ParticleSystem:
@@ -4799,3 +4800,17 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6822984370931800552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927047208115885265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 291da9c8916a41d0a3e577c99899f91c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleType: 0
+  particle: {fileID: 7044512570113838566}

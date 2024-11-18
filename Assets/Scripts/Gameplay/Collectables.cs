@@ -5,6 +5,7 @@ using Enums;
 using Helpers;
 using Managers;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Enum = Enums.Enum;
 
 namespace Gameplay
@@ -46,7 +47,7 @@ namespace Gameplay
                 case Enum.CollectablesType.Coins:
                     return Enum.PoolObjectTypes.Coin;
                 case Enum.CollectablesType.Spell:
-                    return Enum.PoolObjectTypes.Xp;
+                    return Enum.PoolObjectTypes.Spell;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -80,3 +81,4 @@ namespace Gameplay
         }
     }
 }
+

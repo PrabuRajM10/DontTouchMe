@@ -26,7 +26,7 @@ namespace Gameplay
                     var coinCollectableObj = ObjectPooling.Instance.GetCoins();
                     HandleObjectOnReceived(coinCollectableObj.transform, spawnPos);
                     break;
-                case Enum.PoolObjectTypes.Xp:
+                case Enum.PoolObjectTypes.Spell:
                     var xpCollectableObj = ObjectPooling.Instance.GetXp();
                     HandleObjectOnReceived(xpCollectableObj.transform, spawnPos);
                     break;

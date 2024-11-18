@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6786535705513055009}
   - component: {fileID: 2301111885177262250}
   - component: {fileID: 1048057872218262940}
+  - component: {fileID: 375678174606909069}
   m_Layer: 0
   m_Name: HitBlood
   m_TagString: Untagged
@@ -4772,3 +4773,17 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &375678174606909069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3954742629198659284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 291da9c8916a41d0a3e577c99899f91c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleType: 1
+  particle: {fileID: 2301111885177262250}

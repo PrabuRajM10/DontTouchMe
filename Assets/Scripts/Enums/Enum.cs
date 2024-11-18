@@ -32,6 +32,12 @@ namespace Enums
             Heal,
             Spell
         }
+        
+        public enum InGameParticleType
+        {
+            BulletHit,
+            EnemyHit
+        }
         public enum PopUpType
         {
             YES_NO,
@@ -45,9 +51,11 @@ namespace Enums
             Enemy,
             Bullet,
             Coin,
-            Xp,
+            Spell,
             Bomb,
-            Audio
+            Audio,
+            BulletHitParticle,
+            EnemyHitParticle
         }
         public enum PowerCardsId
         {
