@@ -62,6 +62,11 @@ namespace Gameplay
         public void ResetAbility(GameObject requiredObject)
         {
             OnBeforeCooldown(requiredObject, null , () => {_cardState = PowerCardState.UnAvailable;});
+            ResetState();
+        }
+
+        public void ResetState()
+        {
             _cardState = PowerCardState.UnAvailable;
         }
 

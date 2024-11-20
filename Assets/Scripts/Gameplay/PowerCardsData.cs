@@ -17,10 +17,20 @@ namespace Gameplay
 
         public void Init()
         {
+            ResetCardsState();
+            
             SetCardsByRarity(Enum.CardRarity.Common);
             SetCardsByRarity(Enum.CardRarity.Rare);
             SetCardsByRarity(Enum.CardRarity.Epic);
             SetCardsByRarity(Enum.CardRarity.Legendary);
+        }
+
+        public void ResetCardsState()
+        {
+            foreach (var cardData in cardDataList)
+            {
+                cardData.powerCard.ResetState();
+            }
         }
 
         public CardData GetCardDataById(Enum.PowerCardsId cardId)

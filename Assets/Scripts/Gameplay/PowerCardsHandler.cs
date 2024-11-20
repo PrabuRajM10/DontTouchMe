@@ -81,15 +81,15 @@ namespace Gameplay
         }
         private void HandleOnKeyPressed()
         {
-            if (_currentPowerCardIndex == 0 || GetCurrentCard().CardState is PowerCardState.UnAvailable or not PowerCardState.Ready or PowerCardState.Cooldown)
+            if (GetCurrentCard().CardState is not PowerCardState.Ready)
             {
                 return;
             }
 
             UiManager.Instance.OnPowerCardActivated(_currentPowerCardIndex, GetCurrentCard().ActiveTime , GetCurrentCard().XpCost);
             spellManager.OnCurrentXpValueUpdate(-GetCurrentCard().XpCost);
-            UpdateCardsUnAvailability();
             ExecutePowerCard(_currentPowerCardIndex);
+            UpdateCardsUnAvailability();
         }
 
         PowerCard GetCurrentCard()
@@ -99,13 +99,9 @@ namespace Gameplay
 
         void UpdateCardsUnAvailability()
         {
-            foreach (var powerCard in _powerCards)
+            foreach (var powerCard in _powerCards.Where(powerCard => powerCard.Value.CardState is not (PowerCardState.Cooldown or PowerCardState.Active or PowerCardState.UnAvailable)))
             {
-                if(powerCard.Value.CardState is PowerCardState.Cooldown or PowerCardState.Active ) return;
-                if (spellManager.GetXpValue() < powerCard.Value.XpCost)
-                {
-                    powerCard.Value.CardState = PowerCardState.UnAvailable;
-                }
+                powerCard.Value.CardState = PowerCardState.UnAvailable;
             }
         }
 

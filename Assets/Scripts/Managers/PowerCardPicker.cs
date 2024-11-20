@@ -61,6 +61,7 @@ namespace Managers
 
         private List<CardData> GetCards()
         {
+            powerCardsDataSo.ResetCardsState();
             List<CardData> cardsList = new List<CardData>();
             var powerCardsPool = powerCardProbabilities;
 
@@ -94,11 +95,8 @@ namespace Managers
                     if ( random <= powerCardProbability.Value)
                     {
                         Debug.LogFormat("[PowerCardManager] [GetCard] powerCardProbability.probabilityInPercentage {1} " , random , powerCardProbability.Value);
-                        var cardList = powerCardsDataSo.GetCardDataListByRarity(powerCardProbability.Key);
                 
-                        var randomIndex = Random.Range(0, cardList.Count);
-                
-                        var theChosenOne = cardList[randomIndex];
+                        var theChosenOne = GetUniqueCard(cardsList , powerCardProbability.Key);
                 
                         Debug.Log("[PowerCardManager] [GetCard] theChosenOne " + (theChosenOne.cardId.ToString() , theChosenOne.cardRarity));
                         // powerCardsPool.Remove(powerCardProbability);
@@ -109,6 +107,15 @@ namespace Managers
                 }
             }
             return cardsList;
+        }
+
+        CardData GetUniqueCard(List<CardData> pickedCardsList , Enum.CardRarity rarity)
+        {
+            var cardList = powerCardsDataSo.GetCardDataListByRarity(rarity);
+            var randomIndex = Random.Range(0, cardList.Count);
+            var theChosenOne = cardList[randomIndex];
+
+            return !pickedCardsList.Contains(theChosenOne) ? theChosenOne : GetUniqueCard(pickedCardsList, rarity);
         }
 
         public List<CardData> GetPowerCards()

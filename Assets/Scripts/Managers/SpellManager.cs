@@ -38,13 +38,13 @@ namespace Managers
                 _powerCard3Data = _powerCardsData[2];
             }
 
-            if(GameManager.Instance.IsAnyCardActive()) return;
             Debug.Log("[XpManager] [OnCollectablesCollected] _powerCard1Data " + (_powerCard1Data.cardName , _powerCard2Data.cardName , _powerCard3Data.cardName));
             SetCardAvailabilityIfPossible();
         }
 
         public void SetCardAvailabilityIfPossible()
         {
+            if(GameManager.Instance.IsAnyCardActive()) return;
             if (_powerCard1Data.powerCard.XpCost <= totalSpellValue && _powerCard1Data.powerCard.CardState == PowerCardState.UnAvailable)
             {
                 _powerCard1Data.powerCard.CardState = PowerCardState.Ready;
