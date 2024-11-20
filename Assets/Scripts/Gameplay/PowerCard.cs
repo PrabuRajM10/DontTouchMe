@@ -32,10 +32,16 @@ namespace Gameplay
 
         private CallBack _callBack;
 
+        public event Action<PowerCardState> OnCardStateChanged; 
+
         public PowerCardState CardState
         {
             get => _cardState;
-            set => _cardState = value;
+            set
+            {
+                _cardState = value;
+                OnCardStateChanged?.Invoke(_cardState);
+            }
         }
 
         public void Init()
