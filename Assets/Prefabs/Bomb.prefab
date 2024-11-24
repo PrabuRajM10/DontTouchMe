@@ -103,6 +103,7 @@ MonoBehaviour:
   torqueForce: 3
   particle: {fileID: 492144829980200703}
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+  bombMesh: {fileID: 5752642965520336510}
 --- !u!1001 &3305588416793475393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191,6 +192,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikeBall
       objectReference: {fileID: 0}
+    - target: {fileID: 7064654038132047679, guid: bcc17fb0febfc944ca89694a2d6638de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8687822955073438720, guid: bcc17fb0febfc944ca89694a2d6638de, type: 3}
     m_RemovedGameObjects: []
@@ -200,6 +206,12 @@ PrefabInstance:
 --- !u!4 &4535456578886517719 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1382291296267516566, guid: bcc17fb0febfc944ca89694a2d6638de,
+    type: 3}
+  m_PrefabInstance: {fileID: 3305588416793475393}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5752642965520336510 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7064654038132047679, guid: bcc17fb0febfc944ca89694a2d6638de,
     type: 3}
   m_PrefabInstance: {fileID: 3305588416793475393}
   m_PrefabAsset: {fileID: 0}

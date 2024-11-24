@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 1587083420936469868}
   - component: {fileID: 4408749224366263686}
   - component: {fileID: 270307295073838574}
+  - component: {fileID: 3388848235521906252}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -150,6 +151,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3388848235521906252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4575665383494003777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acda5c1b1cae4bf4be4cdc48bb85cc9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 270307295073838574}
+  defaultColor: {r: 0.16078432, g: 0.16078432, b: 0.16078432, a: 1}
+  immuneColor: {r: 0.16078432, g: 0.16078432, b: 0.16078432, a: 0.69803923}
 --- !u!1 &5370872912423155470
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,14 +331,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 7616333253394949895}
   drone: {fileID: 0}
+  body: {fileID: 3388848235521906252}
+  glass: {fileID: 3033043017302618078}
   magnet: {fileID: 585453349893044587}
   meshRenderer: {fileID: 270307295073838574}
   playerCollider: {fileID: 8630525251408984467}
   speed: 11.01
   maxJumpHeight: 1
   maxAirJumps: 1
-  defaultColor: {r: 0.16078432, g: 0.16078432, b: 0.16078432, a: 1}
-  immuneColor: {r: 0.16078432, g: 0.16078432, b: 0.16078432, a: 0.69803923}
 --- !u!1 &7320415305419055832
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +350,7 @@ GameObject:
   - component: {fileID: 1603968826702894590}
   - component: {fileID: 5801586824595009593}
   - component: {fileID: 8136534848669685464}
+  - component: {fileID: 3033043017302618078}
   m_Layer: 0
   m_Name: CoolGlasses
   m_TagString: Untagged
@@ -406,3 +423,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3033043017302618078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7320415305419055832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acda5c1b1cae4bf4be4cdc48bb85cc9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 8136534848669685464}
+  defaultColor: {r: 1, g: 0, b: 0, a: 1}
+  immuneColor: {r: 1, g: 0, b: 0, a: 0.69803923}

@@ -13,6 +13,8 @@ namespace Gameplay
     {
         [SerializeField] private Rigidbody rigidBody;
         [SerializeField] private Drone drone;
+        [SerializeField] private ImmuneTransparencyHandler body;
+        [SerializeField] private ImmuneTransparencyHandler glass;
         [SerializeField] private CollectablesMagnet magnet;
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private Collider playerCollider;
@@ -20,9 +22,6 @@ namespace Gameplay
         [SerializeField, Range(0, 20)] private float speed;
         [SerializeField, Range(0, 20)] private int maxJumpHeight;
         [SerializeField, Range(0, 5)] private int maxAirJumps;
-
-        [SerializeField] private Color defaultColor;
-        [SerializeField] private Color immuneColor;
 
         PlayerInput _input;
 
@@ -40,7 +39,6 @@ namespace Gameplay
         private float _lastSentYValue;
         private float _lastSentZValue;
         private float _defaultPlayerSpeed;
-        private float _floatCheckTolerance = 0.01f;
 
         private Vector2 _playerInput;
         private Vector3 _velocity;
@@ -156,7 +154,7 @@ namespace Gameplay
                 _collisionIgnoredEnemies.Add(enemyCollider);
                     
                 Physics.IgnoreCollision(playerCollider , enemyCollider);
-                enemy.ResetVelocity();
+                // enemy.ResetVelocity();
                 return;
             }
             rigidBody.velocity = Vector3.zero;
@@ -201,8 +199,8 @@ namespace Gameplay
             {
                 EnableCollisionsOnIgnoredEnemies();
             }
-            var material = meshRenderer.material;
-            material.color = _isImmune ? immuneColor : defaultColor;
+            body.SetImmune(_isImmune);
+            glass.SetImmune(_isImmune);
             // material.color = _isImmune ? Color.blue : Color.green;
             //Play visuals
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 using Helpers;
 using UnityEngine;
@@ -36,8 +37,9 @@ namespace Ui.Screens
             quitButton.onClick.AddListener(OnClickQuitButton);
             LeanAnimator.Move(resumeButton.transform , resumeBtnEndPos , LeanTweenType.easeOutElastic , 1 , 0.1f ,true);
             LeanAnimator.Move(homeButton.transform , homeBtnEndPos , LeanTweenType.easeOutElastic , 1 , 0.2f ,true);
+#if !UNITY_WEBGL
             LeanAnimator.Move(quitButton.transform , quitBtnEndPos , LeanTweenType.easeOutElastic , 1 , 0.3f ,true);
-
+#endif
         }
 
         protected override void OnDisable()
@@ -52,10 +54,10 @@ namespace Ui.Screens
         {
             LeanAnimator.ButtonOnClick(quitButton, () =>
             {
-                OnClickAnimation(() =>
+                StartCoroutine(OnClickAnimation(() =>
                 {
                     OnQuitButtonPressed?.Invoke();
-                });
+                }));
             }, true);
         }
 
@@ -63,10 +65,10 @@ namespace Ui.Screens
         {
             LeanAnimator.ButtonOnClick(homeButton, () =>
             {
-                OnClickAnimation(() =>
+                StartCoroutine(OnClickAnimation(() =>
                 {
                     OnHomeButtonPressed?.Invoke();
-                });
+                }));
             }, true);
         }
 
@@ -74,20 +76,31 @@ namespace Ui.Screens
         {
             LeanAnimator.ButtonOnClick(resumeButton, () =>
             {
-                OnClickAnimation(() =>
+                StartCoroutine(OnClickAnimation(() =>
                 {
                     OnResumeButtonPressed?.Invoke();
-                });
+                }));
             } , true);
         }
 
-        async void OnClickAnimation(Callback callback)
+        // async void OnClickAnimation(Callback callback)
+        // {
+        //     LeanAnimator.Move(resumeButton.transform , resumeBtnStartPos , LeanTweenType.easeOutElastic, 1 , 0.1f ,true);
+        //     LeanAnimator.Move(homeButton.transform , homeBtnStartPos , LeanTweenType.easeOutElastic, 1 , 0.2f ,true);
+        //     LeanAnimator.Move(quitButton.transform, quitBtnStartPos, LeanTweenType.easeOutElastic, 1, 0.3f, true);
+        //
+        //     await Task.Delay(600);
+        //     callback?.Invoke();
+        // }
+        
+        IEnumerator OnClickAnimation(Callback callback)
         {
             LeanAnimator.Move(resumeButton.transform , resumeBtnStartPos , LeanTweenType.easeOutElastic, 1 , 0.1f ,true);
             LeanAnimator.Move(homeButton.transform , homeBtnStartPos , LeanTweenType.easeOutElastic, 1 , 0.2f ,true);
             LeanAnimator.Move(quitButton.transform, quitBtnStartPos, LeanTweenType.easeOutElastic, 1, 0.3f, true);
-
-            await Task.Delay(600);
+            Time.timeScale = 1;
+            yield return new WaitForSeconds(0.6f);
+            Debug.Log("After wait");
             callback?.Invoke();
         }
     }

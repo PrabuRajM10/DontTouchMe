@@ -13,11 +13,16 @@ namespace Helpers
         private static CallBack _callback;
         public static void ButtonOnClick(Button button , CallBack callBack, bool ignoreTimeScale = false)
         {
+            button.interactable = false;
             SoundManager.PlaySound(Enum.SoundType.ButtonClick);
             var buttonTrans = button.transform;
             var initialScale = buttonTrans.localScale;
             buttonTrans.localScale = initialScale / 1.2f;
-            buttonTrans.LeanScale(initialScale, 0.25f).setEaseInOutBack().setOnComplete(callBack.Invoke).setIgnoreTimeScale(ignoreTimeScale);
+            buttonTrans.LeanScale(initialScale, 0.25f).setEaseInOutBack().setOnComplete(() =>
+            {
+                callBack?.Invoke();
+                button.interactable = true;
+            }).setIgnoreTimeScale(ignoreTimeScale);
         }
 
         public static void Move(Transform uiElement, Transform destination, LeanTweenType tweenType, float duration = 1, float delay = 0, bool ignoreTimeScale = false,

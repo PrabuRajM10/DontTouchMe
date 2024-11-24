@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Gameplay;
@@ -118,14 +119,33 @@ namespace Ui.Screens
             _cardsList.Clear();
         }
 
-        public async void OnCardsSelected(List<CardData> pickedCard)
+        // public async void OnCardsSelected(List<CardData> pickedCard)
+        // {
+        //     for (int i = 0; i < pickedCard.Count; i++)
+        //     {
+        //         var card = Instantiate(powerCardUi,cardsStartPositions[i].position , quaternion.identity, cardsViewContentParent);
+        //         card.SetData(pickedCard[i] , cardsEndPositions[i]);
+        //         _cardsList.Add(card);
+        //         await Task.Delay(100);
+        //     }
+        //     nextButton.gameObject.SetActive(true);
+        //     LeanAnimator.Move(nextButton.transform , nextBtnEndPos , LeanTweenType.easeOutElastic);
+        //     LeanAnimator.Move(backButton.transform, backBtnStartPos, LeanTweenType.easeOutExpo , 0.6f);
+        // }
+
+        public void OnCardsSelected(List<CardData> pickedCard)
+        {
+            StartCoroutine(SpawnCards(pickedCard));
+        }
+        
+        public IEnumerator SpawnCards(List<CardData> pickedCard)
         {
             for (int i = 0; i < pickedCard.Count; i++)
             {
                 var card = Instantiate(powerCardUi,cardsStartPositions[i].position , quaternion.identity, cardsViewContentParent);
                 card.SetData(pickedCard[i] , cardsEndPositions[i]);
                 _cardsList.Add(card);
-                await Task.Delay(100);
+                yield return new WaitForSeconds(0.1f);
             }
             nextButton.gameObject.SetActive(true);
             LeanAnimator.Move(nextButton.transform , nextBtnEndPos , LeanTweenType.easeOutElastic);

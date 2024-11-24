@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 6149215419740014628}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!198 &7572068229690482518
 ParticleSystem:
@@ -4817,7 +4817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6149215419740014628
 Transform:
   m_ObjectHideFlags: 0
@@ -9539,7 +9539,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1a754ee911c021f408022516e8bd4d01, type: 2}
+  - {fileID: 2100000, guid: be5ba9fbcac74c4408b3a6dec1f04abc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9581,7 +9581,7 @@ ParticleSystemRenderer:
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_VertexStreams: 0001030405
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 4300000, guid: 5dfc7d942b5d84d4893ba3e60454cd2b, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}

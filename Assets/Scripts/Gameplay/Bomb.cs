@@ -19,6 +19,8 @@ namespace Gameplay
         [SerializeField] private ParticleSystem particle;
         [SerializeField] Color gizmoColor = Color.green;
 
+        [SerializeField] private GameObject bombMesh; 
+
         private Rigidbody _rigidBody;
         private SphereCollider _sc;
         private ObjectPooling _pool;
@@ -37,6 +39,8 @@ namespace Gameplay
 
         public void Deploy(Vector3 position)
         {
+            _rigidBody.constraints = RigidbodyConstraints.None;
+            bombMesh.SetActive(true);
             var transform1 = transform;
             transform1.position = position;
             
@@ -72,6 +76,7 @@ namespace Gameplay
                 }
             }
             
+            bombMesh.SetActive(false);
             PlayParticle(particle , transform.position);
         }
 
@@ -80,6 +85,7 @@ namespace Gameplay
             if (other.GetComponent<Jumpable>() != null)
             {
                 _sc.isTrigger = false;
+                _rigidBody.constraints = RigidbodyConstraints.FreezeRotation;
             }
         }
         
@@ -93,7 +99,7 @@ namespace Gameplay
         public void PlayParticle(ParticleSystem particleSystem , Vector3 position)
         {
             particleSystem.Play();
-            Invoke(nameof(OnParticleSpawnDone) , particleSystem.main.duration);
+            Invoke(nameof(OnParticleSpawnDone) , particleSystem.main.duration + 0.5f);
         }
 
         public void OnParticleSpawnDone()

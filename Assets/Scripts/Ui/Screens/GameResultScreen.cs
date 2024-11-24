@@ -1,10 +1,9 @@
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 using Helpers;
 using TMPro;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Ui.Screens
@@ -58,10 +57,10 @@ namespace Ui.Screens
         {
             LeanAnimator.ButtonOnClick(retryButton , () =>
             {
-                OnClickUiAnimations(() =>
+                StartCoroutine(OnClickUiAnimations(() =>
                 {
                     OnRetryButtonPressed?.Invoke();
-                });
+                }));
             });
         }
 
@@ -69,14 +68,27 @@ namespace Ui.Screens
         {
             LeanAnimator.ButtonOnClick(homeButton , () =>
             {
-                OnClickUiAnimations(() =>
+                StartCoroutine(OnClickUiAnimations(() =>
                 {
                     OnHomeButtonPressed?.Invoke();
-                });
+                }));
             });
         }
 
-        async void OnClickUiAnimations(Callback callback)
+        // async void OnClickUiAnimations(Callback callback)
+        // {
+        //     LeanAnimator.Move(title.transform , titleStartPos , LeanTweenType.easeOutElastic);
+        //     LeanAnimator.Move(homeButton.transform , homeBtnStartPos , LeanTweenType.easeOutElastic , 1 , 0.1f);
+        //     LeanAnimator.Move(retryButton.transform , retryBtnStartPos , LeanTweenType.easeOutElastic , 1 , 0.2f);
+        //
+        //     LeanAnimator.Scale(coins , Vector3.one,  Vector3.zero, LeanTweenType.easeOutBack);
+        //     LeanAnimator.Scale(kills , Vector3.one,  Vector3.zero, LeanTweenType.easeOutBack);
+        //     
+        //     await Task.Delay(400);
+        //     callback?.Invoke();
+        // }
+        
+        IEnumerator OnClickUiAnimations(Callback callback)
         {
             LeanAnimator.Move(title.transform , titleStartPos , LeanTweenType.easeOutElastic);
             LeanAnimator.Move(homeButton.transform , homeBtnStartPos , LeanTweenType.easeOutElastic , 1 , 0.1f);
@@ -84,8 +96,8 @@ namespace Ui.Screens
 
             LeanAnimator.Scale(coins , Vector3.one,  Vector3.zero, LeanTweenType.easeOutBack);
             LeanAnimator.Scale(kills , Vector3.one,  Vector3.zero, LeanTweenType.easeOutBack);
-            
-            await Task.Delay(400);
+
+            yield return new WaitForSeconds(0.4f);
             callback?.Invoke();
         }
 

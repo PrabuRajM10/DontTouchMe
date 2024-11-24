@@ -4,6 +4,7 @@ using Helpers;
 using Managers;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 using Enum = Enums.Enum;
 
 namespace Gameplay
@@ -12,14 +13,13 @@ namespace Gameplay
     {
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private float maxHealth = 100;
-        [SerializeField] private Rigidbody rigidbody;
+        [FormerlySerializedAs("rigidbody")] [SerializeField] private Rigidbody rb;
 
         private ObjectPooling _pool;
         private Player _targetPlayer;
 
         private float _currentHealth;
         private float _defaultSpeed;
-        private bool _canMoveTowardsTarget;
 
         public event Action<Enemy> OnDead;
         public void Init(ObjectPooling pool)
@@ -38,12 +38,11 @@ namespace Gameplay
         private void OnValidate()
         {
             if (agent == null) agent = GetComponent<NavMeshAgent>();
-            if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
+            if (rb == null) rb = GetComponent<Rigidbody>();
         }
 
         private void OnEnable()
         {
-            ResetVelocity();
             ResetScale();
             SetSpeed(EnemyManager.Instance.GetEnemySpeed());
             SetScale(EnemyManager.Instance.GetEnemyScale());
@@ -72,7 +71,6 @@ namespace Gameplay
         public void SetTarget(Player target)
         {
             _targetPlayer = target;
-            _canMoveTowardsTarget = true;
         }
         public void TakeDamage(float damage)
         {
@@ -112,7 +110,7 @@ namespace Gameplay
 
         public void ResetVelocity()
         {
-            rigidbody.velocity = Vector3.zero;
+            rb.velocity = Vector3.zero;
         }
 
         void ResetScale()

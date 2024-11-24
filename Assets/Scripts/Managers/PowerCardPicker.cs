@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Enums;
 using Gameplay;
 using UnityEngine;
@@ -33,18 +34,6 @@ namespace Managers
 
         private Dictionary<Enum.CardRarity, int> _rarityMargin = new Dictionary<Enum.CardRarity, int>();
 
-        private void OnValidate()
-        {
-            // var rarity = Enum.GetValues(typeof(CardRarity));
-            //
-            // if (powerCardProbabilities.Count == rarity.Length) return;
-            // powerCardProbabilities.Clear();
-            //
-            // foreach (int r in rarity)
-            // {
-            //     powerCardProbabilities.Add(new PowerCardProbability((CardRarity)r, 10));
-            // }
-        }
 
         public override void Awake()
         {
@@ -62,48 +51,17 @@ namespace Managers
         private List<CardData> GetCards()
         {
             powerCardsDataSo.ResetCardsState();
-            List<CardData> cardsList = new List<CardData>();
-            var powerCardsPool = powerCardProbabilities;
-
+            var cardsList = new List<CardData>();
             for (int i = 0; i < cardPickCount; i++)
             {
-                // var card = powerCardsDataSo.GetRandomCard();
-                // card.powerCard.Init();
-                // cardsList.Add(card);
                 var random = Random.Range(1, 100);
-                Debug.LogFormat("[PowerCardManager] [GetCard] before random " + random);
-                // foreach (var powerCardProbability in powerCardsPool)
-                // {
-                //     if (powerCardProbability.probabilityInPercentage >= random)
-                //     {
-                //         Debug.LogFormat("[PowerCardManager] [GetCard] powerCardProbability.probabilityInPercentage {1} " , random , powerCardProbability.probabilityInPercentage);
-                //         var cardList = powerCardsDataSo.GetCardDataListByRarity(powerCardProbability.cardRarity);
-                //
-                //         var randomIndex = Random.Range(0, cardList.Count);
-                //
-                //         var theChosenOne = cardList[randomIndex];
-                //
-                //         Debug.Log("[PowerCardManager] [GetCard] theChosenOne " + (theChosenOne.cardId.ToString() , theChosenOne.cardRarity));
-                //         // powerCardsPool.Remove(powerCardProbability);
-                //         
-                //         cardsList.Add(theChosenOne);
-                //         break;
-                //     }
-                // }
-                foreach (var powerCardProbability in _rarityMargin)
+                // Debug.LogFormat("[PowerCardManager] [GetCard] before random " + random);
+                foreach (var theChosenOne in from powerCardProbability in _rarityMargin where random <= powerCardProbability.Value select GetUniqueCard(cardsList , powerCardProbability.Key))
                 {
-                    if ( random <= powerCardProbability.Value)
-                    {
-                        Debug.LogFormat("[PowerCardManager] [GetCard] powerCardProbability.probabilityInPercentage {1} " , random , powerCardProbability.Value);
-                
-                        var theChosenOne = GetUniqueCard(cardsList , powerCardProbability.Key);
-                
-                        Debug.Log("[PowerCardManager] [GetCard] theChosenOne " + (theChosenOne.cardId.ToString() , theChosenOne.cardRarity));
-                        // powerCardsPool.Remove(powerCardProbability);
+                    // Debug.Log("[PowerCardManager] [GetCard] theChosenOne " + (theChosenOne.cardId.ToString() , theChosenOne.cardRarity));
                         
-                        cardsList.Add(theChosenOne);
-                        break;
-                    }
+                    cardsList.Add(theChosenOne);
+                    break;
                 }
             }
             return cardsList;

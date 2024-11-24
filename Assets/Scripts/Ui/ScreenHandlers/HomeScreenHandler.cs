@@ -8,7 +8,7 @@ namespace Ui.ScreenHandlers
 {
     public class HomeScreenHandler : BaseScreenHandler
     {
-        [SerializeField] private HomeScreenScreen homeScreen;
+        [SerializeField] private HomeScreen homeScreen;
 
         private void OnEnable()
         {

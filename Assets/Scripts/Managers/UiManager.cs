@@ -15,7 +15,7 @@ namespace Managers
         [SerializeField] private Enum.GameScreen initialScreen; 
         [SerializeField] private GameplayScreen gameplayScreen;
         [SerializeField] private SettingScreen settingScreen;
-        [SerializeField] private HomeScreenScreen homeScreen;
+        [SerializeField] private HomeScreen homeScreen;
         [SerializeField] private GameResultScreen gameResultScreen;
         [SerializeField] private CardPickerScreen cardPickerScreen;
         [SerializeField] private PauseScreen pauseScreen;

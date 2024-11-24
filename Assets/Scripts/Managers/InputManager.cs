@@ -16,7 +16,7 @@ namespace Managers
 
         public Vector3 MousePosition => _mousePosition;
 
-        private void Awake()
+        public override void Awake()
         {
             _input = new PlayerInput();
         }
@@ -43,7 +43,7 @@ namespace Managers
             _isPowerCard3Pressed = _input.PlayerAction.PowerCardSlot3.triggered;
             _mousePosition = _input.PlayerAction.MouseLook.ReadValue<Vector2>();
             // _mousePosition = Mouse.current.position.ReadValue();
-            _mousePosition = _input.PlayerAction.MouseLook.ReadValue<Vector2>();
+            // _mousePosition = _input.PlayerAction.MouseLook.ReadValue<Vector2>();
         }
 
         public Vector2 PlayerMovementInput()

@@ -15,13 +15,13 @@ MonoBehaviour:
   cardDataList:
   - cardId: 1
     cardRarity: 0
-    cardImg: {fileID: 0}
+    cardImg: {fileID: 2062015785, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
     cardName: Player Speed 2X
     cardDescription: 
     powerCard: {fileID: 11400000, guid: 84830170b68fd6c4ab7e88334e24e280, type: 2}
   - cardId: 2
     cardRarity: 0
-    cardImg: {fileID: 0}
+    cardImg: {fileID: 1019859777, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
     cardName: Enemy Speed 0.5X
     cardDescription: 
     powerCard: {fileID: 11400000, guid: fa4104a0dfe0ef74b8fb9ff91750d89f, type: 2}
@@ -33,7 +33,7 @@ MonoBehaviour:
     powerCard: {fileID: 11400000, guid: e8ffb7e426e9277469418d13a44853da, type: 2}
   - cardId: 4
     cardRarity: 0
-    cardImg: {fileID: 0}
+    cardImg: {fileID: 1401011104, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
     cardName: Freeze Enemies
     cardDescription: 
     powerCard: {fileID: 11400000, guid: b3c124ff5fc3ff443a20d1282d696c5c, type: 2}
@@ -45,31 +45,31 @@ MonoBehaviour:
     powerCard: {fileID: 11400000, guid: 73524f68c71d487499c5ce67db9a4d79, type: 2}
   - cardId: 6
     cardRarity: 1
-    cardImg: {fileID: 0}
+    cardImg: {fileID: 21300000, guid: 090ba22e6a67f0147a2fa5387dd968b6, type: 3}
     cardName: Loot Magnet
     cardDescription: 
     powerCard: {fileID: 11400000, guid: 851c62794e8b30e4f85c64dcf9130d7c, type: 2}
   - cardId: 7
     cardRarity: 1
-    cardImg: {fileID: 0}
+    cardImg: {fileID: -1611920951, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
     cardName: Drop Bomb
     cardDescription: 
     powerCard: {fileID: 11400000, guid: 88b421dbe2d2701428dc17cf59e158e4, type: 2}
   - cardId: 8
     cardRarity: 2
-    cardImg: {fileID: 0}
+    cardImg: {fileID: 21300000, guid: d0b3cba3784108640bda9f63dd532e0a, type: 3}
     cardName: Dual Guns
     cardDescription: 
     powerCard: {fileID: 11400000, guid: 4bb4e65ab2437504cb94df56398c02b2, type: 2}
   - cardId: 9
-    cardRarity: 2
-    cardImg: {fileID: 0}
+    cardRarity: 0
+    cardImg: {fileID: 485823971, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
     cardName: Ghost
     cardDescription: 
     powerCard: {fileID: 11400000, guid: f40804e9d55623243b76a41de2ef977a, type: 2}
   - cardId: 10
     cardRarity: 3
-    cardImg: {fileID: 0}
+    cardImg: {fileID: 2047992146, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
     cardName: Hit Man
     cardDescription: 
     powerCard: {fileID: 11400000, guid: 8a6fcaa95f1670141a5dff10eec5aee3, type: 2}
