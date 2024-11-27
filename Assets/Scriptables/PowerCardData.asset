@@ -27,7 +27,7 @@ MonoBehaviour:
     powerCard: {fileID: 11400000, guid: fa4104a0dfe0ef74b8fb9ff91750d89f, type: 2}
   - cardId: 3
     cardRarity: 0
-    cardImg: {fileID: 0}
+    cardImg: {fileID: -606357570, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
     cardName: Big Enemies
     cardDescription: 
     powerCard: {fileID: 11400000, guid: e8ffb7e426e9277469418d13a44853da, type: 2}

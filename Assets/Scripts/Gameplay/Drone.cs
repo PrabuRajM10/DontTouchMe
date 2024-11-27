@@ -4,6 +4,7 @@ using DG.Tweening;
 using Helpers;
 using Managers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Gameplay
 {
@@ -25,15 +26,17 @@ namespace Gameplay
         [SerializeField] private Transform defaultGunPos;
         [SerializeField] private Transform dualGunPos1;
         [SerializeField] private Transform dualGunPos2;
+        [SerializeField]private Camera mainCamera;
 
-        private Camera _camera;
+        [SerializeField] private LayerMask lookTargetLayerMask;
+
         private Vector3 _lookTarget;
         private Gun _gun2;
         private readonly List<Gun> _currentActiveGuns = new List<Gun>();
 
         private void OnValidate()
         {
-            if(_camera == null)_camera = Camera.main;
+            if(mainCamera == null)mainCamera = Camera.main;
             if(yOffsetFromPlayer <= 0)yOffsetFromPlayer = transform.position.y;
         }
 
@@ -74,9 +77,8 @@ namespace Gameplay
 
         void SetTargetToLookAt(Vector3 lookAtPos)
         {
-
-            var ray = _camera.ScreenPointToRay(lookAtPos);
-            if (Physics.Raycast(ray, out RaycastHit hit, 100))
+            var ray = mainCamera.ScreenPointToRay(lookAtPos);
+            if (Physics.Raycast(ray, out RaycastHit hit, 100 , lookTargetLayerMask))
             {
                 _lookTarget = hit.point;
                 _lookTarget.y = lookAtYOffset;
