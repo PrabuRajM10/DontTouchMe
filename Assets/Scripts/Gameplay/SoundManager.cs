@@ -1,6 +1,6 @@
 using System;
+using Enums;
 using UnityEngine;
-using Enum = Enums.Enum;
 
 namespace Gameplay
 {
@@ -14,7 +14,7 @@ namespace Gameplay
         {
             _gameAudioData = data;
         }
-        public static void PlaySound(Enum.SoundType type, Vector3 position = default, bool loop = false)
+        public static void PlaySound(DTMEnum.SoundType type, Vector3 position = default, bool loop = false)
         {
             var audio = ObjectPooling.Instance.GetAudioPrefab();
             var audioData = _gameAudioData.GetAudioByType(type);

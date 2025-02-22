@@ -9,7 +9,7 @@ namespace Gameplay
     {
         [SerializeField] private float distanceFromPlayer;
 
-        protected override (Enum.PoolObjectTypes, Vector3) OnSpawn()
+        protected override (DTMEnum.PoolObjectTypes, Vector3) OnSpawn()
         {
             var playerPos =  GameManager.Instance.Player.GetPosition();
             var randPos = Utils.GetRandomPointAroundTarget(playerPos , distanceFromPlayer);

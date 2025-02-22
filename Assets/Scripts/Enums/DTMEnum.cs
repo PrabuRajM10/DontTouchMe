@@ -1,6 +1,6 @@
 namespace Enums
 {
-    public class Enum
+    public class DTMEnum
     {
         
         public enum SoundType

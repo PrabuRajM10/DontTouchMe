@@ -3,7 +3,6 @@ using Enums;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Enum = Enums.Enum;
 
 namespace Helpers
 {
@@ -80,7 +79,7 @@ namespace Helpers
             } , true);
         }
 
-        public void ShowPop(string header , string message , Enum.PopUpType popUpType , YesCallBack yesCallBack , NoCallBack noCallBack )
+        public void ShowPop(string header , string message , DTMEnum.PopUpType popUpType , YesCallBack yesCallBack , NoCallBack noCallBack )
         {
             HandleButtonsAndCallbacks(popUpType , yesCallBack , noCallBack);
             this.header.text = header;
@@ -106,30 +105,30 @@ namespace Helpers
             LeanAnimator.Fade(transform, 0, LeanTweenType.easeInOutSine, 0.5f , 0 , true);
         }
 
-        void HandleButtonsAndCallbacks(Enum.PopUpType popUpType , YesCallBack yesCallBack , NoCallBack noCallBack)
+        void HandleButtonsAndCallbacks(DTMEnum.PopUpType popUpType , YesCallBack yesCallBack , NoCallBack noCallBack)
         {
             DisableALlButtons();
             switch (popUpType)
             {
-                case Enum.PopUpType.YES_NO:
+                case DTMEnum.PopUpType.YES_NO:
                     this.yesCallBack = yesCallBack;
                     this.noCallBack = noCallBack;
                     yesButton.gameObject.SetActive(true);
                     noButton.gameObject.SetActive(true);
                     break;
-                case Enum.PopUpType.ONLY_YES:
+                case DTMEnum.PopUpType.ONLY_YES:
                     this.yesCallBack = yesCallBack;
                     yesButton.gameObject.SetActive(true);
                     break;
-                case Enum.PopUpType.ONLY_NO:
+                case DTMEnum.PopUpType.ONLY_NO:
                     this.noCallBack = noCallBack;
                     noButton.gameObject.SetActive(true);
                     break;
-                case Enum.PopUpType.CONFIRM:
+                case DTMEnum.PopUpType.CONFIRM:
                     this.yesCallBack = yesCallBack;
                     confirmButton.gameObject.SetActive(true);
                     break;
-                case Enum.PopUpType.CONTINUE:
+                case DTMEnum.PopUpType.CONTINUE:
                     this.yesCallBack = yesCallBack;
                     continueButton.gameObject.SetActive(true);
                     break;

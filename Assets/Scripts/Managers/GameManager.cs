@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Cinemachine;
+using Enums;
 using Gameplay;
 using Helpers;
 using Ui;
@@ -8,7 +9,6 @@ using Ui.Screens;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Enum = Enums.Enum;
 
 namespace Managers
 {
@@ -46,7 +46,7 @@ namespace Managers
             ChangeState(initialState);
             SoundManager.Init(gameAudioData);
             CameraShake.Init(cameraShakeVirtualCam);
-            SoundManager.PlaySound(Enum.SoundType.MainBg , Vector3.zero, true);
+            SoundManager.PlaySound(DTMEnum.SoundType.MainBg , Vector3.zero, true);
         }
 
         private void OnEnable()

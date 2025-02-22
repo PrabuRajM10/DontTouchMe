@@ -1,13 +1,13 @@
 using System;
+using Enums;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Enum = Enums.Enum;
 
 namespace Gameplay
 {
     public class InGameParticles : MonoBehaviour, IPoolableObjects
     {
-        [SerializeField] private Enum.InGameParticleType particleType;
+        [SerializeField] private DTMEnum.InGameParticleType particleType;
         [SerializeField] private ParticleSystem particle;
         private ObjectPooling _pool;
 
@@ -21,12 +21,12 @@ namespace Gameplay
             _pool.AddBackToList(this , GetPoolTypeByParticleType());
         }
 
-        private Enum.PoolObjectTypes GetPoolTypeByParticleType()
+        private DTMEnum.PoolObjectTypes GetPoolTypeByParticleType()
         {
             return particleType switch
             {
-                Enum.InGameParticleType.BulletHit => Enum.PoolObjectTypes.BulletHitParticle,
-                Enum.InGameParticleType.EnemyHit => Enum.PoolObjectTypes.EnemyHitParticle,
+                DTMEnum.InGameParticleType.BulletHit => DTMEnum.PoolObjectTypes.BulletHitParticle,
+                DTMEnum.InGameParticleType.EnemyHit => DTMEnum.PoolObjectTypes.EnemyHitParticle,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

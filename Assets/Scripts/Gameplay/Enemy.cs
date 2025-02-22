@@ -5,7 +5,6 @@ using Managers;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
-using Enum = Enums.Enum;
 
 namespace Gameplay
 {
@@ -32,7 +31,7 @@ namespace Gameplay
 
         public void BackToPool()
         {
-            _pool.AddBackToList(this , Enum.PoolObjectTypes.Enemy);        
+            _pool.AddBackToList(this , DTMEnum.PoolObjectTypes.Enemy);        
         }
 
         private void OnValidate()
@@ -80,12 +79,12 @@ namespace Gameplay
             {
                 EnemyManager.Instance.EnemyDead(this);
                 _currentHealth = maxHealth;
-                SoundManager.PlaySound(Enum.SoundType.EnemyDeath , GetPosition());
+                SoundManager.PlaySound(DTMEnum.SoundType.EnemyDeath , GetPosition());
                 BackToPool();
                 return;
             }
             
-            SoundManager.PlaySound(Enum.SoundType.EnemyHit , GetPosition());
+            SoundManager.PlaySound(DTMEnum.SoundType.EnemyHit , GetPosition());
         }
 
         Vector3 GetPosition()

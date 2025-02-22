@@ -7,7 +7,7 @@ namespace Gameplay
     {
         protected override void OnCollected()
         {
-            SoundManager.PlaySound(Enum.SoundType.Coin , GetPosition());
+            SoundManager.PlaySound(DTMEnum.SoundType.Coin , GetPosition());
             respectiveManager.OnCollectablesCollected();
         }
     }

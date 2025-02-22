@@ -6,13 +6,12 @@ using Helpers;
 using Managers;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Enum = Enums.Enum;
 
 namespace Gameplay
 {
     public abstract class Collectables : MonoBehaviour , IPoolableObjects
     {
-        [SerializeField] private Enum.CollectablesType collectablesType;
+        [SerializeField] private DTMEnum.CollectablesType collectablesType;
         private ObjectPooling _pool;
         protected CollectablesManager respectiveManager;
         private float _speed = 25;
@@ -29,7 +28,7 @@ namespace Gameplay
 
         protected abstract void OnCollected();
 
-        public Enum.CollectablesType CollectablesType => collectablesType;
+        public DTMEnum.CollectablesType CollectablesType => collectablesType;
         public void Init(ObjectPooling pool)
         {
             _pool = pool;
@@ -40,14 +39,14 @@ namespace Gameplay
             _pool.AddBackToList(this , GetPoolTypeByCollectableType());
         }
 
-        Enum.PoolObjectTypes GetPoolTypeByCollectableType()
+        DTMEnum.PoolObjectTypes GetPoolTypeByCollectableType()
         {
             switch (CollectablesType)
             {
-                case Enum.CollectablesType.Coins:
-                    return Enum.PoolObjectTypes.Coin;
-                case Enum.CollectablesType.Spell:
-                    return Enum.PoolObjectTypes.Spell;
+                case DTMEnum.CollectablesType.Coins:
+                    return DTMEnum.PoolObjectTypes.Coin;
+                case DTMEnum.CollectablesType.Spell:
+                    return DTMEnum.PoolObjectTypes.Spell;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

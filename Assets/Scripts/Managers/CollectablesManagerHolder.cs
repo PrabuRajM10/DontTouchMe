@@ -10,17 +10,17 @@ namespace Managers
         [SerializeField] private CollectablesManager coinsManager;
         [SerializeField] private CollectablesManager xPManager;
 
-        private Dictionary<Enum.CollectablesType, CollectablesManager> collectablesDictionary =
-            new Dictionary<Enum.CollectablesType, CollectablesManager>();
+        private Dictionary<DTMEnum.CollectablesType, CollectablesManager> collectablesDictionary =
+            new Dictionary<DTMEnum.CollectablesType, CollectablesManager>();
 
         public override void Awake()
         {
             base.Awake();
-            collectablesDictionary.Add(Enum.CollectablesType.Coins , coinsManager);
-            collectablesDictionary.Add(Enum.CollectablesType.Spell , xPManager);
+            collectablesDictionary.Add(DTMEnum.CollectablesType.Coins , coinsManager);
+            collectablesDictionary.Add(DTMEnum.CollectablesType.Spell , xPManager);
         }
 
-        public CollectablesManager GetManager(Enum.CollectablesType type)
+        public CollectablesManager GetManager(DTMEnum.CollectablesType type)
         {
             CollectablesManager value;
             return collectablesDictionary.TryGetValue(type, out value) ? value : null;

@@ -29,7 +29,7 @@ namespace Ui.ScreenHandlers
 
         private void PlayButtonPressed()
         {
-            SwitchScreen(Enum.GameScreen.CardPicker);
+            SwitchScreen(DTMEnum.GameScreen.CardPicker);
             GameManager.Instance.ChangeState(GameState.CardPicker);
         }
     }

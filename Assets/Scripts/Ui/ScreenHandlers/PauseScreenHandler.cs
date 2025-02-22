@@ -5,7 +5,6 @@ using Managers;
 using Ui.Screens;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Enum = Enums.Enum;
 
 namespace Ui.ScreenHandlers
 {
@@ -30,7 +29,7 @@ namespace Ui.ScreenHandlers
         private void OnQuitButtonPressed()
         {
             Debug.Log("[PauseScreenHandler] [OnQuitButtonPressed] ");
-            PopUp.ShowPopUp("Attention" , "Do you sure you want to quit" , Enum.PopUpType.YES_NO , () =>
+            PopUp.ShowPopUp("Attention" , "Do you sure you want to quit" , DTMEnum.PopUpType.YES_NO , () =>
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
@@ -40,21 +39,21 @@ namespace Ui.ScreenHandlers
             } , () =>
             {
                 PopUp.ClosePopUp();
-                SwitchScreen(Enum.GameScreen.Pause);
+                SwitchScreen(DTMEnum.GameScreen.Pause);
             });
         }
 
         private void OnResumeButtonPressed()
         {
             Time.timeScale = 1;
-            SwitchScreen(Enum.GameScreen.Gameplay);
+            SwitchScreen(DTMEnum.GameScreen.Gameplay);
         }
 
         private void OnHomeButtonPressed()
         {
             Time.timeScale = 1;
             GameManager.Instance.GameEnd(false);
-            SwitchScreen(Enum.GameScreen.Home);
+            SwitchScreen(DTMEnum.GameScreen.Home);
             GameManager.Instance.ChangeState(GameState.Home);
         }
     }

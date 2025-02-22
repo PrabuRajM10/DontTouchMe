@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using Enums;
 using UnityEngine;
-using Enum = Enums.Enum;
+using UnityEngine.Events;
 
 namespace Gameplay
 {
@@ -15,7 +15,7 @@ namespace Gameplay
     }
     public class PowerCard : ScriptableObject
     {
-        [SerializeField] private Enum.PowerCardsId cardId;
+        [SerializeField] private DTMEnum.PowerCardsId cardId;
 
         [SerializeField] private float activeTime;
         [SerializeField] private float cooldownTime;
@@ -24,7 +24,7 @@ namespace Gameplay
         [SerializeField] private PowerCardState _cardState = PowerCardState.UnAvailable;
 
         private bool _isOnCooldown;
-        public Enum.PowerCardsId CardId => cardId;
+        public DTMEnum.PowerCardsId CardId => cardId;
         public float ActiveTime => activeTime;
         public float CooldownTime => cooldownTime;
         public int XpCost => xpCost;
@@ -32,7 +32,10 @@ namespace Gameplay
 
         private CallBack _callBack;
 
-        public event Action<PowerCardState> OnCardStateChanged; 
+        public event Action<PowerCardState> OnCardStateChanged;
+
+
+        protected PowerCardsHandlerEvents powerCardsHandlerEvents;
 
         public PowerCardState CardState
         {
@@ -48,20 +51,23 @@ namespace Gameplay
         {
             _cardState = PowerCardState.UnAvailable;
         }
-        public virtual void Execute(GameObject requiredObject)
+        public virtual void Execute(PowerCardsHandlerEvents powerCardsHandlerEvents)
         {
+            this.powerCardsHandlerEvents = powerCardsHandlerEvents;
+            this.powerCardsHandlerEvents.OnReceivedEvents(CardId);
             _cardState = PowerCardState.Active;
         }
 
-        public virtual void OnBeforeCooldown(GameObject requiredObject, MonoBehaviour mono , CallBack onCooldownDone)
+        public virtual void OnBeforeCooldown(CallBack onCooldownDone)
         {
             _callBack = onCooldownDone;
-            if(mono != null)mono.StartCoroutine(StartCooldown());
+            powerCardsHandlerEvents.OnReceivedExitEvents(CardId); 
+            powerCardsHandlerEvents.StartCoroutine(StartCooldown());
         }
 
-        public void ResetAbility(GameObject requiredObject)
+        public void ResetAbility()
         {
-            OnBeforeCooldown(requiredObject, null , () => {_cardState = PowerCardState.UnAvailable;});
+            OnBeforeCooldown(() => {_cardState = PowerCardState.UnAvailable;});
             ResetState();
         }
 

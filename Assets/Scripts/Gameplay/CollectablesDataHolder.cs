@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Enums;
 using UnityEngine;
-using Enum = Enums.Enum;
 
 namespace Gameplay
 {
     [Serializable]
     public class CollectablesData
     {
-        public Enum.CollectablesType collectableType;
+        public DTMEnum.CollectablesType collectableType;
         public float value;
         public float multiplier;
     }
@@ -27,7 +26,7 @@ namespace Gameplay
             }
         }
 
-        public float  GetValueByType(Enum.CollectablesType type)
+        public float  GetValueByType(DTMEnum.CollectablesType type)
         {
             foreach (var data in collectablesData.Where(data => data.collectableType == type))
             {

@@ -45,6 +45,6 @@ namespace Gameplay
             }
         }
 
-        protected abstract (Enum.PoolObjectTypes type ,Vector3 position) OnSpawn(); // return spawn pos
+        protected abstract (DTMEnum.PoolObjectTypes type ,Vector3 position) OnSpawn(); // return spawn pos
     }
 }

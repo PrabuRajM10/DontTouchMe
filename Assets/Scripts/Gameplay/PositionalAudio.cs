@@ -19,7 +19,7 @@ namespace Gameplay
 
         public void BackToPool()
         {
-            _pool.AddBackToList(this , Enum.PoolObjectTypes.Audio);
+            _pool.AddBackToList(this , DTMEnum.PoolObjectTypes.Audio);
         }
 
         public void SetData(AudioClip clip, AudioMixerGroup mixerGroup, Vector3 position = default, bool loop = false)

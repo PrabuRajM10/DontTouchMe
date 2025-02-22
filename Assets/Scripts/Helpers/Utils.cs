@@ -54,7 +54,7 @@ namespace Helpers
 
         public static void QuitGame()
         {
-            PopUp.ShowPopUp("Attention" , "Do you really want to quit game" , Enum.PopUpType.YES_NO , () =>
+            PopUp.ShowPopUp("Attention" , "Do you really want to quit game" , DTMEnum.PopUpType.YES_NO , () =>
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;

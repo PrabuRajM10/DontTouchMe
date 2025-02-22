@@ -3,7 +3,6 @@ using Enums;
 using Managers;
 using Ui.Screens;
 using UnityEngine;
-using Enum = Enums.Enum;
 
 namespace Ui.ScreenHandlers
 {
@@ -31,7 +30,7 @@ namespace Ui.ScreenHandlers
             if (InputManager.Instance.IsPaused() && GameManager.Instance.CurrentState == GameState.Gameplay)
             {
                 Time.timeScale = 0;
-                SwitchScreen(Enum.GameScreen.Pause);
+                SwitchScreen(DTMEnum.GameScreen.Pause);
             }
         }
     }

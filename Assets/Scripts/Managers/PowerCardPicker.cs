@@ -5,7 +5,6 @@ using Enums;
 using Gameplay;
 using UnityEngine;
 using Unity.Collections;
-using Enum = Enums.Enum;
 using Random = UnityEngine.Random;
 
 namespace Managers
@@ -14,12 +13,12 @@ namespace Managers
     [Serializable]
     public class PowerCardProbability
     {
-        public Enum.CardRarity cardRarity;
+        public DTMEnum.CardRarity cardRarity;
         
         [ Range(1,100)]
         public int probabilityInPercentage;
 
-        public PowerCardProbability(Enum.CardRarity cardRarity , int probability)
+        public PowerCardProbability(DTMEnum.CardRarity cardRarity , int probability)
         {
             this.cardRarity = cardRarity;
             probabilityInPercentage = probability;
@@ -32,7 +31,7 @@ namespace Managers
         [SerializeField] private PowerCardsData powerCardsDataSo;
         [SerializeField] private int cardPickCount = 3;
 
-        private Dictionary<Enum.CardRarity, int> _rarityMargin = new Dictionary<Enum.CardRarity, int>();
+        private Dictionary<DTMEnum.CardRarity, int> _rarityMargin = new Dictionary<DTMEnum.CardRarity, int>();
 
 
         public override void Awake()
@@ -67,7 +66,7 @@ namespace Managers
             return cardsList;
         }
 
-        CardData GetUniqueCard(List<CardData> pickedCardsList , Enum.CardRarity rarity)
+        CardData GetUniqueCard(List<CardData> pickedCardsList , DTMEnum.CardRarity rarity)
         {
             var cardList = powerCardsDataSo.GetCardDataListByRarity(rarity);
             var randomIndex = Random.Range(0, cardList.Count);

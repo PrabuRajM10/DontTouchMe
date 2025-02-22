@@ -21,7 +21,7 @@ namespace Ui.ScreenHandlers
 
         private void OkButtonPressed()
         {
-            SwitchScreen(Enum.GameScreen.Gameplay);
+            SwitchScreen(DTMEnum.GameScreen.Gameplay);
         }
     }
 }

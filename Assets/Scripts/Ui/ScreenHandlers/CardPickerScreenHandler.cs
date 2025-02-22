@@ -7,7 +7,6 @@ using Ui.Screens;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Enum = Enums.Enum;
 
 namespace Ui.ScreenHandlers
 {
@@ -33,13 +32,13 @@ namespace Ui.ScreenHandlers
         private void OnBackButtonPressed()
         {
             GameManager.Instance.ChangeState(GameState.Home);
-            SwitchScreen(Enum.GameScreen.Home);
+            SwitchScreen(DTMEnum.GameScreen.Home);
             
         }
         private void OnNextButtonPressed()
         {
             GameManager.Instance.ChangeState(GameState.Gameplay);
-            SwitchScreen(Enum.GameScreen.Gameplay);
+            SwitchScreen(DTMEnum.GameScreen.Gameplay);
         }
 
         private void GetCardsButtonPressed()

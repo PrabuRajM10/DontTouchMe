@@ -5,7 +5,6 @@ using Enums;
 using Managers;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Enum = Enums.Enum;
 
 namespace Gameplay
 {
@@ -17,7 +16,7 @@ namespace Gameplay
         public GameObject prefab;
         public Transform spawnParent;
         public int initialSpawnCount;
-        public Enum.PoolObjectTypes poolObjectType;
+        public DTMEnum.PoolObjectTypes poolObjectType;
     }
 
     public class ObjectPooling : GenericSingleton<ObjectPooling>
@@ -44,7 +43,7 @@ namespace Gameplay
             // Spawn(enemyPrefab , minEnemyCount , PoolObjectTypes.Enemy , enemySpawnParent);k
         }
 
-        private void Spawn(GameObject poolableObjects, int count , Enum.PoolObjectTypes poolObjectType , Transform parent)
+        private void Spawn(GameObject poolableObjects, int count , DTMEnum.PoolObjectTypes poolObjectType , Transform parent)
         {
             for (int i = 0; i < count; i++)
             {
@@ -58,35 +57,35 @@ namespace Gameplay
             }
         }
 
-        private void AddObjectToPool(Enum.PoolObjectTypes poolObjectType, IPoolableObjects poolObject)
+        private void AddObjectToPool(DTMEnum.PoolObjectTypes poolObjectType, IPoolableObjects poolObject)
         {
 
             switch (poolObjectType)
             {
-                case Enum.PoolObjectTypes.Enemy:
+                case DTMEnum.PoolObjectTypes.Enemy:
                     var enemy = (Enemy)poolObject;
                     enemy.SetTarget(GameManager.Instance.Player);
                     _enemyListPool.Add(enemy);
                     break;
-                case Enum.PoolObjectTypes.Bullet:
+                case DTMEnum.PoolObjectTypes.Bullet:
                     _bulletListPool.Add((Bullet)poolObject);
                     break;
-                case Enum.PoolObjectTypes.Coin:
+                case DTMEnum.PoolObjectTypes.Coin:
                     _coinListPool.Add((Collectables)poolObject);
                     break;
-                case Enum.PoolObjectTypes.Spell:
+                case DTMEnum.PoolObjectTypes.Spell:
                     _xpListPool.Add((Collectables)poolObject);
                     break;
-                case Enum.PoolObjectTypes.Bomb:
+                case DTMEnum.PoolObjectTypes.Bomb:
                     _bombListPool.Add((Bomb)poolObject);
                     break;
-                case Enum.PoolObjectTypes.Audio:
+                case DTMEnum.PoolObjectTypes.Audio:
                     _positionalAudiosPool.Add((PositionalAudio)poolObject);
                     break;
-                case Enum.PoolObjectTypes.BulletHitParticle:
+                case DTMEnum.PoolObjectTypes.BulletHitParticle:
                     _bulletHitParticlePool.Add((InGameParticles)poolObject);
                     break;
-                case Enum.PoolObjectTypes.EnemyHitParticle:
+                case DTMEnum.PoolObjectTypes.EnemyHitParticle:
                     _enemyHitParticlePool.Add((InGameParticles)poolObject);
                     break;
                 default:
@@ -94,14 +93,14 @@ namespace Gameplay
             }
         }
 
-        IPoolableObjects GetObjectFromPool(Enum.PoolObjectTypes poolObjectType)
+        IPoolableObjects GetObjectFromPool(DTMEnum.PoolObjectTypes poolObjectType)
         {
             switch (poolObjectType)
             {
-                case Enum.PoolObjectTypes.Enemy:
+                case DTMEnum.PoolObjectTypes.Enemy:
                     if (_enemyListPool.Count < 2)
                     {
-                        var poolObjectData = GetPoolProjectData(Enum.PoolObjectTypes.Enemy);
+                        var poolObjectData = GetPoolProjectData(DTMEnum.PoolObjectTypes.Enemy);
                         Spawn(poolObjectData.prefab , 10 ,poolObjectData.poolObjectType , poolObjectData.spawnParent);
                     }            
                     var enemy = _enemyListPool[0];
@@ -109,10 +108,10 @@ namespace Gameplay
                     enemy.transform.parent = null;
                     return enemy;
             
-                case Enum.PoolObjectTypes.Bullet:
+                case DTMEnum.PoolObjectTypes.Bullet:
                     if (_bulletListPool.Count < 2)
                     {
-                        var poolObjectData = GetPoolProjectData(Enum.PoolObjectTypes.Bullet);
+                        var poolObjectData = GetPoolProjectData(DTMEnum.PoolObjectTypes.Bullet);
                         Spawn(poolObjectData.prefab , 10 ,poolObjectData.poolObjectType , poolObjectData.spawnParent);
                     }            
                     var bullet = _bulletListPool[0];
@@ -120,44 +119,44 @@ namespace Gameplay
                     bullet.transform.parent = null;
                     return bullet;
 
-                case Enum.PoolObjectTypes.Coin:
-                    var coin = GetCollectablesObject(_coinListPool , Enum.PoolObjectTypes.Coin);
-                    coin.SetManager(CollectablesManagerHolder.Instance.GetManager(Enum.CollectablesType.Coins));
+                case DTMEnum.PoolObjectTypes.Coin:
+                    var coin = GetCollectablesObject(_coinListPool , DTMEnum.PoolObjectTypes.Coin);
+                    coin.SetManager(CollectablesManagerHolder.Instance.GetManager(DTMEnum.CollectablesType.Coins));
                     return coin;
-                case Enum.PoolObjectTypes.Spell:
-                    var xp = GetCollectablesObject(_xpListPool , Enum.PoolObjectTypes.Spell);
-                    xp.SetManager(CollectablesManagerHolder.Instance.GetManager(Enum.CollectablesType.Spell));
+                case DTMEnum.PoolObjectTypes.Spell:
+                    var xp = GetCollectablesObject(_xpListPool , DTMEnum.PoolObjectTypes.Spell);
+                    xp.SetManager(CollectablesManagerHolder.Instance.GetManager(DTMEnum.CollectablesType.Spell));
                     return xp;
-                case Enum.PoolObjectTypes.Bomb:
+                case DTMEnum.PoolObjectTypes.Bomb:
                     if (_bombListPool.Count < 2)
                     {
-                        var poolObjectData = GetPoolProjectData(Enum.PoolObjectTypes.Bomb);
+                        var poolObjectData = GetPoolProjectData(DTMEnum.PoolObjectTypes.Bomb);
                         Spawn(poolObjectData.prefab , 5 ,poolObjectData.poolObjectType , poolObjectData.spawnParent);
                     }            
                     var bomb = _bombListPool[0];
                     _bombListPool.Remove(bomb);
                     bomb.transform.parent = null;
                     return bomb;
-                case Enum.PoolObjectTypes.Audio:
+                case DTMEnum.PoolObjectTypes.Audio:
                     if (_positionalAudiosPool.Count < 2)
                     {
-                        var poolObjectData = GetPoolProjectData(Enum.PoolObjectTypes.Audio);
+                        var poolObjectData = GetPoolProjectData(DTMEnum.PoolObjectTypes.Audio);
                         Spawn(poolObjectData.prefab , 10 ,poolObjectData.poolObjectType , poolObjectData.spawnParent);
                     }            
                     var audio = _positionalAudiosPool[0];
                     _positionalAudiosPool.Remove(audio);
                     audio.transform.parent = null;
                     return audio;
-                case Enum.PoolObjectTypes.BulletHitParticle:
-                    return GetParticleObject(_bulletHitParticlePool , Enum.PoolObjectTypes.BulletHitParticle);
-                case Enum.PoolObjectTypes.EnemyHitParticle:
-                    return GetParticleObject(_enemyHitParticlePool , Enum.PoolObjectTypes.EnemyHitParticle);
+                case DTMEnum.PoolObjectTypes.BulletHitParticle:
+                    return GetParticleObject(_bulletHitParticlePool , DTMEnum.PoolObjectTypes.BulletHitParticle);
+                case DTMEnum.PoolObjectTypes.EnemyHitParticle:
+                    return GetParticleObject(_enemyHitParticlePool , DTMEnum.PoolObjectTypes.EnemyHitParticle);
                 default:
                     return null;
             }
         }
 
-        private IPoolableObjects GetParticleObject(List<InGameParticles> poolList , Enum.PoolObjectTypes particlePoolType)
+        private IPoolableObjects GetParticleObject(List<InGameParticles> poolList , DTMEnum.PoolObjectTypes particlePoolType)
         {
             if (poolList.Count < 2)
             {
@@ -171,7 +170,7 @@ namespace Gameplay
             return bulletHit;
         }
 
-        private Collectables GetCollectablesObject(List<Collectables> collectablesListPool, Enum.PoolObjectTypes collectablesType)
+        private Collectables GetCollectablesObject(List<Collectables> collectablesListPool, DTMEnum.PoolObjectTypes collectablesType)
         {
             if (collectablesListPool.Count < 2)
             {
@@ -188,99 +187,99 @@ namespace Gameplay
 
         public Bullet GetBullet()
         {
-            return (Bullet)GetObjectFromPool(Enum.PoolObjectTypes.Bullet);
+            return (Bullet)GetObjectFromPool(DTMEnum.PoolObjectTypes.Bullet);
         }
 
         public Enemy GetEnemy()
         {
-            return (Enemy)GetObjectFromPool(Enum.PoolObjectTypes.Enemy);
+            return (Enemy)GetObjectFromPool(DTMEnum.PoolObjectTypes.Enemy);
         }
         
         public Collectables GetCoins()
         {
-            return (Collectables)GetObjectFromPool(Enum.PoolObjectTypes.Coin);
+            return (Collectables)GetObjectFromPool(DTMEnum.PoolObjectTypes.Coin);
         }
         
         public Collectables GetXp()
         {
-            return (Collectables)GetObjectFromPool(Enum.PoolObjectTypes.Spell);
+            return (Collectables)GetObjectFromPool(DTMEnum.PoolObjectTypes.Spell);
         }
 
         public Bomb GetBomb()
         {
-            return (Bomb)GetObjectFromPool(Enum.PoolObjectTypes.Bomb);
+            return (Bomb)GetObjectFromPool(DTMEnum.PoolObjectTypes.Bomb);
         }
 
         public PositionalAudio GetAudioPrefab()
         {
-            return (PositionalAudio)GetObjectFromPool(Enum.PoolObjectTypes.Audio);
+            return (PositionalAudio)GetObjectFromPool(DTMEnum.PoolObjectTypes.Audio);
         }
 
         public InGameParticles GetBulletHit()
         {
-            return (InGameParticles)GetObjectFromPool(Enum.PoolObjectTypes.BulletHitParticle);
+            return (InGameParticles)GetObjectFromPool(DTMEnum.PoolObjectTypes.BulletHitParticle);
         }
         
         public InGameParticles GetEnemyHit()
         {
-            return (InGameParticles)GetObjectFromPool(Enum.PoolObjectTypes.EnemyHitParticle);
+            return (InGameParticles)GetObjectFromPool(DTMEnum.PoolObjectTypes.EnemyHitParticle);
         }
-        public void AddBackToList(IPoolableObjects poolable , Enum.PoolObjectTypes poolObjectTypes)
+        public void AddBackToList(IPoolableObjects poolable , DTMEnum.PoolObjectTypes poolObjectTypes)
         {
             switch (poolObjectTypes)
             {
-                case Enum.PoolObjectTypes.Enemy:
+                case DTMEnum.PoolObjectTypes.Enemy:
                     var enemy = (Enemy)poolable;
-                    ResetObjects(enemy.gameObject , Enum.PoolObjectTypes.Enemy);
+                    ResetObjects(enemy.gameObject , DTMEnum.PoolObjectTypes.Enemy);
                     _enemyListPool.Add(enemy);
                     break;
-                case Enum.PoolObjectTypes.Bullet:
+                case DTMEnum.PoolObjectTypes.Bullet:
                     var bullet = (Bullet)poolable;
-                    ResetObjects(bullet.gameObject, Enum.PoolObjectTypes.Bullet);
+                    ResetObjects(bullet.gameObject, DTMEnum.PoolObjectTypes.Bullet);
                     _bulletListPool.Add(bullet);
                     break;
-                case Enum.PoolObjectTypes.Coin:
+                case DTMEnum.PoolObjectTypes.Coin:
                     var coin = (Collectables)poolable;
-                    ResetObjects(coin.gameObject, Enum.PoolObjectTypes.Coin);
+                    ResetObjects(coin.gameObject, DTMEnum.PoolObjectTypes.Coin);
                     _coinListPool.Add(coin);
                     break;
-                case Enum.PoolObjectTypes.Spell:
+                case DTMEnum.PoolObjectTypes.Spell:
                     var xp = (Collectables)poolable;
-                    ResetObjects(xp.gameObject, Enum.PoolObjectTypes.Spell);
+                    ResetObjects(xp.gameObject, DTMEnum.PoolObjectTypes.Spell);
                     _xpListPool.Add(xp);
                     break;
-                case Enum.PoolObjectTypes.Bomb:
+                case DTMEnum.PoolObjectTypes.Bomb:
                     var bomb = (Bomb)poolable;
-                    ResetObjects(bomb.gameObject, Enum.PoolObjectTypes.Bomb);
+                    ResetObjects(bomb.gameObject, DTMEnum.PoolObjectTypes.Bomb);
                     _bombListPool.Add(bomb);
                     break;
-                case Enum.PoolObjectTypes.Audio:
+                case DTMEnum.PoolObjectTypes.Audio:
                     var audio = (PositionalAudio)poolable;
-                    ResetObjects(audio.gameObject, Enum.PoolObjectTypes.Audio);
+                    ResetObjects(audio.gameObject, DTMEnum.PoolObjectTypes.Audio);
                     _positionalAudiosPool.Add(audio);
                     break;
-                case Enum.PoolObjectTypes.BulletHitParticle:
+                case DTMEnum.PoolObjectTypes.BulletHitParticle:
                     var bulletHit = (InGameParticles)poolable;
-                    ResetObjects(bulletHit.gameObject, Enum.PoolObjectTypes.BulletHitParticle);
+                    ResetObjects(bulletHit.gameObject, DTMEnum.PoolObjectTypes.BulletHitParticle);
                     _bulletHitParticlePool.Add(bulletHit);
                     break;
-                case Enum.PoolObjectTypes.EnemyHitParticle:
+                case DTMEnum.PoolObjectTypes.EnemyHitParticle:
                     var enemyHit = (InGameParticles)poolable;
-                    ResetObjects(enemyHit.gameObject, Enum.PoolObjectTypes.EnemyHitParticle);
+                    ResetObjects(enemyHit.gameObject, DTMEnum.PoolObjectTypes.EnemyHitParticle);
                     _enemyHitParticlePool.Add(enemyHit);  break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(poolObjectTypes), poolObjectTypes, null);
             }
         }
 
-        private void ResetObjects(GameObject poolObj , Enum.PoolObjectTypes type)
+        private void ResetObjects(GameObject poolObj , DTMEnum.PoolObjectTypes type)
         {
             poolObj.gameObject.SetActive(false);
             poolObj.transform.SetParent(GetPoolProjectData(type).spawnParent);
             poolObj.transform.position = Vector3.zero;
         }
 
-        PoolObjectData GetPoolProjectData(Enum.PoolObjectTypes poolObjectType)
+        PoolObjectData GetPoolProjectData(DTMEnum.PoolObjectTypes poolObjectType)
         {
             return poolObjectDataList.FirstOrDefault(poolObjectData => poolObjectData.poolObjectType == poolObjectType);
         }

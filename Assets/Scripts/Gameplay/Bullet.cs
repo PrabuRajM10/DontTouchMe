@@ -1,6 +1,6 @@
 using System;
+using Enums;
 using UnityEngine;
-using Enum = Enums.Enum;
 
 namespace Gameplay
 {
@@ -37,7 +37,7 @@ namespace Gameplay
 
         public void BackToPool()
         {
-            _pool.AddBackToList(this , Enum.PoolObjectTypes.Bullet);
+            _pool.AddBackToList(this , DTMEnum.PoolObjectTypes.Bullet);
         }
 
         public void SetPositionAndRotation(Transform muzzlePosition)

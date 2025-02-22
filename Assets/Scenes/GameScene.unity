@@ -1693,12 +1693,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282051006}
   m_CullTransparentMesh: 1
---- !u!1 &298808293 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5370872912423155470, guid: 5007963bfb4817640ad70d3868ab3429,
-    type: 3}
-  m_PrefabInstance: {fileID: 2974762805728744892}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &300620961
 GameObject:
   m_ObjectHideFlags: 0
@@ -3661,7 +3655,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 4981274239114134199}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1943713046}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca8f3360e87f461aacae37cba2657b79, type: 3}
@@ -4076,6 +4070,7 @@ GameObject:
   m_Component:
   - component: {fileID: 609590904}
   - component: {fileID: 609590905}
+  - component: {fileID: 609590906}
   m_Layer: 0
   m_Name: PowerCardHandler
   m_TagString: Untagged
@@ -4110,28 +4105,319 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dda8ca2ff53b4080bfb2ef6eb6168c2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerCardReferences:
-  - cardId: 1
-    requiredReference: {fileID: 298808293}
-  - cardId: 2
-    requiredReference: {fileID: 839121457}
-  - cardId: 3
-    requiredReference: {fileID: 839121457}
-  - cardId: 4
-    requiredReference: {fileID: 839121457}
-  - cardId: 5
-    requiredReference: {fileID: 302221895}
-  - cardId: 6
-    requiredReference: {fileID: 298808293}
-  - cardId: 7
-    requiredReference: {fileID: 298808293}
-  - cardId: 8
-    requiredReference: {fileID: 1943713046}
-  - cardId: 9
-    requiredReference: {fileID: 298808293}
-  - cardId: 10
-    requiredReference: {fileID: 1943713046}
   spellManager: {fileID: 300620963}
+  powerCardsHandlerEvents: {fileID: 609590906}
+--- !u!114 &609590906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609590903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04459ee43f1a4786b8fb35fdce922f8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerCardsEvents:
+  - EventName: 1
+    OnExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1670134341}
+          m_TargetAssemblyTypeName: Gameplay.Player, Assembly-CSharp
+          m_MethodName: SetPlayerSpeedMultiplier
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 2
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1670134341}
+          m_TargetAssemblyTypeName: Gameplay.Player, Assembly-CSharp
+          m_MethodName: ResetPlayerSpeed
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - EventName: 2
+    OnExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1670134341}
+          m_TargetAssemblyTypeName: Gameplay.Player, Assembly-CSharp
+          m_MethodName: SetPlayerSpeedMultiplier
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.5
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1670134341}
+          m_TargetAssemblyTypeName: Gameplay.Player, Assembly-CSharp
+          m_MethodName: SetPlayerSpeedMultiplier
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - EventName: 3
+    OnExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 839121459}
+          m_TargetAssemblyTypeName: Managers.EnemyManager, Assembly-CSharp
+          m_MethodName: SetEnemiesScaleMultiplier
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1.5
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 839121459}
+          m_TargetAssemblyTypeName: Managers.EnemyManager, Assembly-CSharp
+          m_MethodName: SetEnemiesScaleMultiplier
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - EventName: 4
+    OnExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 839121459}
+          m_TargetAssemblyTypeName: Managers.EnemyManager, Assembly-CSharp
+          m_MethodName: FreezeEnemies
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1.5
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    OnExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 839121459}
+          m_TargetAssemblyTypeName: Managers.EnemyManager, Assembly-CSharp
+          m_MethodName: FreezeEnemies
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - EventName: 5
+    OnExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 302221897}
+          m_TargetAssemblyTypeName: Gameplay.LootValueHandler, Assembly-CSharp
+          m_MethodName: SetValueMultiplier
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 2
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    OnExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 302221897}
+          m_TargetAssemblyTypeName: Gameplay.LootValueHandler, Assembly-CSharp
+          m_MethodName: ResetValues
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - EventName: 6
+    OnExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1670134341}
+          m_TargetAssemblyTypeName: Gameplay.Player, Assembly-CSharp
+          m_MethodName: AttractAllCollectables
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 2
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    OnExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1670134341}
+          m_TargetAssemblyTypeName: Gameplay.Player, Assembly-CSharp
+          m_MethodName: AttractAllCollectables
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - EventName: 7
+    OnExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1670134341}
+          m_TargetAssemblyTypeName: Gameplay.Player, Assembly-CSharp
+          m_MethodName: DropBomb
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 2
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    OnExit:
+      m_PersistentCalls:
+        m_Calls: []
+  - EventName: 8
+    OnExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 524729239}
+          m_TargetAssemblyTypeName: Gameplay.Drone, Assembly-CSharp
+          m_MethodName: DualGuns
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 2
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    OnExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 524729239}
+          m_TargetAssemblyTypeName: Gameplay.Drone, Assembly-CSharp
+          m_MethodName: DualGuns
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - EventName: 9
+    OnExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1670134341}
+          m_TargetAssemblyTypeName: Gameplay.Player, Assembly-CSharp
+          m_MethodName: Immune
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 2
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    OnExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1670134341}
+          m_TargetAssemblyTypeName: Gameplay.Player, Assembly-CSharp
+          m_MethodName: Immune
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - EventName: 10
+    OnExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 524729239}
+          m_TargetAssemblyTypeName: Gameplay.Drone, Assembly-CSharp
+          m_MethodName: SetBulletDamage
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 999
+            m_FloatArgument: 2
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    OnExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 524729239}
+          m_TargetAssemblyTypeName: Gameplay.Drone, Assembly-CSharp
+          m_MethodName: ResetBulletDamage
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &635370535
 GameObject:
   m_ObjectHideFlags: 0
@@ -12324,7 +12610,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2974762805728744892}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 298808293}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b90564b055367ee45b5049f1fd112115, type: 3}
@@ -14293,12 +14579,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -172}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1943713046 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 219810764890591887, guid: eb93f2249b5966644a7700d996fa9554,
-    type: 3}
-  m_PrefabInstance: {fileID: 4981274239114134199}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2011639072
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,31 +5,28 @@ using System.Linq;
 using Enums;
 using Managers;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
-using Enum = Enums.Enum;
 using UiManager = Managers.UiManager;
 
 namespace Gameplay
 {
-   
-
     [Serializable]
     public class PowerCardReference
     {
-        public Enum.PowerCardsId cardId;
+        public DTMEnum.PowerCardsId cardId;
         public GameObject requiredReference;
     }
     public class PowerCardsHandler : MonoBehaviour
     {
-        [SerializeField] private List<PowerCardReference> powerCardReferences = new List<PowerCardReference>();
-        [FormerlySerializedAs("xpManager")] [SerializeField] private SpellManager spellManager; 
+        [FormerlySerializedAs("xpManager")] [SerializeField] private SpellManager spellManager;
+        [SerializeField] private PowerCardsHandlerEvents powerCardsHandlerEvents;
 
 
         private Dictionary<int, PowerCard> _powerCards = new Dictionary<int, PowerCard>();
 
         private float _activeTime;
         private float _cooldownTime;
-        private GameObject _requiredRef;
 
         private int _currentPowerCardIndex;
 
@@ -74,8 +71,7 @@ namespace Gameplay
                 return;
             }
             StopAllCoroutines();
-            _requiredRef = GetReferenceByCardType(GetCurrentCard().CardId);
-            GetCurrentCard().ResetAbility(_requiredRef);
+            GetCurrentCard().ResetAbility();
             Reset();
         }
         private void HandleOnKeyPressed()
@@ -108,18 +104,10 @@ namespace Gameplay
         {
             var card = _powerCards[index];
             _activeTime = card.ActiveTime;
-            _requiredRef = GetReferenceByCardType(card.CardId);
-
-            if (_requiredRef != null)
-            {
-                card.Execute(_requiredRef);
-                StartCoroutine(PowerCardActivated(index));
-            }
-            else
-            {
-                Debug.LogError("Cant find required reference || Card id : " + card.CardId);
-            }
+            card.Execute(powerCardsHandlerEvents);
+            StartCoroutine(PowerCardActivated(index));
         }
+        
 
         IEnumerator PowerCardActivated(int index)
         {
@@ -128,7 +116,7 @@ namespace Gameplay
             _activeTime = 0;
             _currentPowerCardIndex = 0;
             var card = _powerCards[index];
-            card.OnBeforeCooldown(_requiredRef , this , OnCooldownDone);
+            card.OnBeforeCooldown(OnCooldownDone);
             UiManager.Instance.PowerCardOnCoolDown(index , card.CooldownTime);
         }
 
@@ -154,16 +142,6 @@ namespace Gameplay
             _activeTime = 0;
             _currentPowerCardIndex = 0;
             _powerCards.Clear();
-        }
-
-        GameObject GetReferenceByCardType(Enum.PowerCardsId cardId)
-        {
-            foreach (var powerCardReference in powerCardReferences.Where(powerCardReference => powerCardReference.cardId == cardId))
-            {
-                return powerCardReference.requiredReference;
-            }
-
-            return null;
         }
     }
 }

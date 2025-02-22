@@ -1,7 +1,6 @@
 using System;
 using Enums;
 using UnityEngine;
-using Enum = Enums.Enum;
 
 namespace Gameplay
 {
@@ -9,24 +8,24 @@ namespace Gameplay
     {
         [SerializeField] protected Transform postSpawnParent;
 
-        [SerializeField] protected Enum.PoolObjectTypes spawnerObjectType;
-        protected void Spawn(Enum.PoolObjectTypes type, Vector3 spawnPos)
+        [SerializeField] protected DTMEnum.PoolObjectTypes spawnerObjectType;
+        protected void Spawn(DTMEnum.PoolObjectTypes type, Vector3 spawnPos)
         {
             switch (type)
             {
-                case Enum.PoolObjectTypes.Enemy:
+                case DTMEnum.PoolObjectTypes.Enemy:
                     var enemyObj = ObjectPooling.Instance.GetEnemy();
                     HandleObjectOnReceived(enemyObj.transform , spawnPos);
                     break;
-                case Enum.PoolObjectTypes.Bullet:
+                case DTMEnum.PoolObjectTypes.Bullet:
                     var bulletObj = ObjectPooling.Instance.GetBullet();
                     HandleObjectOnReceived(bulletObj.transform, spawnPos);
                     break;
-                case Enum.PoolObjectTypes.Coin:
+                case DTMEnum.PoolObjectTypes.Coin:
                     var coinCollectableObj = ObjectPooling.Instance.GetCoins();
                     HandleObjectOnReceived(coinCollectableObj.transform, spawnPos);
                     break;
-                case Enum.PoolObjectTypes.Spell:
+                case DTMEnum.PoolObjectTypes.Spell:
                     var xpCollectableObj = ObjectPooling.Instance.GetXp();
                     HandleObjectOnReceived(xpCollectableObj.transform, spawnPos);
                     break;

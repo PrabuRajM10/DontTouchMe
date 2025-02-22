@@ -2,14 +2,13 @@ using System;
 using Enums;
 using Gameplay;
 using UnityEngine;
-using Enum = Enums.Enum;
 
 namespace Managers
 {
     public abstract class CollectablesManager : MonoBehaviour
     {
         [SerializeField] protected CollectablesDataHolder collectablesDataHolderSo;
-        [SerializeField] protected Enum.CollectablesType collectablesType;
+        [SerializeField] protected DTMEnum.CollectablesType collectablesType;
         public abstract void OnCollectablesCollected();
         public abstract void Reset();
 

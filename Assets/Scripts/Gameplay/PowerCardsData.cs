@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Enums;
 using UnityEngine;
-using Enum = Enums.Enum;
 using Random = UnityEngine.Random;
 
 namespace Gameplay
@@ -13,16 +12,16 @@ namespace Gameplay
     {
         [SerializeField] private List<CardData> cardDataList = new List<CardData>();
 
-        private Dictionary<Enum.CardRarity, List<CardData>> cardDataByRarity = new Dictionary<Enum.CardRarity, List<CardData>>();
+        private Dictionary<DTMEnum.CardRarity, List<CardData>> cardDataByRarity = new Dictionary<DTMEnum.CardRarity, List<CardData>>();
 
         public void Init()
         {
             ResetCardsState();
             
-            SetCardsByRarity(Enum.CardRarity.Common);
-            SetCardsByRarity(Enum.CardRarity.Rare);
-            SetCardsByRarity(Enum.CardRarity.Epic);
-            SetCardsByRarity(Enum.CardRarity.Legendary);
+            SetCardsByRarity(DTMEnum.CardRarity.Common);
+            SetCardsByRarity(DTMEnum.CardRarity.Rare);
+            SetCardsByRarity(DTMEnum.CardRarity.Epic);
+            SetCardsByRarity(DTMEnum.CardRarity.Legendary);
         }
 
         public void ResetCardsState()
@@ -33,12 +32,12 @@ namespace Gameplay
             }
         }
 
-        public CardData GetCardDataById(Enum.PowerCardsId cardId)
+        public CardData GetCardDataById(DTMEnum.PowerCardsId cardId)
         {
             return cardDataList.FirstOrDefault(cardData => cardData.cardId == cardId);
         }
 
-        public List<CardData> GetCardDataListByRarity(Enum.CardRarity rarity)
+        public List<CardData> GetCardDataListByRarity(DTMEnum.CardRarity rarity)
         {
             return cardDataByRarity[rarity];
         }
@@ -49,7 +48,7 @@ namespace Gameplay
             // return cardDataList[8];
         }
 
-        void SetCardsByRarity(Enum.CardRarity rarity)
+        void SetCardsByRarity(DTMEnum.CardRarity rarity)
         {
             var cardList = cardDataList.Where(cardData => cardData.cardRarity == rarity).ToList();
             cardDataByRarity.Add(rarity , cardList);
@@ -61,8 +60,8 @@ namespace Gameplay
     [Serializable]
     public class CardData
     {
-        public Enum.PowerCardsId cardId;
-        public Enum.CardRarity cardRarity;
+        public DTMEnum.PowerCardsId cardId;
+        public DTMEnum.CardRarity cardRarity;
         public Sprite cardImg;
         public string cardName;
         public string cardDescription;

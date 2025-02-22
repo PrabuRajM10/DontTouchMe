@@ -4,7 +4,6 @@ using Enums;
 using Helpers;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Enum = Enums.Enum;
 using Random = UnityEngine.Random;
 
 namespace Gameplay
@@ -34,7 +33,7 @@ namespace Gameplay
 
         public void BackToPool()
         {
-            _pool.AddBackToList(this , Enum.PoolObjectTypes.Bomb);
+            _pool.AddBackToList(this , DTMEnum.PoolObjectTypes.Bomb);
         }
 
         public void Deploy(Vector3 position)

@@ -1,6 +1,6 @@
 using System;
+using Enums;
 using UnityEngine;
-using Enum = Enums.Enum;
 
 namespace Gameplay
 {
@@ -23,7 +23,7 @@ namespace Gameplay
         {
             if(!CanShoot())return;
             var bullet = ObjectPooling.Instance.GetBullet();
-            SoundManager.PlaySound(Enum.SoundType.Fire , muzzlePosition.position);
+            SoundManager.PlaySound(DTMEnum.SoundType.Fire , muzzlePosition.position);
             bullet.SetPositionAndRotation(muzzlePosition);
             bullet.Fire();
             _timeSinceLastShot = 0;
