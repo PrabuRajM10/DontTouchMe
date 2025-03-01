@@ -16476,7 +16476,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -808.5658, y: -65}
+  m_AnchoredPosition: {x: -808.5658, y: -152}
   m_SizeDelta: {x: 234.86829, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2121109970 stripped
@@ -16536,8 +16536,8 @@ MonoBehaviour:
   cardUiParent: {fileID: 405589381}
   info: {fileID: 445729538}
   board: {fileID: 420959523}
-  controlInfo: {fileID: 675915688}
   controlInfoParent: {fileID: 2075766761}
+  controlInfo: {fileID: 675915688}
   spellManager: {fileID: 300620963}
   powerCardUis: []
 --- !u!114 &2123618391
