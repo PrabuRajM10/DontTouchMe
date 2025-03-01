@@ -16,6 +16,7 @@ namespace Ui.Screens
     {
         [SerializeField] private Button pauseButton;
         [SerializeField] private Button infoExitButton;
+        [SerializeField] private Button controlsInfoExitButton;
         [SerializeField] private TMP_Text coinsTxt;
         [SerializeField] private TMP_Text timerTxt;
         [SerializeField] private TMP_Text killsTxt;
@@ -26,6 +27,8 @@ namespace Ui.Screens
         [SerializeField] private Transform cardUiParent;
         [SerializeField] private Transform info;
         [SerializeField] private Transform board;
+        [FormerlySerializedAs("controlInfoBg")] [SerializeField] private Transform controlInfoParent;
+        [SerializeField] private Transform controlInfo;
         [FormerlySerializedAs("xpManager")] [SerializeField] private SpellManager spellManager;
 
         [SerializeField] private PowerCardUi[] powerCardUis;
@@ -35,10 +38,13 @@ namespace Ui.Screens
         private int _currentXp;
 
         public event Action OnPauseButtonPressed;
+        bool firstGame = true;
         private void OnEnable()
         {
             pauseButton.onClick.AddListener(OnClickPauseButton);
             infoExitButton.onClick.AddListener(OnClickInfoExitButton);
+            controlsInfoExitButton.onClick.AddListener(OnClickControlsInfoExitButton);
+            ShowControlInfoAnimation();
         }
 
 
@@ -47,7 +53,19 @@ namespace Ui.Screens
             base.OnDisable();
             pauseButton.onClick.RemoveListener(OnClickPauseButton);
             infoExitButton.onClick.RemoveListener(OnClickInfoExitButton);
+            controlsInfoExitButton.onClick.RemoveListener(OnClickControlsInfoExitButton);
         }
+
+        private void OnClickControlsInfoExitButton()
+        {
+            LeanAnimator.Fade(controlInfoParent , 0 , LeanTweenType.easeInCubic , 0.1f , 0 , true);
+            LeanAnimator.Scale(controlInfo , Vector3.one, Vector3.zero, LeanTweenType.easeOutExpo , 0.5f , 0 , true , () =>
+            {
+                controlInfoParent.gameObject.SetActive(false);
+                Time.timeScale = 1;
+            });
+        }
+
         private void OnClickInfoExitButton()
         {
             LeanAnimator.Fade(info , 0 , LeanTweenType.easeInCubic , 0.1f , 0 , true);
@@ -149,6 +167,16 @@ namespace Ui.Screens
             LeanAnimator.Fade(board , 0 , LeanTweenType.easeInBack , 0.2f , 0 , true);
             LeanAnimator.Fade(info , 1 , LeanTweenType.easeInBack , 0.2f , 0 , true);
             LeanAnimator.Scale(info , Vector3.zero, Vector3.one, LeanTweenType.easeOutElastic , 0.5f , 0 , true);
+        }
+
+        private void ShowControlInfoAnimation()
+        {
+            if(!firstGame)return;
+            controlInfoParent.gameObject.SetActive(true);
+            Time.timeScale = 0;
+            LeanAnimator.Fade(controlInfoParent , 1 , LeanTweenType.easeInBack , 0.2f , 0 , true);
+            LeanAnimator.Scale(controlInfo , Vector3.zero, Vector3.one, LeanTweenType.easeOutElastic , 0.5f , 0 , true);
+            firstGame = false;
         }
     }
 }
