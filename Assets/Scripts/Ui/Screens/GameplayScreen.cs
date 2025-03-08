@@ -84,6 +84,10 @@ namespace Ui.Screens
             coinsTxt.text = "";
             xpTxt.text = "";
             _currentXp = 0;
+            // foreach (var cardUi in _cardsDict)
+            // {
+            //     cardUi.Value.Reset();
+            // }  
         }
 
         private void OnClickPauseButton()

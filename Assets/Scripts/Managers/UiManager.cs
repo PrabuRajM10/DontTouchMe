@@ -49,6 +49,7 @@ namespace Managers
         {
             if (_currentScreen != null)
             {
+                // _currentScreen.Reset();
                 SetScreenVisibility(_currentScreen , false);
             }
 
@@ -127,7 +128,7 @@ namespace Managers
             gameplayScreen.SetCardOnCooldown(index, cardCooldownTime);
         }
 
-        public void SetGameReset(bool successful, int currentCollectedCoins, int currentKillCount)
+        public void SetGameResult(bool successful, int currentCollectedCoins, int currentKillCount)
         {
             gameResultScreen.ShowResult(successful , currentCollectedCoins , currentKillCount);
             OnSwitchScreenEvnt(DTMEnum.GameScreen.GameResult);

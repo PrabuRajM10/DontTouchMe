@@ -4511,9 +4511,9 @@ MonoBehaviour:
     OnExecute:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1670134341}
-          m_TargetAssemblyTypeName: Gameplay.Player, Assembly-CSharp
-          m_MethodName: SetPlayerSpeedMultiplier
+        - m_Target: {fileID: 839121459}
+          m_TargetAssemblyTypeName: Managers.EnemyManager, Assembly-CSharp
+          m_MethodName: SetEnemiesSpeedMultiplier
           m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4526,9 +4526,9 @@ MonoBehaviour:
     OnExit:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1670134341}
-          m_TargetAssemblyTypeName: Gameplay.Player, Assembly-CSharp
-          m_MethodName: SetPlayerSpeedMultiplier
+        - m_Target: {fileID: 839121459}
+          m_TargetAssemblyTypeName: Managers.EnemyManager, Assembly-CSharp
+          m_MethodName: SetEnemiesSpeedMultiplier
           m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

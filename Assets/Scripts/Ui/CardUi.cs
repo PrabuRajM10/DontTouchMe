@@ -20,12 +20,12 @@ namespace Ui
 
         
 
-        private void OnEnable()
+        private void Start()
         {
             GameManager.OnGameEnd += OnGameEnd;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             GameManager.OnGameEnd -= OnGameEnd;
         }

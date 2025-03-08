@@ -75,7 +75,7 @@ namespace Managers
         void EndGame(bool successful)
         {
             ChangeState(GameState.GameResult);
-            UiManager.Instance.SetGameReset(successful , _currentCollectedCoins , _currentKillCount);
+            UiManager.Instance.SetGameResult(successful , _currentCollectedCoins , _currentKillCount);
             GameEnd(successful);
         }
 
